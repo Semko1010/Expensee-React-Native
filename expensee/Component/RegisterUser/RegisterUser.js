@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-native";
 import axios from "axios";
 

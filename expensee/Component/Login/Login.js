@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-native";
+import { newToken } from "../../App";
 import axios from "axios";
 const Login = () => {
 	const navigate = useNavigate();
+	const { token, setToken } = useContext(newToken);
 	const [userNotFound, setUserNotFound] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -12,8 +14,11 @@ const Login = () => {
 		URL = "http://localhost:3030/api/expensee/users/login";
 		try {
 			const fetch = await axios.post(URL, user);
+			console.log("token", token);
 			if (fetch.data.userExist) {
+				setToken(fetch.data.token);
 				navigate("/");
+				console.log("token", token);
 			} else {
 				setUserNotFound("Email or passwort wrong");
 				console.log("please log in");
@@ -42,6 +47,7 @@ const Login = () => {
 						placeholder='Email'
 						placeholderTextColor='black'
 						className='inputUsername'
+						color='black'
 					/>
 				</View>
 				<View style={styles.linkView}>
@@ -51,6 +57,7 @@ const Login = () => {
 						placeholder='Password'
 						placeholderTextColor='black'
 						className='inputUsername'
+						color='black'
 					/>
 				</View>
 
@@ -89,6 +96,7 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 40,
 		backgroundColor: "#fffaf0",
+		color: "black",
 	},
 	userNotFound: {
 		color: "red",

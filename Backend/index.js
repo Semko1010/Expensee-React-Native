@@ -33,8 +33,8 @@ app.post("/api/expensee/users/login", (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
 	LoginUser({ email, password })
-		.then(() => {
-			res.send({ userExist: true });
+		.then(token => {
+			res.send({ userExist: true, token });
 		})
 		.catch(err => {
 			res.send({ userExist: false });
