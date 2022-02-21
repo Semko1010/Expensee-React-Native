@@ -17,7 +17,7 @@ const Login = () => {
 			console.log("token", token);
 			if (fetch.data.userExist) {
 				setToken(fetch.data.token);
-				navigate("/");
+				navigate("/startSite");
 				console.log("token", token);
 			} else {
 				setUserNotFound("Email or passwort wrong");
