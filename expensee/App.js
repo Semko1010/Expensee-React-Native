@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { NativeRouter, Routes, Route, Link } from "react-router-native";
-import RegisterUser from "./Component/Fetch/RegisterUser";
+import RegisterUser from "./Component/RegisterUser/RegisterUser";
 import Login from "./Component/Login/Login";
 import Home from "./Component/Home/Home";
 import { useState, useEffect } from "react";
@@ -12,6 +12,7 @@ export default function App() {
 				<Routes>
 					<Route exact path='/' element={<Home />} />
 					<Route path='/register' element={<RegisterUser />} />
+					<Route path='/login' element={<Login />} />
 				</Routes>
 			</View>
 		</NativeRouter>
