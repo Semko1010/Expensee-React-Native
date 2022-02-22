@@ -38,9 +38,7 @@ app.post("/api/expensee/users/login", (req, res) => {
 });
 
 app.post("/api/expensee/users/amount", (req, res) => {
-	res.send("works");
-	addProduct(req.body);
-	console.log(req.body);
+	addProduct(req.body).then(res.send({ amountAdded: true }));
 });
 
 app.listen(PORT, () => console.log("Server runs on Port:", PORT));

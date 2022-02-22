@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { useState, useEffect, useContext } from "react";
 import SelectDropdown from "react-native-select-dropdown";
-import { Link, useNavigaten } from "react-router-native";
+import { Link, useNavigate } from "react-router-native";
 import DatePicker from "react-native-datepicker";
 import { newToken } from "../../App";
 import axios from "axios";
 const Sales = () => {
+	const navigate = useNavigate();
 	const [date, setDate] = useState(new Date());
-
 	const [categorie, setCategorie] = useState("");
 	const [description, setDescription] = useState("");
 	const [amount, setAmount] = useState();
@@ -20,12 +20,12 @@ const Sales = () => {
 		try {
 			const fetch = await axios.post(URL, stateamount);
 			console.log(fetch);
-			// if (!fetch.data.userExist) {
-			// 	navigate("/");
-			// 	console.log("User created");
-			// } else {
-			// 	console.log("user exist");
-			// }
+			if (fetch.data.amountAdded) {
+				navigate("/startSite");
+				console.log("Amount created");
+			} else {
+				console.log("user exist");
+			}
 		} catch (err) {
 			console.log(err);
 		}
