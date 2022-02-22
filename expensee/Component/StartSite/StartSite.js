@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, Button, TextInput, Image } from "react-native";
-//
+import { Link } from "react-router-native";
 const StartSite = () => {
 	return (
 		<View>
 			<Text>HALLO</Text>
+			<Link to='/sales'>
+				<Text>Sales</Text>
+			</Link>
 			<Image
 				style={styles.image}
 				source={{

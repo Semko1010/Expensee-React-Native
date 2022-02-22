@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
 	textInput: {
 		margin: 5,
 		textAlign: "center",
-
 		padding: 3,
 		color: "white",
 	},

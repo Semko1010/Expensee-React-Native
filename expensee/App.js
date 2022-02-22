@@ -4,6 +4,7 @@ import RegisterUser from "./Component/RegisterUser/RegisterUser";
 import Login from "./Component/Login/Login";
 import Home from "./Component/Home/Home";
 import StartSite from "./Component/StartSite/StartSite";
+import Sales from "./Component/Sales/Sales";
 import { useState, useEffect, createContext } from "react";
 const newToken = createContext({});
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
 						<Route path='/register' element={<RegisterUser />} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/startSite' element={<StartSite />} />
+						<Route path='/sales' element={<Sales />} />
 					</Routes>
 				</View>
 			</NativeRouter>
