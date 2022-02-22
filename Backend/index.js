@@ -10,11 +10,6 @@ const { LoginUser } = require("./services/loginUser");
 //grobal uses
 dotenv.config();
 
-app.get("/test", function (req, res) {
-	res.send("Works Nice");
-	console.log("connect");
-});
-
 app.post("/api/expensee/users/register", (req, res) => {
 	const username = req.body.username;
 	const email = req.body.email;
@@ -39,6 +34,11 @@ app.post("/api/expensee/users/login", (req, res) => {
 		.catch(err => {
 			res.send({ userExist: false });
 		});
+});
+
+app.post("/api/expensee/users/amount", (req, res) => {
+	res.send("works");
+	console.log(req.body);
 });
 
 app.listen(PORT, () => console.log("Server runs on Port:", PORT));
