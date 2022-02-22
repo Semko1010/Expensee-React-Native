@@ -7,10 +7,11 @@ import { newToken } from "../../App";
 import axios from "axios";
 const Sales = () => {
 	const navigate = useNavigate();
-	const [date, setDate] = useState(new Date());
-	const [categorie, setCategorie] = useState("");
-	const [description, setDescription] = useState("");
-	const [amount, setAmount] = useState();
+	const [warning, setWarning] = useState("");
+	const [date, setDate] = useState(null);
+	const [categorie, setCategorie] = useState(null);
+	const [description, setDescription] = useState(null);
+	const [amount, setAmount] = useState(null);
 
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
@@ -18,13 +19,18 @@ const Sales = () => {
 		const stateamount = { categorie, description, amount, date };
 		URL = "http://localhost:3030/api/expensee/users/amount";
 		try {
-			const fetch = await axios.post(URL, stateamount);
-			console.log(fetch);
-			if (fetch.data.amountAdded) {
-				navigate("/startSite");
-				console.log("Amount created");
+			if ((categorie, description, amount, date)) {
+				const fetch = await axios.post(URL, stateamount);
+				console.log(fetch);
+
+				if (fetch.data.amountAdded) {
+					navigate("/startSite");
+					console.log("Amount created");
+				} else {
+					setWarning("Bitte alle Felder ausfüllen");
+				}
 			} else {
-				console.log("user exist");
+				setWarning("Bitte alle Felder ausfüllen");
 			}
 		} catch (err) {
 			console.log(err);
@@ -52,6 +58,7 @@ const Sales = () => {
 						placeholder='Beschreibung'
 					/>
 				</View>
+				<Text style={styles.warning}>{warning}</Text>
 				<View style={styles.linkView}>
 					<TextInput
 						onChangeText={e => setAmount(e)}
@@ -61,7 +68,6 @@ const Sales = () => {
 					/>
 				</View>
 				<View>
-					{/* <Button title='Open' onPress={() => setOpen(true)} /> */}
 					<DatePicker
 						date={date}
 						mode='date'
@@ -130,6 +136,10 @@ const styles = StyleSheet.create({
 		height: "100%",
 		width: "100%",
 		backgroundColor: "#2B2D5B",
+	},
+	warning: {
+		color: "red",
+		fontSize: 20,
 	},
 	textInput: {
 		margin: 5,
