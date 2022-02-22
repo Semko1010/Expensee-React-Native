@@ -68,7 +68,7 @@ const Sales = () => {
 						placeholder='select date'
 						format='DD/MM/YYYY'
 						minDate='01-01-1900'
-						maxDate='01-01-2000'
+						maxDate='01-01-2100'
 						confirmBtnText='Confirm'
 						cancelBtnText='Cancel'
 						customStyles={{
@@ -79,14 +79,14 @@ const Sales = () => {
 								marginLeft: 0,
 							},
 							dateInput: {
-								borderColor: "gray",
+								borderColor: "white",
 								alignItems: "flex-start",
 								borderWidth: 0,
 								borderBottomWidth: 1,
 							},
 							placeholderText: {
 								fontSize: 17,
-								color: "gray",
+								color: "white",
 							},
 							dateText: {
 								fontSize: 17,

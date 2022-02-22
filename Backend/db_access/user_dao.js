@@ -34,7 +34,7 @@ async function getAllUsers() {
 //addProduct
 async function addProduct(newProduct) {
 	const db = await _getDB();
-	const Product = await db.collection("products").insertOne(newProduct);
+	const Product = await db.collection("amount").insertOne(newProduct);
 	return Product;
 }
 //user.object_id
