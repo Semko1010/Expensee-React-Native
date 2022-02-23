@@ -24,9 +24,9 @@ async function getAllProducts() {
 	return allProducts;
 }
 
-async function getAmounts() {
+async function getAmounts(userobjid) {
 	const db = await _getDB();
-	const amount = await db.collection("users").find().toArray();
+	const amount = await db.collection(`amount/${userobjid}`).find().toArray();
 
 	return amount;
 }

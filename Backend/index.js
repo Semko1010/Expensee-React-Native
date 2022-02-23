@@ -7,10 +7,11 @@ app.use(express.json());
 //import functions
 const { registerUser } = require("./services/registerUser");
 const { LoginUser } = require("./services/loginUser");
-const { addAmount } = require("./db_access/user_dao");
+const { addAmount, getAmounts } = require("./db_access/user_dao");
 //grobal uses
 dotenv.config();
 
+//Post Routes
 app.post("/api/expensee/users/register", (req, res) => {
 	const username = req.body.username;
 	const email = req.body.email;
@@ -40,6 +41,13 @@ app.post("/api/expensee/users/login", (req, res) => {
 app.post("/api/expensee/users/amount", (req, res) => {
 	addAmount(req.body).then(res.send({ amountAdded: true }));
 	console.log("Amount Created");
+});
+
+//get Routes
+app.get("/api/expensee/users/allAmounts", (req, res) => {
+	getAmounts(req.headers.userobjid).then(amounts => {
+		res.send(amounts);
+	});
 });
 
 app.listen(PORT, () => console.log("Server runs on Port:", PORT));
