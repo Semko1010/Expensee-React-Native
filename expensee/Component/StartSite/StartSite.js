@@ -1,8 +1,12 @@
 import { StyleSheet, Text, View, Button, TextInput, Image } from "react-native";
 import { Link } from "react-router-native";
+
 const StartSite = () => {
 	return (
 		<View>
+			<Link underlayColor={"transparent"} to='/'>
+				<Text style={styles.backHome}>Back to Home</Text>
+			</Link>
 			<Text>HALLO</Text>
 			<Link to='/sales'>
 				<Text>Sales</Text>

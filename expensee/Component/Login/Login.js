@@ -14,6 +14,7 @@ const Login = () => {
 		URL = "http://localhost:3030/api/expensee/users/login";
 		try {
 			const fetch = await axios.post(URL, user);
+
 			console.log("token", token);
 			if (fetch.data.userExist) {
 				setToken(fetch.data.token);

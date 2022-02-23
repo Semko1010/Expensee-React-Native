@@ -24,17 +24,19 @@ async function getAllProducts() {
 	return allProducts;
 }
 
-async function getAllUsers() {
+async function getAmounts() {
 	const db = await _getDB();
-	const allUsers = await db.collection("users").find().toArray();
+	const amount = await db.collection("users").find().toArray();
 
-	return allUsers;
+	return amount;
 }
 
 //addProduct
-async function addProduct(newProduct) {
+async function addAmount(amount) {
 	const db = await _getDB();
-	const Product = await db.collection("amount").insertOne(newProduct);
+	const Product = await db
+		.collection(`amount/${amount.token.userObjId}`)
+		.insertOne(amount);
 	return Product;
 }
 //user.object_id
@@ -42,7 +44,7 @@ async function addProduct(newProduct) {
 module.exports = {
 	createNewUser,
 	checkEmailExists,
-	addProduct,
+	addAmount,
 	getAllProducts,
-	getAllUsers,
+	getAmounts,
 };

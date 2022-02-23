@@ -7,7 +7,7 @@ app.use(express.json());
 //import functions
 const { registerUser } = require("./services/registerUser");
 const { LoginUser } = require("./services/loginUser");
-const { addProduct } = require("./db_access/user_dao");
+const { addAmount } = require("./db_access/user_dao");
 //grobal uses
 dotenv.config();
 
@@ -38,7 +38,7 @@ app.post("/api/expensee/users/login", (req, res) => {
 });
 
 app.post("/api/expensee/users/amount", (req, res) => {
-	addProduct(req.body).then(res.send({ amountAdded: true }));
+	addAmount(req.body).then(res.send({ amountAdded: true }));
 	console.log("Amount Created");
 });
 

@@ -7,21 +7,20 @@ import { newToken } from "../../App";
 import axios from "axios";
 const Sales = () => {
 	const navigate = useNavigate();
+	const { token, setToken } = useContext(newToken);
 	const [warning, setWarning] = useState("");
 	const [date, setDate] = useState(null);
 	const [categorie, setCategorie] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [amount, setAmount] = useState(null);
-
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
 	async function send() {
-		const stateamount = { categorie, description, amount, date };
+		const stateamount = { categorie, description, amount, date, token };
 		URL = "http://localhost:3030/api/expensee/users/amount";
 		try {
 			if ((categorie, description, amount, date)) {
 				const fetch = await axios.post(URL, stateamount);
-				console.log(fetch);
 
 				if (fetch.data.amountAdded) {
 					navigate("/startSite");
