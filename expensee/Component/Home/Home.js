@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Link } from "react-router-native";
-const Home = ({ history }) => {
+const Home = () => {
 	return (
 		<View style={styles.Home}>
 			<Text style={styles.headLine}>Expensee</Text>

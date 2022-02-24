@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { useState, useEffect, useContext } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { Link, useNavigate } from "react-router-native";
+import HomeNav from "../HomeNav/HomeNav";
 import DatePicker from "react-native-datepicker";
 import { newToken } from "../../App";
 import axios from "axios";
@@ -106,6 +107,7 @@ const Sales = () => {
 					<Button onPress={send} title='Klick' />
 				</View>
 			</View>
+			<HomeNav />
 		</View>
 	);
 };
@@ -129,8 +131,7 @@ const styles = StyleSheet.create({
 	dropDown: { marginBottom: 15 },
 	Home: {
 		display: "flex",
-		justifyContent: "space-evenly",
-		alignItems: "center",
+		justifyContent: "space-between",
 		flexDirection: "column",
 		height: "100%",
 		width: "100%",

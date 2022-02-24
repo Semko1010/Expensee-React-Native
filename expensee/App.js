@@ -5,6 +5,7 @@ import Login from "./Component/Login/Login";
 import Home from "./Component/Home/Home";
 import StartSite from "./Component/StartSite/StartSite";
 import Sales from "./Component/Sales/Sales";
+
 import { useState, useEffect, createContext } from "react";
 
 const newToken = createContext({});
