@@ -6,8 +6,10 @@ import Home from "./Component/Home/Home";
 import StartSite from "./Component/StartSite/StartSite";
 import Sales from "./Component/Sales/Sales";
 import { useState, useEffect, createContext } from "react";
+
 const newToken = createContext({});
-export default function App() {
+
+export default function App(navigation) {
 	const [token, setToken] = useState();
 	return (
 		<newToken.Provider value={{ token, setToken }}>
