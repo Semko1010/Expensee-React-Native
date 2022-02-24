@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 		color: "white",
 	},
 	Home: {
-		display: "flex",
+		flex: 1,
 		justifyContent: "space-around",
 		alignItems: "center",
 		flexDirection: "column",

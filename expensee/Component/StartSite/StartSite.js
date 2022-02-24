@@ -1,6 +1,15 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, View, Button, TextInput, Image } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	Button,
+	TextInput,
+	Image,
+	ScrollView,
+	SafeAreaView,
+} from "react-native";
 import { Link } from "react-router-native";
 import { newToken } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
@@ -19,43 +28,50 @@ const StartSite = () => {
 	console.log(allAmounts);
 	return (
 		<View style={styles.startSite}>
-			<View style={styles.logOut}>
-				<Text style={styles.logOutText}>Log out</Text>
-				<Link underlayColor={"transparent"} to='/'>
-					<Image
-						style={styles.logOutImage}
-						source={{
-							uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/ausloggen.png",
-						}}
-					/>
-				</Link>
-			</View>
-			<View style={styles.startSiteText}>
-				{allAmounts.map(amount => (
-					<View style={styles.AmountView}>
+			<ScrollView>
+				<View style={styles.logOut}>
+					<Text style={styles.logOutText}>Log out</Text>
+					<Link underlayColor={"transparent"} to='/'>
 						<Image
-							style={styles.imageAmount}
+							style={styles.logOutImage}
 							source={{
-								uri: `/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/${
-									amount.categorie == "Einkommen" ? "green.png" : "red.png"
-								}`,
+								uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/ausloggen.png",
 							}}
 						/>
-						<Text>{}</Text>
-						<Text style={styles.amountText}> {amount.date}</Text>
-						<Text style={styles.amountText}>{amount.description}</Text>
+					</Link>
+				</View>
+				<View style={styles.startSiteText}>
+					{allAmounts.map(amount => (
+						<View style={styles.AmountView}>
+							<View style={styles.AmountDateAndDs}>
+								<Image
+									style={styles.imageAmount}
+									source={{
+										uri: `/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/${
+											amount.categorie == "Einkommen" ? "green.png" : "red.png"
+										}`,
+									}}
+								/>
+								<View style={styles.amountViewText}>
+									<Text style={styles.amountTextDS}>{amount.description}</Text>
+									<Text style={styles.amountTextData}> {amount.date}</Text>
+								</View>
+							</View>
+							<Text style={styles.amountTextAmount}>{` ${
+								amount.categorie == "Einkommen" ? "+" : "-"
+							}   ${amount.amount} €`}</Text>
+						</View>
+					))}
+				</View>
+			</ScrollView>
 
-						<Text style={styles.amountText}>{`${amount.amount} €`}</Text>
-					</View>
-				))}
-			</View>
 			<HomeNav />
 		</View>
 	);
 };
 const styles = StyleSheet.create({
 	startSite: {
-		display: "flex",
+		flex: 1,
 		justifyContent: "space-between",
 		height: "100%",
 		width: "100%",
@@ -65,11 +81,20 @@ const styles = StyleSheet.create({
 	AmountView: {
 		margin: 5,
 		backgroundColor: "#232450",
-		display: "flex",
-		flexDirection: "row",
+		flex: 1,
 		alignItems: "center",
+		flexDirection: "row",
 		justifyContent: "space-between",
-		height: "15%",
+		height: 40,
+	},
+	AmountDateAndDs: {
+		margin: 10,
+		justifyContent: "center",
+		alignItems: "center",
+		flexDirection: "row",
+	},
+	amountViewText: {
+		marginLeft: 15,
 	},
 	backHome: {
 		color: "#FFFFFF",
@@ -116,8 +141,18 @@ const styles = StyleSheet.create({
 		width: 25,
 		transform: [{ rotate: "180deg" }],
 	},
-	amountText: {
+	amountTextDS: {
+		fontSize: 15,
+		color: "gray",
+		marginLeft: 4,
+	},
+	amountTextData: {
+		fontSize: 15,
 		color: "white",
+	},
+	amountTextAmount: {
+		fontSize: 15,
+		color: "orange",
 	},
 	imageAmount: {
 		width: 25,

@@ -20,7 +20,7 @@ const Sales = () => {
 		const stateamount = { categorie, description, amount, date, token };
 		URL = "http://localhost:3030/api/expensee/users/amount";
 		try {
-			if ((categorie, description, amount, date)) {
+			if ((categorie, description, amount == typeof Number, date)) {
 				const fetch = await axios.post(URL, stateamount);
 
 				if (fetch.data.amountAdded) {
@@ -113,6 +113,7 @@ const Sales = () => {
 };
 const styles = StyleSheet.create({
 	headLine: {
+		paddingTop: 30,
 		fontSize: 50,
 		color: "white",
 		textAlign: "center",
@@ -124,13 +125,10 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	allMenu: {
-		display: "flex",
-		justifyContent: "space-evenly",
 		alignItems: "center",
 	},
 	dropDown: { marginBottom: 15 },
 	Home: {
-		display: "flex",
 		justifyContent: "space-between",
 		flexDirection: "column",
 		height: "100%",
