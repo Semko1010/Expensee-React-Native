@@ -1,12 +1,20 @@
 import {
+	LineChart,
+	BarChart,
+	PieChart,
+	ProgressChart,
+	ContributionGraph,
+	StackedBarChart,
+} from "react-native-chart-kit";
+import { LinearGradient } from "expo-linear-gradient";
+import {
 	StyleSheet,
 	Text,
 	View,
-	Button,
-	TextInput,
-	Image,
 	TouchableOpacity,
+	Dimensions,
 } from "react-native";
+
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { newToken, Amounts } from "../../App";
@@ -41,16 +49,53 @@ const Einnahmen = () => {
 	return (
 		<View style={styles.container}>
 			{loading && (
-				<View>
+				<View style={styles.container}>
+					<View style={styles.chart}>
+						<PieChart
+							data={[
+								{
+									name: "Seoul",
+									population: 21500000,
+									color: "rgba(131, 167, 234, 1)",
+									legendFontColor: "#7F7F7F",
+								},
+								{
+									name: "Toronto",
+									population: 2800000,
+									color: "#F63535",
+									legendFontColor: "black",
+								},
+							]}
+							width={Dimensions.get("window").width - 16}
+							height={150}
+							chartConfig={{
+								backgroundColor: "#1cc910",
+								backgroundGradientFrom: "#eff3ff",
+								backgroundGradientTo: "#efefef",
+								decimalPlaces: 2,
+								color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+								style: {
+									borderRadius: 16,
+								},
+							}}
+							accessor='population'
+							backgroundColor='transparent'
+							paddingLeft='15'
+							absolute //for the absolute number remove if you want percentage
+						/>
+					</View>
 					<View style={styles.containerSub}>
 						<View>
-							<TouchableOpacity
-								onPress={toggleEinkommen}
-								style={styles.einkommen}>
-								<Text style={styles.headText}>EInkommen</Text>
-								<Text style={styles.headText}>{`${einkommen}€`}</Text>
-							</TouchableOpacity>
-
+							<LinearGradient
+								colors={["#F63535", "#FF009D"]}
+								style={styles.button}>
+								<TouchableOpacity
+									onPress={toggleEinkommen}
+									style={styles.einkommen}>
+									<Text style={styles.headText}>EInkommen</Text>
+									<Text style={styles.headText}>{`${einkommen}€`}</Text>
+								</TouchableOpacity>
+							</LinearGradient>
 							{einkommenToggle && (
 								<View style={styles.allIn}>
 									{allAmounts.map(amount => {
@@ -79,7 +124,9 @@ const Einnahmen = () => {
 
 							<View style={styles.allIn}>
 								{allAmounts.map(amount => {
-									if (!amount.categorie == "Einkommen") {
+									if (
+										(amount.categorie == "Lebensmittel", "Shopping", "Wohnung")
+									) {
 										// return (
 										// 	<View style={styles.einkommenToggle}>
 										// 		<Text style={styles.einkommenText}>
@@ -106,7 +153,10 @@ const Einnahmen = () => {
 
 const styles = StyleSheet.create({
 	container: {
+		backgroundColor: "#2B2D5B",
 		width: "100%",
+		flex: 1,
+		justifyContent: "space-between",
 	},
 	containerSub: {
 		alignItems: "center",
@@ -121,7 +171,6 @@ const styles = StyleSheet.create({
 		width: "80%",
 		height: 40,
 		flexDirection: "row",
-		backgroundColor: "#F63535",
 	},
 	einkommenToggle: {
 		alignItems: "center",
@@ -142,6 +191,14 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		backgroundColor: "#F63535",
 		backgroundColor: "#515FEB",
+		margin: 10,
+	},
+	chart: {
+		marginTop: 40,
+	},
+	button: {
+		alignItems: "center",
+		borderRadius: 5,
 	},
 });
 export default Einnahmen;
