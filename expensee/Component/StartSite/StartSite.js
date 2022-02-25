@@ -10,35 +10,54 @@ import {
 	ScrollView,
 	SafeAreaView,
 } from "react-native";
+import * as Crypto from "expo-crypto";
 import { Link } from "react-router-native";
-import { newToken } from "../../App";
+import { newToken, Amounts } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
 let arr = [];
 const StartSite = () => {
+	const [userImg, setUserImg] = useState("");
 	const { token, setToken } = useContext(newToken);
-	const [allAmounts, setAllAmounts] = useState([]);
-	const [menu, setmenu] = useState(false);
+	const { allAmounts, setAllAmounts } = useContext(Amounts);
+	const [menu, setmenu] = useState("");
 	useEffect(() => {
+		const amountsURL = "http://localhost:3030/api/expensee/users/allAmounts";
+		const userImage = "http://localhost:3030/api/expensee/users/allUsers";
+		//Fetching userImage
 		axios
-			.get("http://localhost:3030/api/expensee/users/allAmounts", {
+			.get(userImage, {
+				headers: token,
+			})
+			.then(response => setUserImg(response.data));
+		console.log(userImg);
+		axios
+			.get(amountsURL, {
 				headers: token,
 			})
 			.then(response => setAllAmounts(response.data));
 	}, []);
-	console.log(allAmounts);
+
 	return (
 		<View style={styles.startSite}>
 			<ScrollView>
 				<View style={styles.logOut}>
-					<Text style={styles.logOutText}>Log out</Text>
-					<Link underlayColor={"transparent"} to='/'>
-						<Image
-							style={styles.logOutImage}
-							source={{
-								uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/ausloggen.png",
-							}}
-						/>
-					</Link>
+					<Image
+						style={styles.userImg}
+						source={{
+							uri: `data:image/jpeg;base64,${userImg}`,
+						}}
+					/>
+					<View style={styles.logOutView}>
+						<Text style={styles.logOutText}>Log Out</Text>
+						<Link underlayColor={"transparent"} to='/'>
+							<Image
+								style={styles.logOutImage}
+								source={{
+									uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/ausloggen.png",
+								}}
+							/>
+						</Link>
+					</View>
 				</View>
 				<View style={styles.startSiteText}>
 					{allAmounts.map(amount => (
@@ -127,19 +146,29 @@ const styles = StyleSheet.create({
 		justifyContent: "space-evenly",
 	},
 	logOut: {
-		margin: 25,
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "flex-end",
+		marginTop: 40,
+		flex: 1,
+		justifyContent: "space-between",
+		paddingBottom: 10,
+		flexDirection: "row",
+		borderBottomWidth: 1,
 	},
 	logOutText: {
 		color: "white",
 	},
+
 	logOutImage: {
+		marginRight: 30,
 		marginTop: 10,
 		height: 17,
 		width: 25,
 		transform: [{ rotate: "180deg" }],
+	},
+	userImg: {
+		marginLeft: 20,
+		borderRadius: 40,
+		height: 50,
+		width: 50,
 	},
 	amountTextDS: {
 		fontSize: 15,

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-native";
+import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
 
 const RegisterUser = () => {
@@ -8,13 +9,14 @@ const RegisterUser = () => {
 	const [username, setUsername] = useState("ff");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const user = { username, email, password };
+	const [userImg, setUserImg] = useState("");
+	const user = { username, email, password, userImg };
 	async function send() {
 		URL = "http://localhost:3030/api/expensee/users/register";
 		try {
 			const fetch = await axios.post(URL, user);
 			if (!fetch.data.userExist) {
-				navigate("/");
+				navigate("/login");
 				console.log("User created");
 			} else {
 				console.log("user exist");
@@ -24,11 +26,39 @@ const RegisterUser = () => {
 		}
 	}
 
+	const pickImage = async () => {
+		// No permissions request is necessary for launching the image library
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [4, 3],
+			quality: 1,
+			base64: true,
+		});
+
+		setUserImg(result.base64);
+	};
+	const pickCamera = async () => {
+		// No permissions request is necessary for launching the image library
+		let result = await ImagePicker.launchCameraAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [4, 3],
+			quality: 1,
+			base64: true,
+		});
+
+		setUserImg(result.base64);
+	};
+
 	return (
 		<>
 			<View style={styles.register}>
 				<Text style={styles.headLine}>Expensee</Text>
-
+				<View style={styles.imageContainer}>
+					<Button onPress={pickImage} title='Select Image' />
+					<Button onPress={pickCamera} title='Camera Image' />
+				</View>
 				<View style={styles.linkContainer}>
 					<View style={styles.linkView}>
 						<Link underlayColor={"transparent"} to='/'>

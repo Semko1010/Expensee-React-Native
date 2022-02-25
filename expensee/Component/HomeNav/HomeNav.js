@@ -4,7 +4,7 @@ import { Link } from "react-router-native";
 const HomeNav = () => {
 	return (
 		<View style={styles.homeImages}>
-			<Link underlayColor={"transparent"} to='/'>
+			<Link underlayColor={"transparent"} to='/startSite'>
 				<Image
 					style={styles.image}
 					source={{
@@ -12,7 +12,7 @@ const HomeNav = () => {
 					}}
 				/>
 			</Link>
-			<Link underlayColor={"transparent"} to='/startSite'>
+			<Link underlayColor={"transparent"} to='/einnahmen'>
 				<Image
 					style={styles.image}
 					source={{
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 		paddingTop: 10,
 		marginBottom: 5,
 		borderTopWidth: 1,
-		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-around",
 	},
