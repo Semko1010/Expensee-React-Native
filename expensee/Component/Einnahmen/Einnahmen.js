@@ -24,6 +24,7 @@ import HomeNav from "../HomeNav/HomeNav";
 
 let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
+let lebensMittel = 0;
 const Einnahmen = () => {
 	const [loading, setLoading] = useState(false);
 	const { token, setToken } = useContext(newToken);
@@ -31,11 +32,14 @@ const Einnahmen = () => {
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 	const [einkommen, setEinkommen] = useState(0);
 	const [ausgaben, setAusgaben] = useState(0);
+	const [lebensMittelGesamt, setLebensMittelGesamt] = useState(0);
 	const [einkommenToggle, setEinkommenToggle] = useState(false);
 	const [ausgabenToggle, setAusgabenToggle] = useState(false);
+	const [lebensmittelToggle, setLebensmittel] = useState(true);
 	useEffect(() => {
 		gesamtEinkommen = 0;
 		gesamtAusgaben = 0;
+		lebensMittel = 0;
 		const URL = "http://localhost:3030/api/expensee/users/allAmounts";
 		axios
 			.get(URL, {
@@ -46,23 +50,35 @@ const Einnahmen = () => {
 		allAmounts.map(amount => {
 			if (amount.categorie == "Einkommen") {
 				setEinkommen((gesamtEinkommen += Number(amount.amount)));
-			} else if (
+			}
+			if (
 				amount.categorie == "Lebensmittel" ||
 				amount.categorie == "Wohnung" ||
 				amount.categorie == "Shopping"
 			) {
 				setAusgaben((gesamtAusgaben += Number(amount.amount)));
 			}
+			if (amount.categorie == "Lebensmittel") {
+				setLebensMittelGesamt((lebensMittel += Number(amount.amount)));
+			}
 		});
-	}, []);
+		console.log("Semir", lebensMittel);
+	}, [einkommen]);
 
 	const toggleEinkommen = () => {
 		setEinkommenToggle(!einkommenToggle);
 		setAusgabenToggle(false);
+		setLebensmittel(false);
 	};
 	const toggleAusgaben = () => {
 		setAusgabenToggle(!ausgabenToggle);
 		setEinkommenToggle(false);
+		setLebensmittel(false);
+	};
+	const toggleLebensmittel = () => {
+		setAusgabenToggle(false);
+		setEinkommenToggle(false);
+		setLebensmittel(!lebensmittelToggle);
 	};
 	return (
 		<View style={styles.container}>
@@ -82,6 +98,12 @@ const Einnahmen = () => {
 									name: "Ausgaben",
 									population: ausgaben,
 									color: "#515FEB",
+									legendFontColor: "white",
+								},
+								{
+									name: "Lebensmittel",
+									population: ausgaben,
+									color: "#EFB722",
 									legendFontColor: "white",
 								},
 							]}
@@ -144,7 +166,7 @@ const Einnahmen = () => {
 						</View>
 
 						{/*##########Ausgaben########## */}
-						<View>
+						<View style={styles.AusgabenParrent}>
 							<LinearGradient
 								colors={["#515FEB", "#514FEB"]}
 								style={styles.button}>
@@ -164,6 +186,42 @@ const Einnahmen = () => {
 												amount.categorie == "Wohnung" ||
 												amount.categorie == "Shopping"
 											) {
+												return (
+													<View style={styles.einkommenToggle}>
+														<Text style={styles.einkommenText}>
+															{amount.description}
+														</Text>
+														<Text
+															style={
+																styles.einkommenText
+															}>{`${amount.amount}€`}</Text>
+													</View>
+												);
+												console.log("semko", amount);
+											}
+										})}
+									</ScrollView>
+								</View>
+							)}
+						</View>
+						{/*##########Lebensmittel########## */}
+						<View>
+							<LinearGradient
+								colors={["#EFB722", "#EFB412"]}
+								style={styles.button}>
+								<TouchableOpacity
+									onPress={toggleLebensmittel}
+									style={styles.ausgaben}>
+									<Text style={styles.headText}>Lebensmittel</Text>
+									<Text
+										style={styles.headText}>{`${lebensMittelGesamt}€`}</Text>
+								</TouchableOpacity>
+							</LinearGradient>
+							{lebensmittelToggle && (
+								<View style={styles.allInausgaben}>
+									<ScrollView style={styles.scrollAusgaben}>
+										{allAmounts.map(amount => {
+											if (amount.categorie == "Lebensmittel") {
 												return (
 													<View style={styles.einkommenToggle}>
 														<Text style={styles.einkommenText}>
@@ -257,7 +315,10 @@ const styles = StyleSheet.create({
 		top: 45,
 		width: "80%",
 	},
-
+	AusgabenParrent: {
+		position: "relative",
+		zIndex: 19,
+	},
 	scroll: {
 		height: 265,
 	},
