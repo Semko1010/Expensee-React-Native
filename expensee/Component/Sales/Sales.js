@@ -15,17 +15,25 @@ const Sales = () => {
 	const [categorie, setCategorie] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [amount, setAmount] = useState(null);
+	const [operator, setOperator] = useState(false);
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
 	useEffect(() => {});
 	async function send() {
+		let zusammen;
+		if (categorie == "Einkommen") {
+			zusammen = Number(vermoegen) + Number(amount);
+		} else {
+			zusammen = Number(vermoegen) - Number(amount);
+		}
+
 		const stateamount = {
 			categorie,
 			description,
 			amount,
 			date,
 			token,
-			vermoegen,
+			zusammen,
 		};
 		URL = "http://localhost:3030/api/expensee/users/amount";
 		try {

@@ -17,7 +17,7 @@ import {
 
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { newToken, Amounts } from "../../App";
+import { newToken, Amounts, Vermoegen } from "../../App";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
 
@@ -28,6 +28,7 @@ const Einnahmen = () => {
 	const [loading, setLoading] = useState(false);
 	const { token, setToken } = useContext(newToken);
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
+	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 	const [einkommen, setEinkommen] = useState(0);
 	const [ausgaben, setAusgaben] = useState(0);
 	const [einkommenToggle, setEinkommenToggle] = useState(false);
@@ -95,7 +96,7 @@ const Einnahmen = () => {
 						/>
 					</View>
 					<View style={styles.containerSub}>
-						<Text>ff</Text>
+						<Text>{vermoegen}</Text>
 						<View>
 							<LinearGradient
 								colors={["#F63535", "#FF009D"]}
