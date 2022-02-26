@@ -26,6 +26,7 @@ let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
 let lebensMittel = 0;
 let shopping = 0;
+let wohnung = 0;
 const Einnahmen = () => {
 	const [loading, setLoading] = useState(false);
 	const { token, setToken } = useContext(newToken);
@@ -35,14 +36,18 @@ const Einnahmen = () => {
 	const [ausgaben, setAusgaben] = useState(0);
 	const [lebensMittelGesamt, setLebensMittelGesamt] = useState(0);
 	const [shoppingGesamt, setShoppingGesamt] = useState(0);
+	const [wohnungGesamt, setWohnungGesamt] = useState(0);
 	const [einkommenToggle, setEinkommenToggle] = useState(false);
 	const [ausgabenToggle, setAusgabenToggle] = useState(false);
 	const [lebensmittelToggle, setLebensmittel] = useState(false);
 	const [shoppingToggle, setShoppingToggle] = useState(false);
+	const [wohnungToggle, setWohnungToggle] = useState(false);
 	useEffect(() => {
 		gesamtEinkommen = 0;
 		gesamtAusgaben = 0;
 		lebensMittel = 0;
+		shopping = 0;
+		wohnung = 0;
 		const URL = "http://localhost:3030/api/expensee/users/allAmounts";
 		axios
 			.get(URL, {
@@ -67,8 +72,10 @@ const Einnahmen = () => {
 			if (amount.categorie == "Shopping") {
 				setShoppingGesamt((shopping += Number(amount.amount)));
 			}
+			if (amount.categorie == "Wohnung") {
+				setWohnungGesamt((wohnung += Number(amount.amount)));
+			}
 		});
-		console.log("Semir", lebensMittel);
 	}, [einkommen]);
 
 	const toggleEinkommen = () => {
@@ -79,21 +86,31 @@ const Einnahmen = () => {
 	};
 	const toggleAusgaben = () => {
 		setShoppingToggle(false);
-		setAusgabenToggle(!ausgabenToggle);
 		setEinkommenToggle(false);
 		setLebensmittel(false);
+		setWohnungToggle(false);
+		setAusgabenToggle(!ausgabenToggle);
 	};
 	const toggleLebensmittel = () => {
 		setShoppingToggle(false);
 		setAusgabenToggle(false);
 		setEinkommenToggle(false);
+		setWohnungToggle(false);
 		setLebensmittel(!lebensmittelToggle);
 	};
 	const toggleShopping = () => {
 		setAusgabenToggle(false);
 		setEinkommenToggle(false);
 		setLebensmittel(false);
+		setWohnungToggle(false);
 		setShoppingToggle(!shoppingToggle);
+	};
+	const toggleWohnung = () => {
+		setAusgabenToggle(false);
+		setEinkommenToggle(false);
+		setLebensmittel(false);
+		setShoppingToggle(false);
+		setWohnungToggle(!wohnungToggle);
 	};
 	return (
 		<View style={styles.container}>
@@ -119,6 +136,18 @@ const Einnahmen = () => {
 									name: "Lebensmittel",
 									population: lebensMittelGesamt,
 									color: "#EFB722",
+									legendFontColor: "white",
+								},
+								{
+									name: "Shopping",
+									population: shoppingGesamt,
+									color: "#00bfff",
+									legendFontColor: "white",
+								},
+								{
+									name: "Wohnung",
+									population: wohnungGesamt,
+									color: "#ff8c00",
 									legendFontColor: "white",
 								},
 							]}
@@ -259,7 +288,7 @@ const Einnahmen = () => {
 						{/*##########Shopping########## */}
 						<View style={styles.ShoppingParrent}>
 							<LinearGradient
-								colors={["#EFB722", "#EFB412"]}
+								colors={["#00bfff", "#28bfff"]}
 								style={styles.button}>
 								<TouchableOpacity
 									onPress={toggleShopping}
@@ -290,6 +319,41 @@ const Einnahmen = () => {
 								</View>
 							)}
 						</View>
+
+						{/*##########Wohnung########## */}
+						<View style={styles.wohnungParrent}>
+							<LinearGradient
+								colors={["#ff8c00", "#ff8c30"]}
+								style={styles.button}>
+								<TouchableOpacity
+									onPress={toggleWohnung}
+									style={styles.ausgaben}>
+									<Text style={styles.headText}>Wohnung</Text>
+									<Text style={styles.headText}>{`${wohnungGesamt}€`}</Text>
+								</TouchableOpacity>
+							</LinearGradient>
+							{wohnungToggle && (
+								<View style={styles.allInausgaben}>
+									<ScrollView style={styles.scrollAusgaben}>
+										{allAmounts.map(amount => {
+											if (amount.categorie == "Wohnung") {
+												return (
+													<View style={styles.einkommenToggle}>
+														<Text style={styles.einkommenText}>
+															{amount.description}
+														</Text>
+														<Text
+															style={
+																styles.einkommenText
+															}>{`${amount.amount}€`}</Text>
+													</View>
+												);
+											}
+										})}
+									</ScrollView>
+								</View>
+							)}
+						</View>
 					</View>
 					<HomeNav />
 				</View>
@@ -302,6 +366,7 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "#2B2D5B",
 		width: "100%",
+
 		flex: 1,
 		justifyContent: "space-between",
 	},

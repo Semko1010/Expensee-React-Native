@@ -38,10 +38,11 @@ const styles = StyleSheet.create({
 	},
 
 	homeImages: {
-		paddingTop: 10,
-		marginBottom: 5,
+		position: "absolute",
+		bottom: 5,
 		borderTopWidth: 1,
 		flexDirection: "row",
+		width: "100%",
 		justifyContent: "space-around",
 	},
 
