@@ -3,14 +3,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-native";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
-
+let zusammen = 0;
 const RegisterUser = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState("ff");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [userImg, setUserImg] = useState("");
-	const user = { username, email, password, userImg };
+	const user = { username, email, password, userImg, zusammen };
 	async function send() {
 		URL = "http://localhost:3030/api/expensee/users/register";
 		try {
@@ -72,6 +72,7 @@ const RegisterUser = () => {
 							placeholder='Username'
 							placeholderTextColor='black'
 							className='inputUsername'
+							color='black'
 						/>
 					</View>
 					<View style={styles.linkView}>
@@ -80,6 +81,7 @@ const RegisterUser = () => {
 							style={styles.textInput}
 							placeholder='Email'
 							placeholderTextColor='black'
+							color='black'
 							className='inputUsername'
 						/>
 					</View>
@@ -89,6 +91,7 @@ const RegisterUser = () => {
 							style={styles.textInput}
 							placeholder='Password'
 							placeholderTextColor='black'
+							color='black'
 							className='inputUsername'
 						/>
 					</View>

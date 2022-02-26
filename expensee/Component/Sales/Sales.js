@@ -20,7 +20,7 @@ const Sales = () => {
 
 	useEffect(() => {});
 	async function send() {
-		let zusammen;
+		let zusammen = 0;
 		if (categorie == "Einkommen") {
 			zusammen = Number(vermoegen) + Number(amount);
 		} else {

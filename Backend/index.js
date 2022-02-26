@@ -18,8 +18,8 @@ app.post("/api/expensee/users/register", (req, res) => {
 	const email = req.body.email;
 	const userImg = req.body.userImg;
 	const password = req.body.password;
-
-	registerUser({ username, email, password, userImg })
+	const gesamtVermoegen = req.body.zusammen;
+	registerUser({ username, email, password, userImg, gesamtVermoegen })
 		.then(() => {
 			res.send({ userExist: false });
 		})
@@ -44,7 +44,7 @@ app.post("/api/expensee/users/amount", (req, res) => {
 	addAmount(req.body).then(res.send({ amountAdded: true }));
 	const userObjId = req.body.token.userObjId;
 	const amount = req.body.zusammen;
-
+	console.log(amount);
 	allMoney(userObjId, amount);
 });
 
