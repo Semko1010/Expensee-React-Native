@@ -20,15 +20,21 @@ import axios from "axios";
 import { newToken, Amounts } from "../../App";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
+
+let gesamtvermoegen = 0;
 let gesamtEinkommen = 0;
+let gesamtAusgaben = 0;
 const Einnahmen = () => {
 	const [loading, setLoading] = useState(false);
 	const { token, setToken } = useContext(newToken);
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
 	const [einkommen, setEinkommen] = useState(0);
+	const [ausgaben, setAusgaben] = useState(0);
 	const [einkommenToggle, setEinkommenToggle] = useState(false);
+	const [ausgabenToggle, setAusgabenToggle] = useState(false);
 	useEffect(() => {
 		gesamtEinkommen = 0;
+
 		const URL = "http://localhost:3030/api/expensee/users/allAmounts";
 		axios
 			.get(URL, {
@@ -39,12 +45,16 @@ const Einnahmen = () => {
 		allAmounts.map(amount => {
 			if (amount.categorie == "Einkommen") {
 				setEinkommen((gesamtEinkommen += Number(amount.amount)));
+				setAusgaben(gesamtAusgaben);
 			}
 		});
 	}, []);
 
 	const toggleEinkommen = () => {
 		setEinkommenToggle(!einkommenToggle);
+	};
+	const toggleAusgaben = () => {
+		setAusgabenToggle(!ausgabenToggle);
 	};
 	return (
 		<View style={styles.container}>
@@ -54,16 +64,16 @@ const Einnahmen = () => {
 						<PieChart
 							data={[
 								{
-									name: "Seoul",
+									name: "Ausgaben",
 									population: 21500000,
-									color: "rgba(131, 167, 234, 1)",
-									legendFontColor: "#7F7F7F",
+									color: "#515FEB",
+									legendFontColor: "white",
 								},
 								{
 									name: "Toronto",
-									population: 2800000,
+									population: einkommen,
 									color: "#F63535",
-									legendFontColor: "black",
+									legendFontColor: "white",
 								},
 							]}
 							width={Dimensions.get("window").width - 16}
@@ -85,6 +95,7 @@ const Einnahmen = () => {
 						/>
 					</View>
 					<View style={styles.containerSub}>
+						<Text>ff</Text>
 						<View>
 							<LinearGradient
 								colors={["#F63535", "#FF009D"]}
@@ -117,31 +128,40 @@ const Einnahmen = () => {
 							)}
 						</View>
 						<View>
-							<TouchableOpacity style={styles.ausgaben}>
-								<Text style={styles.headText}>Ausgaben</Text>
-								<Text style={styles.headText}>{`${einkommen}€`}</Text>
-							</TouchableOpacity>
-
-							<View style={styles.allIn}>
-								{allAmounts.map(amount => {
-									if (
-										(amount.categorie == "Lebensmittel", "Shopping", "Wohnung")
-									) {
-										// return (
-										// 	<View style={styles.einkommenToggle}>
-										// 		<Text style={styles.einkommenText}>
-										// 			{amount.description}
-										// 		</Text>
-										// 		<Text
-										// 			style={
-										// 				styles.einkommenText
-										// 			}>{`${amount.amount}€`}</Text>
-										// 	</View>
-										// );
-										console.log("Semiraga", amount);
-									}
-								})}
-							</View>
+							<LinearGradient
+								colors={["#515FEB", "#514FEB"]}
+								style={styles.button}>
+								<TouchableOpacity
+									onPress={toggleAusgaben}
+									style={styles.ausgaben}>
+									<Text style={styles.headText}>Ausgaben</Text>
+									<Text style={styles.headText}>{`${einkommen}€`}</Text>
+								</TouchableOpacity>
+							</LinearGradient>
+							{ausgabenToggle && (
+								<View style={styles.allIn}>
+									{allAmounts.map(amount => {
+										if (
+											amount.categorie == "Lebensmittel" ||
+											amount.categorie == "Wohnung" ||
+											amount.categorie == "Shopping"
+										) {
+											return (
+												<View style={styles.einkommenToggle}>
+													<Text style={styles.einkommenText}>
+														{amount.description}
+													</Text>
+													<Text
+														style={
+															styles.einkommenText
+														}>{`${amount.amount}€`}</Text>
+												</View>
+											);
+											console.log("semko", amount);
+										}
+									})}
+								</View>
+							)}
 						</View>
 					</View>
 					<HomeNav />
@@ -189,9 +209,6 @@ const styles = StyleSheet.create({
 		width: "80%",
 		height: 40,
 		flexDirection: "row",
-		backgroundColor: "#F63535",
-		backgroundColor: "#515FEB",
-		margin: 10,
 	},
 	chart: {
 		marginTop: 40,
@@ -199,6 +216,7 @@ const styles = StyleSheet.create({
 	button: {
 		alignItems: "center",
 		borderRadius: 5,
+		marginTop: 5,
 	},
 });
 export default Einnahmen;

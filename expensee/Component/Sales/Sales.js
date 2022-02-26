@@ -4,10 +4,11 @@ import SelectDropdown from "react-native-select-dropdown";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
 import DatePicker from "react-native-datepicker";
-import { newToken } from "../../App";
+import { newToken, Vermoegen } from "../../App";
 import axios from "axios";
 const Sales = () => {
 	const navigate = useNavigate();
+	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 	const { token, setToken } = useContext(newToken);
 	const [warning, setWarning] = useState("");
 	const [date, setDate] = useState(null);
@@ -16,11 +17,19 @@ const Sales = () => {
 	const [amount, setAmount] = useState(null);
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
+	useEffect(() => {});
 	async function send() {
-		const stateamount = { categorie, description, amount, date, token };
+		const stateamount = {
+			categorie,
+			description,
+			amount,
+			date,
+			token,
+			vermoegen,
+		};
 		URL = "http://localhost:3030/api/expensee/users/amount";
 		try {
-			if ((categorie, description, amount == typeof Number, date)) {
+			if ((categorie, description, amount, date)) {
 				const fetch = await axios.post(URL, stateamount);
 
 				if (fetch.data.amountAdded) {

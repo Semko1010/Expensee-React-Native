@@ -12,14 +12,15 @@ import {
 } from "react-native";
 import * as Crypto from "expo-crypto";
 import { Link } from "react-router-native";
-import { newToken, Amounts } from "../../App";
+import { newToken, Amounts, Vermoegen } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
 let arr = [];
 const StartSite = () => {
 	const [userImg, setUserImg] = useState("");
 	const { token, setToken } = useContext(newToken);
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
-	const [menu, setmenu] = useState("");
+	const { vermoegen, setVermoegen } = useContext(Vermoegen);
+
 	useEffect(() => {
 		const amountsURL = "http://localhost:3030/api/expensee/users/allAmounts";
 		const userImage = "http://localhost:3030/api/expensee/users/allUsers";
@@ -28,8 +29,12 @@ const StartSite = () => {
 			.get(userImage, {
 				headers: token,
 			})
-			.then(response => setUserImg(response.data));
-		console.log(userImg);
+			.then(response => {
+				const res = response;
+				setUserImg(res.data.userImg);
+				setVermoegen(res.data.gesamtVermoegen);
+			});
+
 		axios
 			.get(amountsURL, {
 				headers: token,
