@@ -68,19 +68,20 @@ const Einnahmen = () => {
 		<View style={styles.container}>
 			{loading && (
 				<View style={styles.container}>
+					{/*##########DonutChart########## */}
 					<View style={styles.chart}>
 						<PieChart
 							data={[
 								{
-									name: "Ausgaben",
-									population: 21500000,
-									color: "#515FEB",
+									name: "Einkommen",
+									population: einkommen,
+									color: "#F63535",
 									legendFontColor: "white",
 								},
 								{
-									name: "Toronto",
-									population: einkommen,
-									color: "#F63535",
+									name: "Ausgaben",
+									population: ausgaben,
+									color: "#515FEB",
 									legendFontColor: "white",
 								},
 							]}
@@ -104,7 +105,10 @@ const Einnahmen = () => {
 					</View>
 
 					<View style={styles.containerSub}>
+						{/*##########Vermoegen########## */}
 						<Text style={styles.VermoegenText}>{`${vermoegen}€`}</Text>
+
+						{/*##########Einkommen########## */}
 						<View style={styles.allInParrent}>
 							<LinearGradient
 								colors={["#F63535", "#FF009D"]}
@@ -138,6 +142,8 @@ const Einnahmen = () => {
 								</View>
 							)}
 						</View>
+
+						{/*##########Ausgaben########## */}
 						<View>
 							<LinearGradient
 								colors={["#515FEB", "#514FEB"]}
@@ -177,7 +183,6 @@ const Einnahmen = () => {
 							)}
 						</View>
 					</View>
-
 					<HomeNav />
 				</View>
 			)}
@@ -254,10 +259,10 @@ const styles = StyleSheet.create({
 	},
 
 	scroll: {
-		height: 270,
+		height: 265,
 	},
 	scrollAusgaben: {
-		height: 230,
+		height: 225,
 	},
 });
 export default Einnahmen;

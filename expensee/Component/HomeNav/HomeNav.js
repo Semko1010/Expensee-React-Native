@@ -8,7 +8,7 @@ const HomeNav = () => {
 				<Image
 					style={styles.image}
 					source={{
-						uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/circle home.png",
+						uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/transaction.png",
 					}}
 				/>
 			</Link>
