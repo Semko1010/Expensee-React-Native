@@ -25,6 +25,7 @@ import HomeNav from "../HomeNav/HomeNav";
 let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
 let lebensMittel = 0;
+let shopping = 0;
 const Einnahmen = () => {
 	const [loading, setLoading] = useState(false);
 	const { token, setToken } = useContext(newToken);
@@ -33,9 +34,11 @@ const Einnahmen = () => {
 	const [einkommen, setEinkommen] = useState(0);
 	const [ausgaben, setAusgaben] = useState(0);
 	const [lebensMittelGesamt, setLebensMittelGesamt] = useState(0);
+	const [shoppingGesamt, setShoppingGesamt] = useState(0);
 	const [einkommenToggle, setEinkommenToggle] = useState(false);
 	const [ausgabenToggle, setAusgabenToggle] = useState(false);
-	const [lebensmittelToggle, setLebensmittel] = useState(true);
+	const [lebensmittelToggle, setLebensmittel] = useState(false);
+	const [shoppingToggle, setShoppingToggle] = useState(false);
 	useEffect(() => {
 		gesamtEinkommen = 0;
 		gesamtAusgaben = 0;
@@ -61,24 +64,36 @@ const Einnahmen = () => {
 			if (amount.categorie == "Lebensmittel") {
 				setLebensMittelGesamt((lebensMittel += Number(amount.amount)));
 			}
+			if (amount.categorie == "Shopping") {
+				setShoppingGesamt((shopping += Number(amount.amount)));
+			}
 		});
 		console.log("Semir", lebensMittel);
 	}, [einkommen]);
 
 	const toggleEinkommen = () => {
+		setShoppingToggle(false);
 		setEinkommenToggle(!einkommenToggle);
 		setAusgabenToggle(false);
 		setLebensmittel(false);
 	};
 	const toggleAusgaben = () => {
+		setShoppingToggle(false);
 		setAusgabenToggle(!ausgabenToggle);
 		setEinkommenToggle(false);
 		setLebensmittel(false);
 	};
 	const toggleLebensmittel = () => {
+		setShoppingToggle(false);
 		setAusgabenToggle(false);
 		setEinkommenToggle(false);
 		setLebensmittel(!lebensmittelToggle);
+	};
+	const toggleShopping = () => {
+		setAusgabenToggle(false);
+		setEinkommenToggle(false);
+		setLebensmittel(false);
+		setShoppingToggle(!shoppingToggle);
 	};
 	return (
 		<View style={styles.container}>
@@ -102,7 +117,7 @@ const Einnahmen = () => {
 								},
 								{
 									name: "Lebensmittel",
-									population: ausgaben,
+									population: lebensMittelGesamt,
 									color: "#EFB722",
 									legendFontColor: "white",
 								},
@@ -204,8 +219,9 @@ const Einnahmen = () => {
 								</View>
 							)}
 						</View>
+
 						{/*##########Lebensmittel########## */}
-						<View>
+						<View style={styles.lebensmittelParrent}>
 							<LinearGradient
 								colors={["#EFB722", "#EFB412"]}
 								style={styles.button}>
@@ -234,6 +250,40 @@ const Einnahmen = () => {
 													</View>
 												);
 												console.log("semko", amount);
+											}
+										})}
+									</ScrollView>
+								</View>
+							)}
+						</View>
+						{/*##########Shopping########## */}
+						<View style={styles.ShoppingParrent}>
+							<LinearGradient
+								colors={["#EFB722", "#EFB412"]}
+								style={styles.button}>
+								<TouchableOpacity
+									onPress={toggleShopping}
+									style={styles.ausgaben}>
+									<Text style={styles.headText}>Shopping</Text>
+									<Text style={styles.headText}>{`${shoppingGesamt}€`}</Text>
+								</TouchableOpacity>
+							</LinearGradient>
+							{shoppingToggle && (
+								<View style={styles.allInausgaben}>
+									<ScrollView style={styles.scrollAusgaben}>
+										{allAmounts.map(amount => {
+											if (amount.categorie == "Shopping") {
+												return (
+													<View style={styles.einkommenToggle}>
+														<Text style={styles.einkommenText}>
+															{amount.description}
+														</Text>
+														<Text
+															style={
+																styles.einkommenText
+															}>{`${amount.amount}€`}</Text>
+													</View>
+												);
 											}
 										})}
 									</ScrollView>
@@ -315,9 +365,22 @@ const styles = StyleSheet.create({
 		top: 45,
 		width: "80%",
 	},
+	allInausgaben: {
+		position: "absolute",
+		top: 45,
+		width: "80%",
+	},
 	AusgabenParrent: {
 		position: "relative",
 		zIndex: 19,
+	},
+	lebensmittelParrent: {
+		position: "relative",
+		zIndex: 18,
+	},
+	ShoppingParrent: {
+		position: "relative",
+		zIndex: 17,
 	},
 	scroll: {
 		height: 265,
