@@ -1,10 +1,10 @@
 const { createNewUser, checkEmailExists } = require("../db_access/user_dao");
 const { hashPassword } = require("../utility/pwHash");
 
-async function registerUser({ username, email, password }) {
+async function registerUser({ username, email, password, userImg }) {
 	//checkEmailExist
 	const foundUser = await checkEmailExists(email);
-	console.log(email);
+
 	if (foundUser) {
 		console.log("user Exist! Please Log in!");
 		throw new Error("User with this Email already exist. Please log in!");
@@ -16,6 +16,7 @@ async function registerUser({ username, email, password }) {
 		username,
 		email,
 		passwordHash,
+		userImg,
 	};
 	const insertResult = await createNewUser(newUser);
 	if (!insertResult.acknowledged) {

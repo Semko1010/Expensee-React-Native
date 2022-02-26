@@ -13,6 +13,7 @@ import {
 	View,
 	TouchableOpacity,
 	Dimensions,
+	ScrollView,
 } from "react-native";
 
 import { useState, useEffect, useContext } from "react";
@@ -53,9 +54,11 @@ const Einnahmen = () => {
 
 	const toggleEinkommen = () => {
 		setEinkommenToggle(!einkommenToggle);
+		setAusgabenToggle(false);
 	};
 	const toggleAusgaben = () => {
 		setAusgabenToggle(!ausgabenToggle);
+		setEinkommenToggle(false);
 	};
 	return (
 		<View style={styles.container}>
@@ -95,9 +98,10 @@ const Einnahmen = () => {
 							absolute //for the absolute number remove if you want percentage
 						/>
 					</View>
+
 					<View style={styles.containerSub}>
-						<Text>{vermoegen}</Text>
-						<View>
+						<Text style={styles.VermoegenText}>{vermoegen}</Text>
+						<View style={styles.allInParrent}>
 							<LinearGradient
 								colors={["#F63535", "#FF009D"]}
 								style={styles.button}>
@@ -110,21 +114,23 @@ const Einnahmen = () => {
 							</LinearGradient>
 							{einkommenToggle && (
 								<View style={styles.allIn}>
-									{allAmounts.map(amount => {
-										if (amount.categorie == "Einkommen") {
-											return (
-												<View style={styles.einkommenToggle}>
-													<Text style={styles.einkommenText}>
-														{amount.description}
-													</Text>
-													<Text
-														style={
-															styles.einkommenText
-														}>{`${amount.amount}€`}</Text>
-												</View>
-											);
-										}
-									})}
+									<ScrollView style={styles.scroll}>
+										{allAmounts.map(amount => {
+											if (amount.categorie == "Einkommen") {
+												return (
+													<View style={styles.einkommenToggle}>
+														<Text style={styles.einkommenText}>
+															{amount.description}
+														</Text>
+														<Text
+															style={
+																styles.einkommenText
+															}>{`${amount.amount}€`}</Text>
+													</View>
+												);
+											}
+										})}
+									</ScrollView>
 								</View>
 							)}
 						</View>
@@ -140,31 +146,34 @@ const Einnahmen = () => {
 								</TouchableOpacity>
 							</LinearGradient>
 							{ausgabenToggle && (
-								<View style={styles.allIn}>
-									{allAmounts.map(amount => {
-										if (
-											amount.categorie == "Lebensmittel" ||
-											amount.categorie == "Wohnung" ||
-											amount.categorie == "Shopping"
-										) {
-											return (
-												<View style={styles.einkommenToggle}>
-													<Text style={styles.einkommenText}>
-														{amount.description}
-													</Text>
-													<Text
-														style={
-															styles.einkommenText
-														}>{`${amount.amount}€`}</Text>
-												</View>
-											);
-											console.log("semko", amount);
-										}
-									})}
+								<View style={styles.allInausgaben}>
+									<ScrollView style={styles.scrollAusgaben}>
+										{allAmounts.map(amount => {
+											if (
+												amount.categorie == "Lebensmittel" ||
+												amount.categorie == "Wohnung" ||
+												amount.categorie == "Shopping"
+											) {
+												return (
+													<View style={styles.einkommenToggle}>
+														<Text style={styles.einkommenText}>
+															{amount.description}
+														</Text>
+														<Text
+															style={
+																styles.einkommenText
+															}>{`${amount.amount}€`}</Text>
+													</View>
+												);
+												console.log("semko", amount);
+											}
+										})}
+									</ScrollView>
 								</View>
 							)}
 						</View>
 					</View>
+
 					<HomeNav />
 				</View>
 			)}
@@ -181,6 +190,7 @@ const styles = StyleSheet.create({
 	},
 	containerSub: {
 		alignItems: "center",
+		marginBottom: 200,
 	},
 	headText: {
 		color: "white",
@@ -218,6 +228,31 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		borderRadius: 5,
 		marginTop: 5,
+	},
+	VermoegenText: {
+		color: "white",
+		fontSize: 30,
+	},
+	allInParrent: {
+		position: "relative",
+		zIndex: 20,
+	},
+	allIn: {
+		position: "absolute",
+		top: 45,
+		width: "80%",
+	},
+	allInausgaben: {
+		position: "absolute",
+		top: 45,
+		width: "80%",
+	},
+
+	scroll: {
+		height: 270,
+	},
+	scrollAusgaben: {
+		height: 230,
 	},
 });
 export default Einnahmen;

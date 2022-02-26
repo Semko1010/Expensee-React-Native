@@ -24,7 +24,7 @@ const generateToken = user => {
 async function LoginUser({ email, password }) {
 	//email-Input mit Datenbank abgleichen
 	const foundUser = await checkEmailExists(email);
-	console.log("FoundUser", foundUser);
+
 	if (!foundUser) {
 		throw new Error("User not found.");
 	}

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-native";
+import { Link, useNavigate, TouchableOpacity } from "react-router-native";
 import { newToken } from "../../App";
 import axios from "axios";
 const Login = () => {
@@ -62,7 +62,7 @@ const Login = () => {
 					/>
 				</View>
 
-				<Button onPress={send} title='Send'></Button>
+				<Button onPress={send} title='Einloggen'></Button>
 			</View>
 		</View>
 	);

@@ -1,3 +1,4 @@
+const ObjectId = require("mongodb").ObjectId;
 const { _getDB } = require("./_getDB");
 
 //create new User
@@ -8,22 +9,23 @@ async function createNewUser(user) {
 }
 //Check Name or email exist, User vorhanden in Datenbank
 async function checkEmailExists(email) {
-	console.log(email);
 	const db = await _getDB();
 	const user = await db.collection("users").findOne({
 		$or: [{ email: email }],
 	});
-	console.log("semir", user);
+
 	return user;
 }
-//getallProducts
-async function getAllProducts() {
+//get user
+async function findOneUser(id) {
 	const db = await _getDB();
-	const allProducts = await db.collection("products").find().toArray();
+	const foundUser = await db
+		.collection("users")
+		.findOne({ _id: new ObjectId(id) });
+	const favorites = foundUser;
 
-	return allProducts;
+	return favorites;
 }
-
 async function getAmounts(userobjid) {
 	const db = await _getDB();
 	const amount = await db.collection(`amount/${userobjid}`).find().toArray();
@@ -45,6 +47,6 @@ module.exports = {
 	createNewUser,
 	checkEmailExists,
 	addAmount,
-	getAllProducts,
+	findOneUser,
 	getAmounts,
 };
