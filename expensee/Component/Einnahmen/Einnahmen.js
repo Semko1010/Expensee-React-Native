@@ -22,7 +22,6 @@ import { newToken, Amounts, Vermoegen } from "../../App";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
 
-let gesamtvermoegen = 0;
 let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
 const Einnahmen = () => {
@@ -36,7 +35,7 @@ const Einnahmen = () => {
 	const [ausgabenToggle, setAusgabenToggle] = useState(false);
 	useEffect(() => {
 		gesamtEinkommen = 0;
-
+		gesamtAusgaben = 0;
 		const URL = "http://localhost:3030/api/expensee/users/allAmounts";
 		axios
 			.get(URL, {
@@ -47,7 +46,12 @@ const Einnahmen = () => {
 		allAmounts.map(amount => {
 			if (amount.categorie == "Einkommen") {
 				setEinkommen((gesamtEinkommen += Number(amount.amount)));
-				setAusgaben(gesamtAusgaben);
+			} else if (
+				amount.categorie == "Lebensmittel" ||
+				amount.categorie == "Wohnung" ||
+				amount.categorie == "Shopping"
+			) {
+				setAusgaben((gesamtAusgaben += Number(amount.amount)));
 			}
 		});
 	}, []);
@@ -100,7 +104,7 @@ const Einnahmen = () => {
 					</View>
 
 					<View style={styles.containerSub}>
-						<Text style={styles.VermoegenText}>{vermoegen}</Text>
+						<Text style={styles.VermoegenText}>{`${vermoegen}€`}</Text>
 						<View style={styles.allInParrent}>
 							<LinearGradient
 								colors={["#F63535", "#FF009D"]}
@@ -142,7 +146,7 @@ const Einnahmen = () => {
 									onPress={toggleAusgaben}
 									style={styles.ausgaben}>
 									<Text style={styles.headText}>Ausgaben</Text>
-									<Text style={styles.headText}>{`${einkommen}€`}</Text>
+									<Text style={styles.headText}>{`${ausgaben}€`}</Text>
 								</TouchableOpacity>
 							</LinearGradient>
 							{ausgabenToggle && (
@@ -232,6 +236,7 @@ const styles = StyleSheet.create({
 	VermoegenText: {
 		color: "white",
 		fontSize: 30,
+		marginBottom: 30,
 	},
 	allInParrent: {
 		position: "relative",
