@@ -1,20 +1,41 @@
 import { StyleSheet, Text, View } from "react-native";
 import { NativeRouter, Routes, Route, Link } from "react-router-native";
-import RegisterUser from "./Component/Fetch/RegisterUser";
+import RegisterUser from "./Component/RegisterUser/RegisterUser";
 import Login from "./Component/Login/Login";
 import Home from "./Component/Home/Home";
-import { useState, useEffect } from "react";
+import Einnahmen from "./Component/Einnahmen/Einnahmen";
+import StartSite from "./Component/StartSite/StartSite";
+import Sales from "./Component/Sales/Sales";
 
-export default function App() {
+import { useState, useEffect, createContext } from "react";
+
+const newToken = createContext({});
+const Amounts = createContext({});
+const Vermoegen = createContext({});
+
+export default function App(navigation) {
+	const [token, setToken] = useState();
+	const [allAmounts, setAllAmounts] = useState([]);
+	const [vermoegen, setVermoegen] = useState();
 	return (
-		<NativeRouter>
-			<View style={styles.container}>
-				<Routes>
-					<Route exact path='/' element={<Home />} />
-					<Route path='/register' element={<RegisterUser />} />
-				</Routes>
-			</View>
-		</NativeRouter>
+		<Vermoegen.Provider value={{ vermoegen, setVermoegen }}>
+			<Amounts.Provider value={{ allAmounts, setAllAmounts }}>
+				<newToken.Provider value={{ token, setToken }}>
+					<NativeRouter>
+						<View style={styles.container}>
+							<Routes>
+								<Route exact path='/' element={<Home />} />
+								<Route path='/register' element={<RegisterUser />} />
+								<Route path='/login' element={<Login />} />
+								<Route path='/startSite' element={<StartSite />} />
+								<Route path='/einNahmen' element={<Einnahmen />} />
+								<Route path='/sales' element={<Sales />} />
+							</Routes>
+						</View>
+					</NativeRouter>
+				</newToken.Provider>
+			</Amounts.Provider>
+		</Vermoegen.Provider>
 	);
 }
 
@@ -26,3 +47,5 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 });
+
+export { newToken, Amounts, Vermoegen };
