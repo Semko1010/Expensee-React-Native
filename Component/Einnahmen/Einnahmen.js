@@ -48,7 +48,8 @@ const Einnahmen = () => {
 		lebensMittel = 0;
 		shopping = 0;
 		wohnung = 0;
-		const URL = "http://localhost:3030/api/expensee/users/allAmounts";
+		const URL =
+			"https://expenseeserver.herokuapp.com/expensee/users/allAmounts";
 		axios
 			.get(URL, {
 				headers: token,

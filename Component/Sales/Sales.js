@@ -35,7 +35,7 @@ const Sales = () => {
 			token,
 			zusammen,
 		};
-		URL = "http://localhost:3030/api/expensee/users/amount";
+		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/amount";
 		try {
 			if ((categorie, description, amount, date)) {
 				const fetch = await axios.post(URL, stateamount);

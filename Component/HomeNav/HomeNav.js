@@ -8,7 +8,7 @@ const HomeNav = () => {
 				<Image
 					style={styles.image}
 					source={{
-						uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/transaction.png",
+						uri: "/Users/admin/Desktop/expensee/assets/transaction.png",
 					}}
 				/>
 			</Link>
@@ -16,7 +16,7 @@ const HomeNav = () => {
 				<Image
 					style={styles.image}
 					source={{
-						uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/circle home.png",
+						uri: "/Users/admin/Desktop/expensee/assets/circle home.png",
 					}}
 				/>
 			</Link>
@@ -24,7 +24,7 @@ const HomeNav = () => {
 				<Image
 					style={styles.image}
 					source={{
-						uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/profits.png",
+						uri: "/Users/admin/Desktop/expensee/assets/profits.png",
 					}}
 				/>
 			</Link>

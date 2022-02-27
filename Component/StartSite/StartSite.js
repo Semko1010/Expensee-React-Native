@@ -22,8 +22,10 @@ const StartSite = () => {
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 
 	useEffect(() => {
-		const amountsURL = "http://localhost:3030/api/expensee/users/allAmounts";
-		const userImage = "http://localhost:3030/api/expensee/users/allUsers";
+		const amountsURL =
+			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
+		const userImage =
+			"https://expenseeserver.herokuapp.com/api/expensee/users/allUsers";
 		//Fetching userImage
 		axios
 			.get(userImage, {
@@ -71,7 +73,7 @@ const StartSite = () => {
 								<Image
 									style={styles.imageAmount}
 									source={{
-										uri: `/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/${
+										uri: `/Users/admin/Desktop/PortfolioProjects/expensee/assets/${
 											amount.categorie == "Einkommen" ? "green.png" : "red.png"
 										}`,
 									}}
