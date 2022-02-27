@@ -144,9 +144,11 @@ const styles = StyleSheet.create({
 	allMenu: {
 		alignItems: "center",
 	},
-	dropDown: { marginBottom: 15 },
+	dropDown: {
+		marginTop: 70,
+		marginBottom: 10,
+	},
 	Home: {
-		justifyContent: "space-between",
 		flexDirection: "column",
 		height: "100%",
 		width: "100%",
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 	},
 	textInput: {
-		margin: 5,
+		flex: 1,
 		textAlign: "center",
 		padding: 3,
 		color: "black",

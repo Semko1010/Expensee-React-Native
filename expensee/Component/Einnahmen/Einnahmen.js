@@ -172,7 +172,7 @@ const Einnahmen = () => {
 
 					<View style={styles.containerSub}>
 						{/*##########Vermoegen########## */}
-						<Text style={styles.VermoegenText}>{`${vermoegen}€`}</Text>
+						<Text style={styles.VermoegenText}>{`Guthaben ${vermoegen}€`}</Text>
 
 						{/*##########Einkommen########## */}
 						<View style={styles.allInParrent}>
@@ -390,8 +390,10 @@ const styles = StyleSheet.create({
 		backgroundColor: "#32377C",
 		flexDirection: "row",
 		justifyContent: "space-around",
-		margin: 1,
+		margin: 0,
 		height: 35,
+		borderBottomWidth: 1,
+		borderColor: "white",
 	},
 	einkommenText: {
 		color: "white",
@@ -415,6 +417,10 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontSize: 30,
 		marginBottom: 30,
+		marginTop: 20,
+		borderRadius: 30,
+		width: "80%",
+		textAlign: "center",
 	},
 	allInParrent: {
 		position: "relative",

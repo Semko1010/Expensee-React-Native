@@ -39,8 +39,10 @@ const styles = StyleSheet.create({
 
 	homeImages: {
 		position: "absolute",
+		paddingTop: 10,
 		bottom: 5,
 		borderTopWidth: 1,
+		borderColor: "gray",
 		flexDirection: "row",
 		width: "100%",
 		justifyContent: "space-around",

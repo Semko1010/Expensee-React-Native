@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 10,
 		flexDirection: "row",
 		borderBottomWidth: 1,
+		borderColor: "gray",
 	},
 	logOutText: {
 		color: "white",
@@ -187,6 +188,7 @@ const styles = StyleSheet.create({
 	amountTextAmount: {
 		fontSize: 15,
 		color: "orange",
+		marginRight: 10,
 	},
 	imageAmount: {
 		width: 25,
