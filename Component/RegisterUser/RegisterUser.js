@@ -12,7 +12,7 @@ const RegisterUser = () => {
 	const [userImg, setUserImg] = useState("");
 	const user = { username, email, password, userImg, zusammen };
 	async function send() {
-		URL = "http://localhost:3030/api/expensee/users/register";
+		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/register";
 		try {
 			const fetch = await axios.post(URL, user);
 			if (!fetch.data.userExist) {

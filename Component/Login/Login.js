@@ -11,7 +11,7 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 	const user = { email, password };
 	async function send() {
-		URL = "http://localhost:3030/api/expensee/users/login";
+		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/login";
 		try {
 			const fetch = await axios.post(URL, user);
 
