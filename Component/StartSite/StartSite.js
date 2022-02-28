@@ -53,20 +53,20 @@ const StartSite = () => {
 						uri: `data:image/jpeg;base64,${userImg}`,
 					}}
 				/>
+
 				<View style={styles.logOutView}>
-					<Text style={styles.logOutText}>Log Out</Text>
 					<Link underlayColor={"transparent"} to='/'>
 						<Image
 							style={styles.logOutImage}
 							source={{
-								uri: "/Users/admin/Desktop/PortfolioProjects//expensee/assets/ausloggen.png",
+								uri: "/Users/admin/Desktop/expensee/assets/ausloggen (1).png",
 							}}
 						/>
 					</Link>
 				</View>
 			</View>
 			<ScrollView style={styles.scroll}>
-				{allAmounts.map(amount => (
+				{allAmounts.map((amount, index) => (
 					<View style={styles.AmountView}>
 						<View style={styles.AmountDateAndDs}>
 							<Image
@@ -121,10 +121,10 @@ const styles = StyleSheet.create({
 	},
 
 	logOut: {
-		height: 100,
+		marginTop: 30,
+		paddingBottom: 10,
 		alignItems: "center",
 		justifyContent: "space-between",
-
 		flexDirection: "row",
 		borderBottomWidth: 1,
 		borderColor: "gray",
@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
 	logOutImage: {
 		marginRight: 30,
 		marginTop: 10,
-		height: 17,
-		width: 25,
+		height: 45,
+		width: 50,
 		transform: [{ rotate: "180deg" }],
 	},
 	userImg: {

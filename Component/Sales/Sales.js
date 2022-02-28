@@ -6,6 +6,7 @@ import HomeNav from "../HomeNav/HomeNav";
 import DatePicker from "react-native-datepicker";
 import { newToken, Vermoegen } from "../../App";
 import axios from "axios";
+import NumericInput from "react-native-numeric-input";
 const Sales = () => {
 	const navigate = useNavigate();
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
@@ -14,11 +15,12 @@ const Sales = () => {
 	const [date, setDate] = useState(null);
 	const [categorie, setCategorie] = useState(null);
 	const [description, setDescription] = useState(null);
-	const [amount, setAmount] = useState(null);
-	const [operator, setOperator] = useState(false);
+	const [amount, setAmount] = useState(0);
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
-	useEffect(() => {});
+	useEffect(() => {
+		console.log(amount);
+	}, [amount]);
 	async function send() {
 		let zusammen = 0;
 		if (categorie == "Einkommen") {
@@ -76,12 +78,21 @@ const Sales = () => {
 					/>
 				</View>
 				<Text style={styles.warning}>{warning}</Text>
-				<View style={styles.linkView}>
-					<TextInput
-						onChangeText={e => setAmount(e)}
-						placeholderTextColor='black'
-						style={styles.textInput}
-						placeholder='Geldbetrag'
+				<View style={styles.numeric}>
+					<NumericInput
+						value={amount}
+						onChange={value => setAmount(value)}
+						onLimitReached={(isMax, msg) => console.log(isMax, msg)}
+						totalWidth={300}
+						totalHeight={50}
+						iconSize={25}
+						step={1.5}
+						valueType='real'
+						rounded
+						textColor='#B0228C'
+						iconStyle={{ color: "white" }}
+						rightButtonBackgroundColor='#EA3788'
+						leftButtonBackgroundColor='#E56B70'
 					/>
 				</View>
 				<View>
@@ -120,8 +131,8 @@ const Sales = () => {
 						}}
 					/>
 				</View>
-				<View>
-					<Button onPress={send} title='Klick' />
+				<View style={styles.btnView}>
+					<Button style={styles.btn} onPress={send} title='Erstellen' />
 				</View>
 			</View>
 			<HomeNav />
@@ -171,6 +182,18 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 40,
 		backgroundColor: "#fffaf0",
+	},
+	numeric: {
+		marginBottom: 20,
+	},
+	btnView: {
+		marginTop: 20,
+		width: 200,
+		borderRadius: 10,
+		backgroundColor: "white",
+	},
+	btn: {
+		color: "black",
 	},
 });
 export default Sales;
