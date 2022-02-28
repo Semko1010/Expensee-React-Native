@@ -46,49 +46,47 @@ const StartSite = () => {
 
 	return (
 		<View style={styles.startSite}>
-			<ScrollView>
-				<View style={styles.logOut}>
-					<Image
-						style={styles.userImg}
-						source={{
-							uri: `data:image/jpeg;base64,${userImg}`,
-						}}
-					/>
-					<View style={styles.logOutView}>
-						<Text style={styles.logOutText}>Log Out</Text>
-						<Link underlayColor={"transparent"} to='/'>
+			<View style={styles.logOut}>
+				<Image
+					style={styles.userImg}
+					source={{
+						uri: `data:image/jpeg;base64,${userImg}`,
+					}}
+				/>
+				<View style={styles.logOutView}>
+					<Text style={styles.logOutText}>Log Out</Text>
+					<Link underlayColor={"transparent"} to='/'>
+						<Image
+							style={styles.logOutImage}
+							source={{
+								uri: "/Users/admin/Desktop/PortfolioProjects//expensee/assets/ausloggen.png",
+							}}
+						/>
+					</Link>
+				</View>
+			</View>
+			<ScrollView style={styles.scroll}>
+				{allAmounts.map(amount => (
+					<View style={styles.AmountView}>
+						<View style={styles.AmountDateAndDs}>
 							<Image
-								style={styles.logOutImage}
+								style={styles.imageAmount}
 								source={{
-									uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/ausloggen.png",
+									uri: `/Users/admin/Desktop/PortfolioProjects/expensee/assets/${
+										amount.categorie == "Einkommen" ? "green.png" : "red.png"
+									}`,
 								}}
 							/>
-						</Link>
-					</View>
-				</View>
-				<View style={styles.startSiteText}>
-					{allAmounts.map(amount => (
-						<View style={styles.AmountView}>
-							<View style={styles.AmountDateAndDs}>
-								<Image
-									style={styles.imageAmount}
-									source={{
-										uri: `/Users/admin/Desktop/PortfolioProjects/expensee/assets/${
-											amount.categorie == "Einkommen" ? "green.png" : "red.png"
-										}`,
-									}}
-								/>
-								<View style={styles.amountViewText}>
-									<Text style={styles.amountTextDS}>{amount.description}</Text>
-									<Text style={styles.amountTextData}> {amount.date}</Text>
-								</View>
+							<View style={styles.amountViewText}>
+								<Text style={styles.amountTextDS}>{amount.description}</Text>
+								<Text style={styles.amountTextData}> {amount.date}</Text>
 							</View>
-							<Text style={styles.amountTextAmount}>{` ${
-								amount.categorie == "Einkommen" ? "+" : "-"
-							}   ${amount.amount} €`}</Text>
 						</View>
-					))}
-				</View>
+						<Text style={styles.amountTextAmount}>{` ${
+							amount.categorie == "Einkommen" ? "+" : "-"
+						}   ${amount.amount} €`}</Text>
+					</View>
+				))}
 			</ScrollView>
 
 			<HomeNav />
@@ -97,9 +95,8 @@ const StartSite = () => {
 };
 const styles = StyleSheet.create({
 	startSite: {
-		flex: 1,
-		justifyContent: "space-between",
 		height: "100%",
+		justifyContent: "space-around",
 		width: "100%",
 		backgroundColor: "#2B2D5B",
 	},
@@ -122,41 +119,12 @@ const styles = StyleSheet.create({
 	amountViewText: {
 		marginLeft: 15,
 	},
-	backHome: {
-		color: "#FFFFFF",
-		textAlign: "center",
-		fontSize: 20,
-		textAlign: "center",
-		width: 300,
-		height: 40,
-		backgroundColor: "#2B2D4B",
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 11,
-		},
-		shadowOpacity: 0.57,
-		shadowRadius: 15.19,
-		elevation: 23,
-	},
 
-	uebersicht: {
-		paddingLeft: 10,
-		backgroundColor: "#2B2D6B",
-		position: "absolute",
-		top: 40,
-		left: 0,
-		width: "10%",
-		height: "90%",
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "space-evenly",
-	},
 	logOut: {
-		marginTop: 40,
-		flex: 1,
+		height: 100,
+		alignItems: "center",
 		justifyContent: "space-between",
-		paddingBottom: 10,
+
 		flexDirection: "row",
 		borderBottomWidth: 1,
 		borderColor: "gray",
@@ -164,7 +132,7 @@ const styles = StyleSheet.create({
 	logOutText: {
 		color: "white",
 	},
-
+	logOutView: {},
 	logOutImage: {
 		marginRight: 30,
 		marginTop: 10,
@@ -196,5 +164,10 @@ const styles = StyleSheet.create({
 		width: 25,
 		height: 25,
 	},
+	scroll: {
+		marginTop: 20,
+		marginBottom: 90,
+	},
 });
+
 export default StartSite;
