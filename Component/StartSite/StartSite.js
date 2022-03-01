@@ -22,8 +22,7 @@ const StartSite = () => {
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 
 	useEffect(() => {
-		const amountsURL =
-			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
+		const amountsURL = "http://localhost:3030/api/expensee/users/allAmounts";
 		const userImage =
 			"https://expenseeserver.herokuapp.com/api/expensee/users/allUsers";
 		//Fetching userImage

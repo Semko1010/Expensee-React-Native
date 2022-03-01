@@ -44,7 +44,7 @@ const Einnahmen = () => {
 		shopping = 0;
 		wohnung = 0;
 		const URL =
-			"https://expenseeserver.herokuapp.com/expensee/users/allAmounts";
+			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
 		axios
 			.get(URL, {
 				headers: token,
@@ -54,7 +54,6 @@ const Einnahmen = () => {
 		allAmounts.map(amount => {
 			if (amount.categorie == "Einkommen") {
 				setEinkommen((gesamtEinkommen += Number(amount.amount)));
-				console.log(amount);
 			}
 			if (
 				amount.categorie == "Lebensmittel" ||
@@ -73,7 +72,7 @@ const Einnahmen = () => {
 				setWohnungGesamt((wohnung += Number(amount.amount)));
 			}
 		});
-	}, [deleteAmount]);
+	}, [allAmounts]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
@@ -116,14 +115,13 @@ const Einnahmen = () => {
 			token,
 		};
 		const URL = "http://localhost:3030/api/expensee/users/delete";
-		axios.post(URL, delAmount).then(response => {
-			if (response.data.amountRemoved) {
-				setDeleteAmount(!deleteAmount);
-				console.log(deleteAmount);
-			}
+		axios.post(URL, delAmount).then(() => {
+			axios
+				.get("http://localhost:3030/api/expensee/users/allAmounts", {
+					headers: token,
+				})
+				.then(response => setAllAmounts(response.data));
 		});
-		setDeleteAmount(!deleteAmount);
-		console.log(deleteAmount);
 	};
 	return (
 		<View style={styles.container}>
