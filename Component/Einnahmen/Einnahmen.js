@@ -1,11 +1,4 @@
-import {
-	LineChart,
-	BarChart,
-	PieChart,
-	ProgressChart,
-	ContributionGraph,
-	StackedBarChart,
-} from "react-native-chart-kit";
+import { PieChart } from "react-native-chart-kit";
 import { LinearGradient } from "expo-linear-gradient";
 import {
 	StyleSheet,
@@ -14,6 +7,7 @@ import {
 	TouchableOpacity,
 	Dimensions,
 	ScrollView,
+	Button,
 } from "react-native";
 
 import { useState, useEffect, useContext } from "react";
@@ -42,6 +36,7 @@ const Einnahmen = () => {
 	const [lebensmittelToggle, setLebensmittel] = useState(false);
 	const [shoppingToggle, setShoppingToggle] = useState(false);
 	const [wohnungToggle, setWohnungToggle] = useState(false);
+	const [deleteAmount, setDeleteAmount] = useState(false);
 	useEffect(() => {
 		gesamtEinkommen = 0;
 		gesamtAusgaben = 0;
@@ -59,6 +54,7 @@ const Einnahmen = () => {
 		allAmounts.map(amount => {
 			if (amount.categorie == "Einkommen") {
 				setEinkommen((gesamtEinkommen += Number(amount.amount)));
+				console.log(amount);
 			}
 			if (
 				amount.categorie == "Lebensmittel" ||
@@ -77,7 +73,7 @@ const Einnahmen = () => {
 				setWohnungGesamt((wohnung += Number(amount.amount)));
 			}
 		});
-	}, [einkommen]);
+	}, [deleteAmount]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
@@ -112,6 +108,22 @@ const Einnahmen = () => {
 		setLebensmittel(false);
 		setShoppingToggle(false);
 		setWohnungToggle(!wohnungToggle);
+	};
+
+	const deleteAmounts = amountId => {
+		const delAmount = {
+			amountId,
+			token,
+		};
+		const URL = "http://localhost:3030/api/expensee/users/delete";
+		axios.post(URL, delAmount).then(response => {
+			if (response.data.amountRemoved) {
+				setDeleteAmount(!deleteAmount);
+				console.log(deleteAmount);
+			}
+		});
+		setDeleteAmount(!deleteAmount);
+		console.log(deleteAmount);
 	};
 	return (
 		<View style={styles.container}>
@@ -201,6 +213,12 @@ const Einnahmen = () => {
 															style={
 																styles.einkommenText
 															}>{`${amount.amount}€`}</Text>
+														<Button
+															onPress={() => {
+																deleteAmounts(amount);
+															}}
+															title='x'
+														/>
 													</View>
 												);
 											}
@@ -240,6 +258,13 @@ const Einnahmen = () => {
 															style={
 																styles.einkommenText
 															}>{`${amount.amount}€`}</Text>
+
+														<Button
+															onPress={() => {
+																deleteAmounts(amount);
+															}}
+															title='x'
+														/>
 													</View>
 												);
 												console.log("semko", amount);

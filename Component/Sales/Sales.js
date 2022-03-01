@@ -86,7 +86,7 @@ const Sales = () => {
 						totalWidth={300}
 						totalHeight={50}
 						iconSize={25}
-						step={1.5}
+						step={1}
 						valueType='real'
 						rounded
 						textColor='#B0228C'
