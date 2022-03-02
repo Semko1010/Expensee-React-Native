@@ -79,7 +79,7 @@ const Einnahmen = () => {
 				}),
 			)
 			.then(setLoading(true));
-	}, [allAmounts, allAmounts]);
+	}, [allAmounts]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
@@ -123,7 +123,13 @@ const Einnahmen = () => {
 		};
 		const URL = "http://localhost:3030/api/expensee/users/delete";
 		axios.post(URL, delAmount);
+		if (amountId.categorie == "Einkommen") {
+			setVermoegen(vermoegen - amountId.amount);
+		} else {
+			setVermoegen(vermoegen + amountId.amount);
+		}
 	};
+
 	return (
 		<View style={styles.container}>
 			{loading && (
