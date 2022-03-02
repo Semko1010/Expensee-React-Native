@@ -38,7 +38,11 @@ const Einnahmen = () => {
 	const [wohnungToggle, setWohnungToggle] = useState(false);
 	const [deleteAmount, setDeleteAmount] = useState(false);
 	useEffect(() => {
-		console.log("test");
+		setEinkommen(0);
+		setAusgaben(0);
+		setLebensMittelGesamt(0);
+		setShoppingGesamt(0);
+		setWohnungGesamt(0);
 		gesamtEinkommen = 0;
 		gesamtAusgaben = 0;
 		lebensMittel = 0;
@@ -51,28 +55,30 @@ const Einnahmen = () => {
 				headers: token,
 			})
 			.then(response => setAllAmounts(response.data))
+			.then(
+				allAmounts.map(amount => {
+					if (amount.categorie == "Einkommen") {
+						setEinkommen((gesamtEinkommen += Number(amount.amount)));
+					}
+					if (
+						amount.categorie == "Lebensmittel" ||
+						amount.categorie == "Wohnung" ||
+						amount.categorie == "Shopping"
+					) {
+						setAusgaben((gesamtAusgaben += Number(amount.amount)));
+					}
+					if (amount.categorie == "Lebensmittel") {
+						setLebensMittelGesamt((lebensMittel += Number(amount.amount)));
+					}
+					if (amount.categorie == "Shopping") {
+						setShoppingGesamt((shopping += Number(amount.amount)));
+					}
+					if (amount.categorie == "Wohnung") {
+						setWohnungGesamt((wohnung += Number(amount.amount)));
+					}
+				}),
+			)
 			.then(setLoading(true));
-		allAmounts.map(amount => {
-			if (amount.categorie == "Einkommen") {
-				setEinkommen((gesamtEinkommen += Number(amount.amount)));
-			}
-			if (
-				amount.categorie == "Lebensmittel" ||
-				amount.categorie == "Wohnung" ||
-				amount.categorie == "Shopping"
-			) {
-				setAusgaben((gesamtAusgaben += Number(amount.amount)));
-			}
-			if (amount.categorie == "Lebensmittel") {
-				setLebensMittelGesamt((lebensMittel += Number(amount.amount)));
-			}
-			if (amount.categorie == "Shopping") {
-				setShoppingGesamt((shopping += Number(amount.amount)));
-			}
-			if (amount.categorie == "Wohnung") {
-				setWohnungGesamt((wohnung += Number(amount.amount)));
-			}
-		});
 	}, [allAmounts, allAmounts]);
 
 	const toggleEinkommen = () => {
@@ -116,13 +122,7 @@ const Einnahmen = () => {
 			token,
 		};
 		const URL = "http://localhost:3030/api/expensee/users/delete";
-		axios.post(URL, delAmount).then(() => {
-			axios
-				.get("http://localhost:3030/api/expensee/users/allAmounts", {
-					headers: token,
-				})
-				.then(response => setAllAmounts(response.data));
-		});
+		axios.post(URL, delAmount);
 	};
 	return (
 		<View style={styles.container}>
