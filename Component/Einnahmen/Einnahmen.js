@@ -117,16 +117,35 @@ const Einnahmen = () => {
 	};
 
 	const deleteAmounts = amountId => {
+		let zusammen = 0;
+		const stateamount = {
+			zusammen,
+			token,
+		};
 		const delAmount = {
 			amountId,
 			token,
+			zusammen,
 		};
-		const URL = "http://localhost:3030/api/expensee/users/delete";
+		const URL =
+			"https://expenseeserver.herokuapp.com/api/expensee/users/delete";
 		axios.post(URL, delAmount);
 		if (amountId.categorie == "Einkommen") {
-			setVermoegen(vermoegen - amountId.amount);
+			zusammen = vermoegen - amountId.amount;
+			axios
+				.post("http://localhost:3030/api/expensee/users/delete/newAmount", {
+					token,
+					zusammen,
+				})
+				.then(setVermoegen(vermoegen - amountId.amount));
 		} else {
-			setVermoegen(vermoegen + amountId.amount);
+			zusammen = vermoegen + amountId.amount;
+			axios
+				.post("http://localhost:3030/api/expensee/users/delete/newAmount", {
+					token,
+					zusammen,
+				})
+				.then(setVermoegen(vermoegen + amountId.amount));
 		}
 	};
 

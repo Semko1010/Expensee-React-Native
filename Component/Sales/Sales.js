@@ -19,9 +19,6 @@ const Sales = () => {
 	const [amount, setAmount] = useState(0);
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
-	useEffect(() => {
-		console.log(amount);
-	}, [amount]);
 	async function send() {
 		let zusammen = 0;
 		if (categorie == "Einkommen") {
@@ -38,7 +35,7 @@ const Sales = () => {
 			token,
 			zusammen,
 		};
-		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/amount";
+		URL = "http://localhost:3030/api/expensee/users/amount";
 		try {
 			if ((categorie, description, amount, date)) {
 				const fetch = await axios.post(URL, stateamount);
@@ -49,7 +46,7 @@ const Sales = () => {
 					},
 				);
 				const setNewAmount = await setAllAmounts(newFetch.data);
-
+				console.log(fetch);
 				if (fetch.data.amountAdded) {
 					navigate("/einNahmen");
 					console.log("Amount created");
