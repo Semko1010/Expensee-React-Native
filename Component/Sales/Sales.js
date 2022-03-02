@@ -4,11 +4,12 @@ import SelectDropdown from "react-native-select-dropdown";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
 import DatePicker from "react-native-datepicker";
-import { newToken, Vermoegen } from "../../App";
+import { newToken, Vermoegen, Amounts } from "../../App";
 import axios from "axios";
 import NumericInput from "react-native-numeric-input";
 const Sales = () => {
 	const navigate = useNavigate();
+	const { allAmounts, setAllAmounts } = useContext(Amounts);
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 	const { token, setToken } = useContext(newToken);
 	const [warning, setWarning] = useState("");
@@ -41,9 +42,16 @@ const Sales = () => {
 		try {
 			if ((categorie, description, amount, date)) {
 				const fetch = await axios.post(URL, stateamount);
+				const newFetch = await axios.get(
+					"http://localhost:3030/api/expensee/users/allAmounts",
+					{
+						headers: token,
+					},
+				);
+				const setNewAmount = await setAllAmounts(newFetch.data);
 
 				if (fetch.data.amountAdded) {
-					navigate("/startSite");
+					navigate("/einNahmen");
 					console.log("Amount created");
 				} else {
 					setWarning("Bitte alle Felder ausfüllen");

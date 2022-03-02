@@ -72,7 +72,7 @@ const Einnahmen = () => {
 				setWohnungGesamt((wohnung += Number(amount.amount)));
 			}
 		});
-	}, [allAmounts]);
+	}, [allAmounts, allAmounts]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
