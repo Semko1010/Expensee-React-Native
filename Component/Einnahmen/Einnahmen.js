@@ -38,6 +38,7 @@ const Einnahmen = () => {
 	const [wohnungToggle, setWohnungToggle] = useState(false);
 	const [deleteAmount, setDeleteAmount] = useState(false);
 	useEffect(() => {
+		console.log("test");
 		gesamtEinkommen = 0;
 		gesamtAusgaben = 0;
 		lebensMittel = 0;
