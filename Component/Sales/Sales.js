@@ -20,44 +20,69 @@ const Sales = () => {
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
 	async function send() {
-		let zusammen = 0;
-		if (categorie == "Einkommen") {
-			zusammen = Number(vermoegen) + Number(amount);
-		} else {
-			zusammen = Number(vermoegen) - Number(amount);
-		}
-
 		const stateamount = {
 			categorie,
 			description,
 			amount,
 			date,
 			token,
-			zusammen,
 		};
-		URL = "http://localhost:3030/api/expensee/users/amount";
-		try {
-			if ((categorie, description, amount, date)) {
-				const fetch = await axios.post(URL, stateamount);
-				const newFetch = await axios.get(
-					"http://localhost:3030/api/expensee/users/allAmounts",
-					{
-						headers: token,
-					},
-				);
-				const setNewAmount = await setAllAmounts(newFetch.data);
-				console.log(fetch);
-				if (fetch.data.amountAdded) {
-					navigate("/einNahmen");
-					console.log("Amount created");
-				} else {
-					setWarning("Bitte alle Felder ausfüllen");
+
+		const gesamtVermoegen =
+			"https://expenseeserver.herokuapp.com/api/expensee/users/allUsers";
+		axios
+			.get(gesamtVermoegen, {
+				headers: token,
+			})
+			.then(response => {
+				setVermoegen(response.data.gesamtVermoegen);
+			});
+		if (categorie == "Einkommen") {
+			URL = "http://localhost:3030/api/expensee/users/amount";
+			try {
+				if ((categorie, description, amount, date)) {
+					const fetch = await axios.post(URL, stateamount);
+					const newFetch = await axios.get(
+						"http://localhost:3030/api/expensee/users/allAmounts",
+						{
+							headers: token,
+						},
+					);
+					const setNewAmount = await setAllAmounts(newFetch.data);
+					console.log(fetch);
+					if (fetch.data.amountAdded) {
+						navigate("/einNahmen");
+						console.log("Amount created");
+					} else {
+						setWarning("Bitte alle Felder ausfüllen");
+					}
 				}
-			} else {
-				setWarning("Bitte alle Felder ausfüllen");
+			} catch (err) {
+				console.log(err);
 			}
-		} catch (err) {
-			console.log(err);
+		} else {
+			URL = "http://localhost:3030/api/expensee/users/amountCountDown";
+			try {
+				if ((categorie, description, amount, date)) {
+					const fetch = await axios.post(URL, stateamount);
+					const newFetch = await axios.get(
+						"http://localhost:3030/api/expensee/users/allAmounts",
+						{
+							headers: token,
+						},
+					);
+					const setNewAmount = await setAllAmounts(newFetch.data);
+					console.log(fetch);
+					if (fetch.data.amountAdded) {
+						navigate("/einNahmen");
+						console.log("Amount created");
+					} else {
+						setWarning("Bitte alle Felder ausfüllen");
+					}
+				}
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	}
 

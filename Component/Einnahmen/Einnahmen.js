@@ -38,6 +38,7 @@ const Einnahmen = () => {
 	const [wohnungToggle, setWohnungToggle] = useState(false);
 	const [deleteAmount, setDeleteAmount] = useState(false);
 	useEffect(() => {
+		console.log(allAmounts);
 		setEinkommen(0);
 		setAusgaben(0);
 		setLebensMittelGesamt(0);
@@ -48,8 +49,7 @@ const Einnahmen = () => {
 		lebensMittel = 0;
 		shopping = 0;
 		wohnung = 0;
-		const URL =
-			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
+		const URL = "http://localhost:3030/api/expensee/users/allAmounts";
 		axios
 			.get(URL, {
 				headers: token,
@@ -79,7 +79,7 @@ const Einnahmen = () => {
 				}),
 			)
 			.then(setLoading(true));
-	}, [allAmounts]);
+	}, [vermoegen]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
@@ -116,36 +116,38 @@ const Einnahmen = () => {
 		setWohnungToggle(!wohnungToggle);
 	};
 
-	const deleteAmounts = amountId => {
-		let zusammen = 0;
-		const stateamount = {
-			zusammen,
-			token,
-		};
+	const deleteAmounts = amount => {
+		const userImage =
+			"https://expenseeserver.herokuapp.com/api/expensee/users/allUsers";
 		const delAmount = {
-			amountId,
+			amount,
 			token,
-			zusammen,
 		};
-		const URL =
-			"https://expenseeserver.herokuapp.com/api/expensee/users/delete";
-		axios.post(URL, delAmount);
-		if (amountId.categorie == "Einkommen") {
-			zusammen = vermoegen - amountId.amount;
-			axios
-				.post("http://localhost:3030/api/expensee/users/delete/newAmount", {
-					token,
-					zusammen,
-				})
-				.then(setVermoegen(vermoegen - amountId.amount));
+
+		if (amount.categorie == "Einkommen") {
+			const URL = "http://localhost:3030/api/expensee/users/delete";
+			axios.post(URL, delAmount).then(
+				//Fetching userImage
+				axios
+					.get(userImage, {
+						headers: token,
+					})
+					.then(response => {
+						setVermoegen(response.data.gesamtVermoegen);
+					}),
+			);
 		} else {
-			zusammen = vermoegen + amountId.amount;
 			axios
-				.post("http://localhost:3030/api/expensee/users/delete/newAmount", {
-					token,
-					zusammen,
-				})
-				.then(setVermoegen(vermoegen + amountId.amount));
+				.post("http://localhost:3030/api/expensee/users/deleteUp", delAmount)
+				.then(
+					axios
+						.get(userImage, {
+							headers: token,
+						})
+						.then(response => {
+							setVermoegen(response.data.gesamtVermoegen);
+						}),
+				);
 		}
 	};
 

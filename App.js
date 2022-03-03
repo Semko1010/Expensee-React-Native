@@ -16,7 +16,7 @@ const Vermoegen = createContext({});
 export default function App(navigation) {
 	const [token, setToken] = useState();
 	const [allAmounts, setAllAmounts] = useState([]);
-	const [vermoegen, setVermoegen] = useState();
+	const [vermoegen, setVermoegen] = useState(0);
 	return (
 		<Vermoegen.Provider value={{ vermoegen, setVermoegen }}>
 			<Amounts.Provider value={{ allAmounts, setAllAmounts }}>
@@ -24,7 +24,7 @@ export default function App(navigation) {
 					<NativeRouter>
 						<View style={styles.container}>
 							<Routes>
-								<Route exact path='/' element={<Home />} />
+								<Route path='/' element={<Home />} />
 								<Route path='/register' element={<RegisterUser />} />
 								<Route path='/login' element={<Login />} />
 								<Route path='/startSite' element={<StartSite />} />
