@@ -34,7 +34,6 @@ const StartSite = () => {
 			.then(response => {
 				const res = response;
 				setUserImg(res.data.userImg);
-				setVermoegen(res.data.gesamtVermoegen);
 			});
 
 		axios

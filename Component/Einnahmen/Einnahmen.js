@@ -15,15 +15,13 @@ import axios from "axios";
 import { newToken, Amounts, Vermoegen } from "../../App";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
-const userImage =
-	"https://expenseeserver.herokuapp.com/api/expensee/users/allUsers";
-const URL =
-	"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
+
 let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
 let lebensMittel = 0;
 let shopping = 0;
 let wohnung = 0;
+let guthaben = 0;
 const Einnahmen = () => {
 	const [loading, setLoading] = useState(false);
 	const { token, setToken } = useContext(newToken);
@@ -47,20 +45,17 @@ const Einnahmen = () => {
 		setLebensMittelGesamt(0);
 		setShoppingGesamt(0);
 		setWohnungGesamt(0);
+		setVermoegen(0);
 		gesamtEinkommen = 0;
 		gesamtAusgaben = 0;
 		lebensMittel = 0;
 		shopping = 0;
 		wohnung = 0;
+		guthaben = 0;
+		const URL =
+			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
+		axios
 
-		axios
-			.get(userImage, {
-				headers: token,
-			})
-			.then(response => {
-				setVermoegen(response.data.gesamtVermoegen);
-			});
-		axios
 			.get(URL, {
 				headers: token,
 			})
@@ -69,6 +64,7 @@ const Einnahmen = () => {
 				allAmounts.map(amount => {
 					if (amount.categorie == "Einkommen") {
 						setEinkommen((gesamtEinkommen += Number(amount.amount)));
+						setVermoegen((guthaben += Number(amount.amount)));
 					}
 					if (
 						amount.categorie == "Lebensmittel" ||
@@ -76,6 +72,7 @@ const Einnahmen = () => {
 						amount.categorie == "Shopping"
 					) {
 						setAusgaben((gesamtAusgaben += Number(amount.amount)));
+						setVermoegen((guthaben -= Number(amount.amount)));
 					}
 					if (amount.categorie == "Lebensmittel") {
 						setLebensMittelGesamt((lebensMittel += Number(amount.amount)));
@@ -89,7 +86,6 @@ const Einnahmen = () => {
 				}),
 			)
 			.then(setLoading(true));
-		console.log(allAmounts);
 	}, [deleteAmount]);
 
 	const toggleEinkommen = () => {
@@ -127,44 +123,25 @@ const Einnahmen = () => {
 		setWohnungToggle(!wohnungToggle);
 	};
 
-	const deleteAmounts = amount => {
-		const userImage =
-			"https://expenseeserver.herokuapp.com/api/expensee/users/allUsers";
+	async function deleteAmounts(amount) {
 		const delAmount = {
 			amount,
 			token,
 		};
 
-		if (amount.categorie == "Einkommen") {
-			const URL =
-				"https://expenseeserver.herokuapp.com/api/expensee/users/delete";
-			axios
-				.post(URL, delAmount)
-				.then(setDeleteAmount(!deleteAmount))
-				.then(
-					axios
-						.get(URL, {
-							headers: token,
-						})
-						.then(response => setAllAmounts(response.data)),
-				)
-				.then(setDeleteAmount(!deleteAmount));
-		} else {
-			axios
-				.post(
-					"https://expenseeserver.herokuapp.com/api/expensee/users/deleteUp",
-					delAmount,
-				)
-				.then(
-					axios
-						.get(URL, {
-							headers: token,
-						})
-						.then(response => setAllAmounts(response.data)),
-				)
-				.then(setDeleteAmount(!deleteAmount));
-		}
-	};
+		const URL =
+			"https://expenseeserver.herokuapp.com/api/expensee/users/delete";
+		const fetch = await axios.post(URL, delAmount);
+		const removed = await fetch.data.amountRemoved;
+		const fet = await axios.get(
+			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts",
+			{
+				headers: token,
+			},
+		);
+		const setFet = await setAllAmounts(fet.data);
+		const setDel = await setDeleteAmount(!deleteAmount);
+	}
 
 	return (
 		<View style={styles.container}>

@@ -28,65 +28,30 @@ const Sales = () => {
 			token,
 		};
 
-		const gesamtVermoegen =
-			"https://expenseeserver.herokuapp.com/api/expensee/users/allUsers";
-		axios
-			.get(gesamtVermoegen, {
-				headers: token,
-			})
-			.then(response => {
-				setVermoegen(response.data.gesamtVermoegen);
-			});
-		if (categorie == "Einkommen") {
-			URL = "https://expenseeserver.herokuapp.com/api/expensee/users/amount";
+		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/amount";
 
-			try {
-				if ((categorie, description, amount, date)) {
-					const fetch = await axios.post(URL, stateamount);
-					const newFetch = await axios.get(
-						"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts",
-						{
-							headers: token,
-						},
-					);
+		try {
+			if ((categorie, description, amount, date)) {
+				const fetch = await axios.post(URL, stateamount);
+				const newFetch = await axios.get(
+					"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts",
+					{
+						headers: token,
+					},
+				);
 
-					const setNewAmount = await setAllAmounts(newFetch.data);
-					const amountcreated = await fetch.data.amountAdded;
+				const setNewAmount = await setAllAmounts(newFetch.data);
+				const amountcreated = await fetch.data.amountAdded;
 
-					if (amountcreated) {
-						navigate("/einNahmen");
-						console.log("Amount created");
-					} else {
-						setWarning("Bitte alle Felder ausfüllen");
-					}
+				if (amountcreated) {
+					navigate("/einNahmen");
+					console.log("Amount created");
 				}
-			} catch (err) {
-				console.log(err);
+			} else {
+				setWarning("Bitte alle Felder ausfüllen");
 			}
-		} else {
-			URL =
-				"https://expenseeserver.herokuapp.com/api/expensee/users/amountCountDown";
-			try {
-				if ((categorie, description, amount, date)) {
-					const fetch = await axios.post(URL, stateamount);
-					const newFetch = await axios.get(
-						"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts",
-						{
-							headers: token,
-						},
-					);
-					const setNewAmount = await setAllAmounts(newFetch.data);
-					const amountcreated = await fetch.data.amountAdded;
-					if (amountcreated) {
-						navigate("/einNahmen");
-						console.log("Amount created");
-					}
-				} else {
-					setWarning("Bitte alle Felder ausfüllen");
-				}
-			} catch (err) {
-				console.log(err);
-			}
+		} catch (err) {
+			console.log(err);
 		}
 	}
 
