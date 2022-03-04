@@ -38,19 +38,22 @@ const Sales = () => {
 				setVermoegen(response.data.gesamtVermoegen);
 			});
 		if (categorie == "Einkommen") {
-			URL = "http://localhost:3030/api/expensee/users/amount";
+			URL = "https://expenseeserver.herokuapp.com/api/expensee/users/amount";
+
 			try {
 				if ((categorie, description, amount, date)) {
 					const fetch = await axios.post(URL, stateamount);
 					const newFetch = await axios.get(
-						"http://localhost:3030/api/expensee/users/allAmounts",
+						"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts",
 						{
 							headers: token,
 						},
 					);
+
 					const setNewAmount = await setAllAmounts(newFetch.data);
-					console.log(fetch);
-					if (fetch.data.amountAdded) {
+					const amountcreated = await fetch.data.amountAdded;
+
+					if (amountcreated) {
 						navigate("/einNahmen");
 						console.log("Amount created");
 					} else {
@@ -61,24 +64,25 @@ const Sales = () => {
 				console.log(err);
 			}
 		} else {
-			URL = "http://localhost:3030/api/expensee/users/amountCountDown";
+			URL =
+				"https://expenseeserver.herokuapp.com/api/expensee/users/amountCountDown";
 			try {
 				if ((categorie, description, amount, date)) {
 					const fetch = await axios.post(URL, stateamount);
 					const newFetch = await axios.get(
-						"http://localhost:3030/api/expensee/users/allAmounts",
+						"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts",
 						{
 							headers: token,
 						},
 					);
 					const setNewAmount = await setAllAmounts(newFetch.data);
-					console.log(fetch);
-					if (fetch.data.amountAdded) {
+					const amountcreated = await fetch.data.amountAdded;
+					if (amountcreated) {
 						navigate("/einNahmen");
 						console.log("Amount created");
-					} else {
-						setWarning("Bitte alle Felder ausfüllen");
 					}
+				} else {
+					setWarning("Bitte alle Felder ausfüllen");
 				}
 			} catch (err) {
 				console.log(err);
