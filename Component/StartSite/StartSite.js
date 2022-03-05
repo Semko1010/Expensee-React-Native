@@ -14,6 +14,7 @@ import * as Crypto from "expo-crypto";
 import { Link } from "react-router-native";
 import { newToken, Amounts, Vermoegen } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
+import Img from "../../assets/green.png";
 let arr = [];
 const StartSite = () => {
 	const [userImg, setUserImg] = useState("");
@@ -40,7 +41,8 @@ const StartSite = () => {
 			.get(amountsURL, {
 				headers: token,
 			})
-			.then(response => setAllAmounts(response.data));
+			.then(response => setAllAmounts(response.data))
+			.then(console.log("test", allAmounts));
 	}, [vermoegen]);
 
 	return (
@@ -57,9 +59,7 @@ const StartSite = () => {
 					<Link underlayColor={"transparent"} to='/'>
 						<Image
 							style={styles.logOutImage}
-							source={{
-								uri: "/Users/admin/Desktop/expensee/assets/ausloggen (1).png",
-							}}
+							source={require("../../assets/ausloggen.png")}
 						/>
 					</Link>
 				</View>
@@ -70,6 +70,10 @@ const StartSite = () => {
 						<View style={styles.AmountDateAndDs}>
 							<Image
 								style={styles.imageAmount}
+								// source={require(`../../assets/${
+								// 	amount.categorie == "Einkommen" ? "green.png" : "red"
+								// }`)}
+
 								source={{
 									uri: `/Users/admin/Desktop/PortfolioProjects/expensee/assets/${
 										amount.categorie == "Einkommen" ? "green.png" : "red.png"

@@ -14,8 +14,8 @@ const Sales = () => {
 	const { token, setToken } = useContext(newToken);
 	const [warning, setWarning] = useState("");
 	const [date, setDate] = useState(null);
-	const [categorie, setCategorie] = useState(null);
-	const [description, setDescription] = useState(null);
+	const [categorie, setCategorie] = useState("");
+	const [description, setDescription] = useState("");
 	const [amount, setAmount] = useState(0);
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
@@ -31,7 +31,12 @@ const Sales = () => {
 		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/amount";
 
 		try {
-			if ((categorie, description, amount, date)) {
+			if (
+				amount >= 1 &&
+				description.length >= 1 &&
+				date &&
+				categorie.length >= 1
+			) {
 				const fetch = await axios.post(URL, stateamount);
 				const newFetch = await axios.get(
 					"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts",

@@ -18,9 +18,7 @@ const Home = () => {
 			</View>
 			<Image
 				style={styles.image}
-				source={{
-					uri: "/Users/admin/Desktop/PortfolioProjects/ReactNative Expensee/expensee/assets/logoExpensee.png",
-				}}
+				source={require("../../assets/logoExpensee.png")}
 			/>
 		</View>
 	);
