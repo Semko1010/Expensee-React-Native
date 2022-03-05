@@ -7,6 +7,7 @@ import DatePicker from "react-native-datepicker";
 import { newToken, Vermoegen, Amounts } from "../../App";
 import axios from "axios";
 import NumericInput from "react-native-numeric-input";
+import DropDownPicker from "react-native-dropdown-picker";
 const Sales = () => {
 	const navigate = useNavigate();
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
@@ -19,6 +20,12 @@ const Sales = () => {
 	const [amount, setAmount] = useState(0);
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
+	// const [open, setOpen] = useState(false);
+	// const [value, setValue] = useState(null);
+	// const [items, setItems] = useState([
+	// 	{ label: "Apple", value: "apple" },
+	// 	{ label: "Banana", value: "banana" },
+	// ]);
 	async function send() {
 		const stateamount = {
 			categorie,
@@ -66,12 +73,30 @@ const Sales = () => {
 			<View style={styles.allMenu}>
 				<View style={styles.dropDown}>
 					<Text style={styles.kategorie}>Kategorie</Text>
+
 					<SelectDropdown
+						style={{
+							backgroundColor: "crimson",
+							opacity: 0.9,
+						}}
 						data={stuff}
 						onSelect={(selectedItem, index) => {
 							setCategorie(selectedItem);
 						}}
 					/>
+
+					{/* <DropDownPicker
+						style={{
+							backgroundColor: "crimson",
+							opacity: 0.9,
+						}}
+						open={open}
+						value={value}
+						items={items}
+						setOpen={setOpen}
+						setValue={setValue}
+						setItems={setItems}
+					/> */}
 				</View>
 				<View style={styles.linkView}>
 					<TextInput
@@ -93,26 +118,26 @@ const Sales = () => {
 						step={1}
 						valueType='real'
 						rounded
-						textColor='#B0228C'
+						textColor='white'
 						iconStyle={{ color: "white" }}
-						rightButtonBackgroundColor='#EA3788'
-						leftButtonBackgroundColor='#E56B70'
+						rightButtonBackgroundColor='#00bfff'
+						leftButtonBackgroundColor='#00bfff'
 					/>
 				</View>
 				<View>
 					<DatePicker
 						date={date}
 						mode='date'
-						placeholder='select date'
+						placeholder='Datum auswählen'
 						format='DD/MM/YYYY'
 						minDate='01-01-1900'
 						maxDate='01-01-2100'
-						confirmBtnText='Confirm'
-						cancelBtnText='Cancel'
+						confirmBtnText='Bestätigen'
+						cancelBtnText='Abbrechen'
 						customStyles={{
 							dateIcon: {
 								position: "absolute",
-								right: -5,
+								right: -60,
 								top: 4,
 								marginLeft: 0,
 							},
@@ -128,6 +153,8 @@ const Sales = () => {
 							},
 							dateText: {
 								fontSize: 17,
+								color: "white",
+								textAlign: "center",
 							},
 						}}
 						onDateChange={date => {
@@ -136,7 +163,12 @@ const Sales = () => {
 					/>
 				</View>
 				<View style={styles.btnView}>
-					<Button style={styles.btn} onPress={send} title='Erstellen' />
+					<Button
+						color='black'
+						style={styles.btn}
+						onPress={send}
+						title='Erstellen'
+					/>
 				</View>
 			</View>
 			<HomeNav />
@@ -189,12 +221,14 @@ const styles = StyleSheet.create({
 	},
 	numeric: {
 		marginBottom: 20,
+		marginTop: 20,
 	},
 	btnView: {
 		marginTop: 20,
 		width: 200,
 		borderRadius: 10,
 		backgroundColor: "white",
+		borderWidth: 2,
 	},
 	btn: {
 		color: "black",

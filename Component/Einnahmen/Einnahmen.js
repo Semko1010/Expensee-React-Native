@@ -8,6 +8,7 @@ import {
 	Dimensions,
 	ScrollView,
 	Button,
+	Image,
 } from "react-native";
 
 import { useState, useEffect, useContext } from "react";
@@ -280,12 +281,15 @@ const Einnahmen = () => {
 															style={
 																styles.einkommenText
 															}>{`${amount.amount}€`}</Text>
-														<Button
+														<TouchableOpacity
 															onPress={() => {
 																deleteAmounts(amount);
-															}}
-															title='x'
-														/>
+															}}>
+															<Image
+																style={styles.deleteImage}
+																source={require("../../assets/remove.png")}
+															/>
+														</TouchableOpacity>
 													</View>
 												);
 											}
@@ -325,16 +329,17 @@ const Einnahmen = () => {
 															style={
 																styles.einkommenText
 															}>{`${amount.amount}€`}</Text>
-
-														<Button
+														<TouchableOpacity
 															onPress={() => {
 																deleteAmounts(amount);
-															}}
-															title='x'
-														/>
+															}}>
+															<Image
+																style={styles.deleteImage}
+																source={require("../../assets/remove.png")}
+															/>
+														</TouchableOpacity>
 													</View>
 												);
-												console.log("semko", amount);
 											}
 										})}
 									</ScrollView>
@@ -369,6 +374,16 @@ const Einnahmen = () => {
 															style={
 																styles.einkommenText
 															}>{`${amount.amount}€`}</Text>
+
+														<TouchableOpacity
+															onPress={() => {
+																deleteAmounts(amount);
+															}}>
+															<Image
+																style={styles.deleteImage}
+																source={require("../../assets/remove.png")}
+															/>
+														</TouchableOpacity>
 													</View>
 												);
 												console.log("semko", amount);
@@ -404,6 +419,16 @@ const Einnahmen = () => {
 															style={
 																styles.einkommenText
 															}>{`${amount.amount}€`}</Text>
+
+														<TouchableOpacity
+															onPress={() => {
+																deleteAmounts(amount);
+															}}>
+															<Image
+																style={styles.deleteImage}
+																source={require("../../assets/remove.png")}
+															/>
+														</TouchableOpacity>
 													</View>
 												);
 											}
@@ -439,6 +464,16 @@ const Einnahmen = () => {
 															style={
 																styles.einkommenText
 															}>{`${amount.amount}€`}</Text>
+
+														<TouchableOpacity
+															onPress={() => {
+																deleteAmounts(amount);
+															}}>
+															<Image
+																style={styles.deleteImage}
+																source={require("../../assets/remove.png")}
+															/>
+														</TouchableOpacity>
 													</View>
 												);
 											}
@@ -551,6 +586,10 @@ const styles = StyleSheet.create({
 	},
 	scrollAusgaben: {
 		height: 225,
+	},
+	deleteImage: {
+		width: 25,
+		height: 25,
 	},
 });
 export default Einnahmen;

@@ -76,7 +76,7 @@ const StartSite = () => {
 
 								source={{
 									uri: `/Users/admin/Desktop/PortfolioProjects/expensee/assets/${
-										amount.categorie == "Einkommen" ? "green.png" : "red.png"
+										amount.categorie == "Einkommen" ? "plus.png" : "minus.png"
 									}`,
 								}}
 							/>
