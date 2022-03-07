@@ -4,21 +4,16 @@ import SelectDropdown from "react-native-select-dropdown";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
 import DatePicker from "react-native-datepicker";
-import { newToken, Vermoegen, Amounts } from "../../App";
+import { newToken, Vermoegen, Amounts, fonts } from "../../App";
 import axios from "axios";
 import NumericInput from "react-native-numeric-input";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-	IMFellEnglishSC_400Regular,
-	useFonts,
-} from "@expo-google-fonts/im-fell-english-sc";
 
 const Sales = () => {
 	const navigate = useNavigate();
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
-	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 	const { token, setToken } = useContext(newToken);
-	const [fontsLoaded, error] = useFonts({ IMFellEnglishSC_400Regular });
+
 	const [warning, setWarning] = useState("");
 	const [date, setDate] = useState(null);
 	const [categorie, setCategorie] = useState("");

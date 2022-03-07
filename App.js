@@ -6,14 +6,18 @@ import Home from "./Component/Home/Home";
 import Einnahmen from "./Component/Einnahmen/Einnahmen";
 import StartSite from "./Component/StartSite/StartSite";
 import Sales from "./Component/Sales/Sales";
-
-import { useState, useEffect, createContext } from "react";
+import {
+	IMFellEnglishSC_400Regular,
+	useFonts,
+} from "@expo-google-fonts/im-fell-english-sc";
+import { useState, createContext } from "react";
 
 const newToken = createContext({});
 const Amounts = createContext({});
 const Vermoegen = createContext({});
-
+const fonts = createContext({});
 export default function App(navigation) {
+	const [fontsLoaded, error] = useFonts({ IMFellEnglishSC_400Regular });
 	const [token, setToken] = useState();
 	const [allAmounts, setAllAmounts] = useState([]);
 	const [vermoegen, setVermoegen] = useState(0);
@@ -48,4 +52,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export { newToken, Amounts, Vermoegen };
+export { newToken, Amounts, Vermoegen, fonts };
