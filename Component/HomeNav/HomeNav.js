@@ -7,19 +7,19 @@ const HomeNav = () => {
 			<Link underlayColor={"transparent"} to='/startSite'>
 				<Image
 					style={styles.image}
-					source={require("../../assets/transaction.png")}
+					source={require("../../assets/geschaftsbericht.png")}
 				/>
 			</Link>
 			<Link underlayColor={"transparent"} to='/einnahmen'>
 				<Image
 					style={styles.image}
-					source={require("../../assets/circlehome.png")}
+					source={require("../../assets/zuhause.png")}
 				/>
 			</Link>
 			<Link underlayColor={"transparent"} to='/sales'>
 				<Image
 					style={styles.image}
-					source={require("../../assets/profits.png")}
+					source={require("../../assets/dollar.png")}
 				/>
 			</Link>
 		</View>

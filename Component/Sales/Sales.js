@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
@@ -7,9 +7,12 @@ import DatePicker from "react-native-datepicker";
 import { newToken, Vermoegen, Amounts } from "../../App";
 import axios from "axios";
 import NumericInput from "react-native-numeric-input";
+import { LinearGradient } from "expo-linear-gradient";
+import {
+	IMFellEnglishSC_400Regular,
+	useFonts,
+} from "@expo-google-fonts/im-fell-english-sc";
 
-import { IMFellEnglishSC_400Regular } from "@expo-google-fonts/im-fell-english-sc";
-import { useFonts, Akronim_400Regular } from "@expo-google-fonts/akronim";
 const Sales = () => {
 	const navigate = useNavigate();
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
@@ -23,12 +26,6 @@ const Sales = () => {
 	const [amount, setAmount] = useState(0);
 	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
 
-	// const [open, setOpen] = useState(false);
-	// const [value, setValue] = useState(null);
-	// const [items, setItems] = useState([
-	// 	{ label: "Apple", value: "apple" },
-	// 	{ label: "Banana", value: "banana" },
-	// ]);
 	async function send() {
 		const stateamount = {
 			categorie,
@@ -72,109 +69,95 @@ const Sales = () => {
 
 	return (
 		<View style={styles.Home}>
-			<Text style={styles.headLine}>Umsätze</Text>
-			<View style={styles.allMenu}>
-				<View style={styles.dropDown}>
-					<Text style={styles.kategorie}>Kategorie</Text>
+			<LinearGradient
+				style={styles.Home}
+				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+				<Text style={styles.headLine}>Umsätze</Text>
+				<View style={styles.allMenu}>
+					<View style={styles.dropDown}>
+						<Text style={styles.kategorie}>Kategorie</Text>
 
-					<SelectDropdown
-						style={{
-							backgroundColor: "crimson",
-							opacity: 0.9,
+						<SelectDropdown
+							style={{
+								backgroundColor: "crimson",
+								opacity: 0.9,
+							}}
+							data={stuff}
+							onSelect={(selectedItem, index) => {
+								setCategorie(selectedItem);
+							}}
+						/>
+					</View>
+					<View style={styles.linkView}>
+						<TextInput
+							onChangeText={e => setDescription(e)}
+							placeholderTextColor='black'
+							style={styles.textInput}
+							placeholder='Beschreibung'
+						/>
+					</View>
+					<Text style={styles.warning}>{warning}</Text>
+					<View style={styles.numeric}>
+						<NumericInput
+							value={amount}
+							onChange={value => setAmount(value)}
+							onLimitReached={(isMax, msg) => console.log(isMax, msg)}
+							totalWidth={300}
+							totalHeight={50}
+							iconSize={25}
+							step={1}
+							valueType='real'
+							rounded
+							textColor='white'
+							iconStyle={{ color: "white" }}
+							rightButtonBackgroundColor='#00bfff'
+							leftButtonBackgroundColor='#00bfff'
+						/>
+					</View>
+
+					<DatePicker
+						date={date}
+						mode='date'
+						placeholder='Datum'
+						format='DD.MM.YYYY'
+						minDate='01-01-1900'
+						maxDate='01-01-2100'
+						confirmBtnText='Bestätigen'
+						cancelBtnText='Abbrechen'
+						customStyles={{
+							dateIcon: {},
+							dateInput: {
+								borderColor: "white",
+								alignItems: "center",
+								borderWidth: 0,
+								borderBottomWidth: 1,
+							},
+							placeholderText: {
+								fontSize: 17,
+								color: "white",
+							},
+							dateText: {
+								fontSize: 17,
+								color: "white",
+								textAlign: "center",
+							},
 						}}
-						data={stuff}
-						onSelect={(selectedItem, index) => {
-							setCategorie(selectedItem);
+						onDateChange={date => {
+							setDate(date);
 						}}
 					/>
 
-					{/* <DropDownPicker
-						style={{
-							backgroundColor: "crimson",
-							opacity: 0.9,
-						}}
-						open={open}
-						value={value}
-						items={items}
-						setOpen={setOpen}
-						setValue={setValue}
-						setItems={setItems}
-					/> */}
+					<View style={styles.btnView}>
+						<Button
+							color='black'
+							style={styles.btn}
+							onPress={send}
+							title='Erstellen'
+						/>
+					</View>
 				</View>
-				<View style={styles.linkView}>
-					<TextInput
-						onChangeText={e => setDescription(e)}
-						placeholderTextColor='black'
-						style={styles.textInput}
-						placeholder='Beschreibung'
-					/>
-				</View>
-				<Text style={styles.warning}>{warning}</Text>
-				<View style={styles.numeric}>
-					<NumericInput
-						value={amount}
-						onChange={value => setAmount(value)}
-						onLimitReached={(isMax, msg) => console.log(isMax, msg)}
-						totalWidth={300}
-						totalHeight={50}
-						iconSize={25}
-						step={1}
-						valueType='real'
-						rounded
-						textColor='white'
-						iconStyle={{ color: "white" }}
-						rightButtonBackgroundColor='#00bfff'
-						leftButtonBackgroundColor='#00bfff'
-					/>
-				</View>
-
-				<DatePicker
-					date={date}
-					mode='date'
-					placeholder='Datum auswählen'
-					format='DD.MM.YYYY'
-					minDate='01-01-1900'
-					maxDate='01-01-2100'
-					confirmBtnText='Bestätigen'
-					cancelBtnText='Abbrechen'
-					customStyles={{
-						dateIcon: {
-							position: "absolute",
-							right: -60,
-							top: 4,
-							marginLeft: 0,
-						},
-						dateInput: {
-							borderColor: "white",
-							alignItems: "flex-start",
-							borderWidth: 0,
-							borderBottomWidth: 1,
-						},
-						placeholderText: {
-							fontSize: 17,
-							color: "white",
-						},
-						dateText: {
-							fontSize: 17,
-							color: "white",
-							textAlign: "center",
-						},
-					}}
-					onDateChange={date => {
-						setDate(date);
-					}}
-				/>
-
-				<View style={styles.btnView}>
-					<Button
-						color='black'
-						style={styles.btn}
-						onPress={send}
-						title='Erstellen'
-					/>
-				</View>
-			</View>
-			<HomeNav />
+				<HomeNav />
+			</LinearGradient>
 		</View>
 	);
 };

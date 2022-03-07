@@ -14,7 +14,10 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { newToken, Amounts, Vermoegen } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
-
+import {
+	IMFellEnglishSC_400Regular,
+	useFonts,
+} from "@expo-google-fonts/im-fell-english-sc";
 let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
 let lebensMittel = 0;
@@ -219,7 +222,7 @@ const Einnahmen = () => {
 								mode='date'
 								placeholder='Datum auswählen'
 								format='DD.MM.YYYY'
-								minDate='01.01-1900'
+								minDate='01-01-1900'
 								maxDate='01-01-2100'
 								confirmBtnText='Bestätigen'
 								cancelBtnText='Abbrechen'
@@ -227,17 +230,17 @@ const Einnahmen = () => {
 									dateIcon: {},
 									dateInput: {
 										borderColor: "white",
-										alignItems: "flex-start",
+										alignItems: "center",
 										borderWidth: 0,
 										borderBottomWidth: 1,
 									},
 									placeholderText: {
 										fontSize: 17,
-										color: "black",
+										color: "gray",
 									},
 									dateText: {
 										fontSize: 17,
-										color: "black",
+										color: "white",
 									},
 								}}
 								onDateChange={date => {
@@ -518,7 +521,7 @@ const styles = StyleSheet.create({
 	},
 	einkommenToggle: {
 		alignItems: "center",
-		backgroundColor: "#32377C",
+		backgroundColor: "#808080",
 		flexDirection: "row",
 		justifyContent: "space-around",
 		margin: 0,
@@ -545,11 +548,11 @@ const styles = StyleSheet.create({
 		marginTop: 5,
 	},
 	VermoegenText: {
-		color: "white",
+		fontFamily: "IMFellEnglishSC_400Regular",
+		color: "gray",
 		fontSize: 30,
-		marginBottom: 30,
+		marginBottom: 20,
 		marginTop: 20,
-		borderRadius: 30,
 		width: "80%",
 		textAlign: "center",
 	},
