@@ -3,26 +3,31 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-native";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
-let zusammen = 0;
+
 const RegisterUser = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState("ff");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [userImg, setUserImg] = useState("");
-	const user = { username, email, password, userImg, zusammen };
+	const [warning, setWarning] = useState("");
+	const user = { username, email, password, userImg };
 	async function send() {
 		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/register";
-		try {
-			const fetch = await axios.post(URL, user);
-			if (!fetch.data.userExist) {
-				navigate("/login");
-				console.log("User created");
-			} else {
-				console.log("user exist");
+		if (username.length >= 3 && email.includes("@") && password.length >= 6) {
+			try {
+				const fetch = await axios.post(URL, user);
+				if (!fetch.data.userExist) {
+					navigate("/login");
+					console.log("User created");
+				} else {
+					console.log("user exist");
+				}
+			} catch (err) {
+				console.log(err);
 			}
-		} catch (err) {
-			console.log(err);
+		} else {
+			setWarning("Bitte alle Felder ausfüllen");
 		}
 	}
 
@@ -60,6 +65,7 @@ const RegisterUser = () => {
 					<Button onPress={pickCamera} title='Camera Image' />
 				</View>
 				<View style={styles.linkContainer}>
+					<Text>{warning}</Text>
 					<View style={styles.linkView}>
 						<Link underlayColor={"transparent"} to='/'>
 							<Text style={styles.backHome}>Back to Home</Text>

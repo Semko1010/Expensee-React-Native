@@ -8,11 +8,15 @@ import { newToken, Vermoegen, Amounts } from "../../App";
 import axios from "axios";
 import NumericInput from "react-native-numeric-input";
 import DropDownPicker from "react-native-dropdown-picker";
+import { AppLoading } from "expo";
+import { IMFellEnglishSC_400Regular } from "@expo-google-fonts/im-fell-english-sc";
+import { useFonts, Akronim_400Regular } from "@expo-google-fonts/akronim";
 const Sales = () => {
 	const navigate = useNavigate();
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 	const { token, setToken } = useContext(newToken);
+	const [fontsLoaded, error] = useFonts({ IMFellEnglishSC_400Regular });
 	const [warning, setWarning] = useState("");
 	const [date, setDate] = useState(null);
 	const [categorie, setCategorie] = useState("");
@@ -181,6 +185,7 @@ const styles = StyleSheet.create({
 		fontSize: 50,
 		color: "white",
 		textAlign: "center",
+		fontFamily: "IMFellEnglishSC_400Regular",
 	},
 	kategorie: {
 		fontSize: 25,

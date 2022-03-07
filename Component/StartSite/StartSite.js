@@ -1,20 +1,11 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	Button,
-	TextInput,
-	Image,
-	ScrollView,
-	SafeAreaView,
-} from "react-native";
-import * as Crypto from "expo-crypto";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "react-router-native";
 import { newToken, Amounts, Vermoegen } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
-import Img from "../../assets/green.png";
+
 let arr = [];
 const StartSite = () => {
 	const [userImg, setUserImg] = useState("");
@@ -47,52 +38,56 @@ const StartSite = () => {
 
 	return (
 		<View style={styles.startSite}>
-			<View style={styles.logOut}>
-				<Image
-					style={styles.userImg}
-					source={{
-						uri: `data:image/jpeg;base64,${userImg}`,
-					}}
-				/>
+			<LinearGradient
+				style={styles.startSite}
+				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+				<View style={styles.logOut}>
+					<Image
+						style={styles.userImg}
+						source={{
+							uri: `data:image/jpeg;base64,${userImg}`,
+						}}
+					/>
 
-				<View style={styles.logOutView}>
-					<Link underlayColor={"transparent"} to='/'>
-						<Image
-							style={styles.logOutImage}
-							source={require("../../assets/ausloggen.png")}
-						/>
-					</Link>
-				</View>
-			</View>
-			<ScrollView style={styles.scroll}>
-				{allAmounts.map((amount, index) => (
-					<View style={styles.AmountView}>
-						<View style={styles.AmountDateAndDs}>
+					<View style={styles.logOutView}>
+						<Link underlayColor={"transparent"} to='/'>
 							<Image
-								style={styles.imageAmount}
-								// source={require(`../../assets/${
-								// 	amount.categorie == "Einkommen" ? "green.png" : "red"
-								// }`)}
-
-								source={{
-									uri: `/Users/admin/Desktop/PortfolioProjects/expensee/assets/${
-										amount.categorie == "Einkommen" ? "plus.png" : "minus.png"
-									}`,
-								}}
+								style={styles.logOutImage}
+								source={require("../../assets/ausloggen.png")}
 							/>
-							<View style={styles.amountViewText}>
-								<Text style={styles.amountTextDS}>{amount.description}</Text>
-								<Text style={styles.amountTextData}> {amount.date}</Text>
-							</View>
-						</View>
-						<Text style={styles.amountTextAmount}>{` ${
-							amount.categorie == "Einkommen" ? "+" : "-"
-						}   ${amount.amount} €`}</Text>
+						</Link>
 					</View>
-				))}
-			</ScrollView>
+				</View>
+				<ScrollView style={styles.scroll}>
+					{allAmounts.map((amount, index) => (
+						<View style={styles.AmountView}>
+							<View style={styles.AmountDateAndDs}>
+								<Image
+									style={styles.imageAmount}
+									// source={require(`../../assets/${
+									// 	amount.categorie == "Einkommen" ? "green.png" : "red"
+									// }`)}
 
-			<HomeNav />
+									source={{
+										uri: `/Users/admin/Desktop/PortfolioProjects/expensee/assets/${
+											amount.categorie == "Einkommen" ? "plus.png" : "minus.png"
+										}`,
+									}}
+								/>
+								<View style={styles.amountViewText}>
+									<Text style={styles.amountTextDS}>{amount.description}</Text>
+									<Text style={styles.amountTextData}> {amount.date}</Text>
+								</View>
+							</View>
+							<Text style={styles.amountTextAmount}>{` ${
+								amount.categorie == "Einkommen" ? "+" : "-"
+							}   ${amount.amount} €`}</Text>
+						</View>
+					))}
+				</ScrollView>
+
+				<HomeNav />
+			</LinearGradient>
 		</View>
 	);
 };
@@ -101,12 +96,11 @@ const styles = StyleSheet.create({
 		height: "100%",
 		justifyContent: "space-around",
 		width: "100%",
-		backgroundColor: "#2B2D5B",
 	},
 
 	AmountView: {
 		margin: 5,
-		backgroundColor: "#232450",
+		backgroundColor: "#808080",
 		flex: 1,
 		alignItems: "center",
 		flexDirection: "row",
@@ -151,7 +145,7 @@ const styles = StyleSheet.create({
 	},
 	amountTextDS: {
 		fontSize: 15,
-		color: "gray",
+		color: "white",
 		marginLeft: 4,
 	},
 	amountTextData: {
