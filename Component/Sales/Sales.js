@@ -7,8 +7,7 @@ import DatePicker from "react-native-datepicker";
 import { newToken, Vermoegen, Amounts } from "../../App";
 import axios from "axios";
 import NumericInput from "react-native-numeric-input";
-import DropDownPicker from "react-native-dropdown-picker";
-import { AppLoading } from "expo";
+
 import { IMFellEnglishSC_400Regular } from "@expo-google-fonts/im-fell-english-sc";
 import { useFonts, Akronim_400Regular } from "@expo-google-fonts/akronim";
 const Sales = () => {
@@ -128,44 +127,44 @@ const Sales = () => {
 						leftButtonBackgroundColor='#00bfff'
 					/>
 				</View>
-				<View>
-					<DatePicker
-						date={date}
-						mode='date'
-						placeholder='Datum auswählen'
-						format='DD/MM/YYYY'
-						minDate='01-01-1900'
-						maxDate='01-01-2100'
-						confirmBtnText='Bestätigen'
-						cancelBtnText='Abbrechen'
-						customStyles={{
-							dateIcon: {
-								position: "absolute",
-								right: -60,
-								top: 4,
-								marginLeft: 0,
-							},
-							dateInput: {
-								borderColor: "white",
-								alignItems: "flex-start",
-								borderWidth: 0,
-								borderBottomWidth: 1,
-							},
-							placeholderText: {
-								fontSize: 17,
-								color: "white",
-							},
-							dateText: {
-								fontSize: 17,
-								color: "white",
-								textAlign: "center",
-							},
-						}}
-						onDateChange={date => {
-							setDate(date);
-						}}
-					/>
-				</View>
+
+				<DatePicker
+					date={date}
+					mode='date'
+					placeholder='Datum auswählen'
+					format='DD.MM.YYYY'
+					minDate='01-01-1900'
+					maxDate='01-01-2100'
+					confirmBtnText='Bestätigen'
+					cancelBtnText='Abbrechen'
+					customStyles={{
+						dateIcon: {
+							position: "absolute",
+							right: -60,
+							top: 4,
+							marginLeft: 0,
+						},
+						dateInput: {
+							borderColor: "white",
+							alignItems: "flex-start",
+							borderWidth: 0,
+							borderBottomWidth: 1,
+						},
+						placeholderText: {
+							fontSize: 17,
+							color: "white",
+						},
+						dateText: {
+							fontSize: 17,
+							color: "white",
+							textAlign: "center",
+						},
+					}}
+					onDateChange={date => {
+						setDate(date);
+					}}
+				/>
+
 				<View style={styles.btnView}>
 					<Button
 						color='black'

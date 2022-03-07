@@ -9,7 +9,7 @@ import {
 	ScrollView,
 	Image,
 } from "react-native";
-
+import DatePicker from "react-native-datepicker";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { newToken, Amounts, Vermoegen } from "../../App";
@@ -38,10 +38,11 @@ const Einnahmen = () => {
 	const [wohnungToggle, setWohnungToggle] = useState(false);
 	const [deleteAmount, setDeleteAmount] = useState(false);
 	const [date, setDate] = useState(
-		`07/0${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
+		`07.0${new Date().getMonth() + 1}.${new Date().getFullYear()}`,
 	);
 
 	useEffect(() => {
+		console.log("r", date);
 		setEinkommen(0);
 		setAusgaben(0);
 		setLebensMittelGesamt(0);
@@ -91,7 +92,7 @@ const Einnahmen = () => {
 			)
 
 			.then(setLoading(true));
-	}, [deleteAmount, vermoegen]);
+	}, [deleteAmount, vermoegen, date]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
@@ -213,7 +214,36 @@ const Einnahmen = () => {
 							{/*##########Vermoegen########## */}
 							<Text
 								style={styles.VermoegenText}>{`Guthaben ${vermoegen}€`}</Text>
-
+							<DatePicker
+								date={date}
+								mode='date'
+								placeholder='Datum auswählen'
+								format='DD.MM.YYYY'
+								minDate='01.01-1900'
+								maxDate='01-01-2100'
+								confirmBtnText='Bestätigen'
+								cancelBtnText='Abbrechen'
+								customStyles={{
+									dateIcon: {},
+									dateInput: {
+										borderColor: "white",
+										alignItems: "flex-start",
+										borderWidth: 0,
+										borderBottomWidth: 1,
+									},
+									placeholderText: {
+										fontSize: 17,
+										color: "black",
+									},
+									dateText: {
+										fontSize: 17,
+										color: "black",
+									},
+								}}
+								onDateChange={date => {
+									setDate(date);
+								}}
+							/>
 							{/*##########Einkommen########## */}
 							<View style={styles.allInParrent}>
 								<LinearGradient
@@ -230,28 +260,30 @@ const Einnahmen = () => {
 									<View style={styles.allIn}>
 										<ScrollView style={styles.scroll}>
 											{allAmounts.map(amount => {
-												if (amount.categorie == "Einkommen") {
-													return (
-														<View style={styles.einkommenToggle}>
-															<Text style={styles.einkommenText}>
-																{amount.description}
-															</Text>
-															<Text
-																style={
-																	styles.einkommenText
-																}>{`${amount.amount}€`}</Text>
-															<TouchableOpacity
-																style={styles.delBtn}
-																onPress={() => {
-																	deleteAmounts(amount);
-																}}>
-																<Image
-																	style={styles.deleteImage}
-																	source={require("../../assets/remove.png")}
-																/>
-															</TouchableOpacity>
-														</View>
-													);
+												if (amount.date == date) {
+													if (amount.categorie == "Einkommen") {
+														return (
+															<View style={styles.einkommenToggle}>
+																<Text style={styles.einkommenText}>
+																	{amount.description}
+																</Text>
+																<Text
+																	style={
+																		styles.einkommenText
+																	}>{`${amount.amount}€`}</Text>
+																<TouchableOpacity
+																	style={styles.delBtn}
+																	onPress={() => {
+																		deleteAmounts(amount);
+																	}}>
+																	<Image
+																		style={styles.deleteImage}
+																		source={require("../../assets/remove.png")}
+																	/>
+																</TouchableOpacity>
+															</View>
+														);
+													}
 												}
 											})}
 										</ScrollView>
@@ -275,32 +307,34 @@ const Einnahmen = () => {
 									<View style={styles.allInausgaben}>
 										<ScrollView style={styles.scrollAusgaben}>
 											{allAmounts.map(amount => {
-												if (
-													amount.categorie == "Lebensmittel" ||
-													amount.categorie == "Wohnung" ||
-													amount.categorie == "Shopping"
-												) {
-													return (
-														<View style={styles.einkommenToggle}>
-															<Text style={styles.einkommenText}>
-																{amount.description}
-															</Text>
-															<Text
-																style={
-																	styles.einkommenText
-																}>{`${amount.amount}€`}</Text>
-															<TouchableOpacity
-																style={styles.delBtn}
-																onPress={() => {
-																	deleteAmounts(amount);
-																}}>
-																<Image
-																	style={styles.deleteImage}
-																	source={require("../../assets/remove.png")}
-																/>
-															</TouchableOpacity>
-														</View>
-													);
+												if (amount.date == date) {
+													if (
+														amount.categorie == "Lebensmittel" ||
+														amount.categorie == "Wohnung" ||
+														amount.categorie == "Shopping"
+													) {
+														return (
+															<View style={styles.einkommenToggle}>
+																<Text style={styles.einkommenText}>
+																	{amount.description}
+																</Text>
+																<Text
+																	style={
+																		styles.einkommenText
+																	}>{`${amount.amount}€`}</Text>
+																<TouchableOpacity
+																	style={styles.delBtn}
+																	onPress={() => {
+																		deleteAmounts(amount);
+																	}}>
+																	<Image
+																		style={styles.deleteImage}
+																		source={require("../../assets/remove.png")}
+																	/>
+																</TouchableOpacity>
+															</View>
+														);
+													}
 												}
 											})}
 										</ScrollView>
@@ -323,32 +357,34 @@ const Einnahmen = () => {
 								</LinearGradient>
 								{lebensmittelToggle && (
 									<View style={styles.allInausgaben}>
-										<ScrollView style={styles.scrollAusgaben}>
+										<ScrollView style={styles.scrollLebensmittel}>
 											{allAmounts.map(amount => {
-												if (amount.categorie == "Lebensmittel") {
-													return (
-														<View style={styles.einkommenToggle}>
-															<Text style={styles.einkommenText}>
-																{amount.description}
-															</Text>
-															<Text
-																style={
-																	styles.einkommenText
-																}>{`${amount.amount}€`}</Text>
+												if (amount.date == date) {
+													if (amount.categorie == "Lebensmittel") {
+														return (
+															<View style={styles.einkommenToggle}>
+																<Text style={styles.einkommenText}>
+																	{amount.description}
+																</Text>
+																<Text
+																	style={
+																		styles.einkommenText
+																	}>{`${amount.amount}€`}</Text>
 
-															<TouchableOpacity
-																style={styles.delBtn}
-																onPress={() => {
-																	deleteAmounts(amount);
-																}}>
-																<Image
-																	style={styles.deleteImage}
-																	source={require("../../assets/remove.png")}
-																/>
-															</TouchableOpacity>
-														</View>
-													);
-													console.log("semko", amount);
+																<TouchableOpacity
+																	style={styles.delBtn}
+																	onPress={() => {
+																		deleteAmounts(amount);
+																	}}>
+																	<Image
+																		style={styles.deleteImage}
+																		source={require("../../assets/remove.png")}
+																	/>
+																</TouchableOpacity>
+															</View>
+														);
+														console.log("semko", amount);
+													}
 												}
 											})}
 										</ScrollView>
@@ -369,31 +405,33 @@ const Einnahmen = () => {
 								</LinearGradient>
 								{shoppingToggle && (
 									<View style={styles.allInausgaben}>
-										<ScrollView style={styles.scrollAusgaben}>
+										<ScrollView style={styles.scrollShopping}>
 											{allAmounts.map(amount => {
-												if (amount.categorie == "Shopping") {
-													return (
-														<View style={styles.einkommenToggle}>
-															<Text style={styles.einkommenText}>
-																{amount.description}
-															</Text>
-															<Text
-																style={
-																	styles.einkommenText
-																}>{`${amount.amount}€`}</Text>
+												if (amount.date == date) {
+													if (amount.categorie == "Shopping") {
+														return (
+															<View style={styles.einkommenToggle}>
+																<Text style={styles.einkommenText}>
+																	{amount.description}
+																</Text>
+																<Text
+																	style={
+																		styles.einkommenText
+																	}>{`${amount.amount}€`}</Text>
 
-															<TouchableOpacity
-																style={styles.delBtn}
-																onPress={() => {
-																	deleteAmounts(amount);
-																}}>
-																<Image
-																	style={styles.deleteImage}
-																	source={require("../../assets/remove.png")}
-																/>
-															</TouchableOpacity>
-														</View>
-													);
+																<TouchableOpacity
+																	style={styles.delBtn}
+																	onPress={() => {
+																		deleteAmounts(amount);
+																	}}>
+																	<Image
+																		style={styles.deleteImage}
+																		source={require("../../assets/remove.png")}
+																	/>
+																</TouchableOpacity>
+															</View>
+														);
+													}
 												}
 											})}
 										</ScrollView>
@@ -415,31 +453,33 @@ const Einnahmen = () => {
 								</LinearGradient>
 								{wohnungToggle && (
 									<View style={styles.allInausgaben}>
-										<ScrollView style={styles.scrollAusgaben}>
+										<ScrollView style={styles.scrollWohnung}>
 											{allAmounts.map(amount => {
-												if (amount.categorie == "Wohnung") {
-													return (
-														<View style={styles.einkommenToggle}>
-															<Text style={styles.einkommenText}>
-																{amount.description}
-															</Text>
-															<Text
-																style={
-																	styles.einkommenText
-																}>{`${amount.amount}€`}</Text>
+												if (amount.date == date) {
+													if (amount.categorie == "Wohnung") {
+														return (
+															<View style={styles.einkommenToggle}>
+																<Text style={styles.einkommenText}>
+																	{amount.description}
+																</Text>
+																<Text
+																	style={
+																		styles.einkommenText
+																	}>{`${amount.amount}€`}</Text>
 
-															<TouchableOpacity
-																style={styles.delBtn}
-																onPress={() => {
-																	deleteAmounts(amount);
-																}}>
-																<Image
-																	style={styles.deleteImage}
-																	source={require("../../assets/remove.png")}
-																/>
-															</TouchableOpacity>
-														</View>
-													);
+																<TouchableOpacity
+																	style={styles.delBtn}
+																	onPress={() => {
+																		deleteAmounts(amount);
+																	}}>
+																	<Image
+																		style={styles.deleteImage}
+																		source={require("../../assets/remove.png")}
+																	/>
+																</TouchableOpacity>
+															</View>
+														);
+													}
 												}
 											})}
 										</ScrollView>
@@ -548,7 +588,16 @@ const styles = StyleSheet.create({
 		height: 265,
 	},
 	scrollAusgaben: {
-		height: 225,
+		height: 190,
+	},
+	scrollLebensmittel: {
+		height: 190,
+	},
+	scrollShopping: {
+		height: 100,
+	},
+	scrollWohnung: {
+		height: 60,
 	},
 	deleteImage: {
 		width: 25,
@@ -556,6 +605,10 @@ const styles = StyleSheet.create({
 	},
 	delBtn: {
 		marginRight: 10,
+	},
+	date: {
+		flex: 1,
+		justifyContent: "flex-start",
 	},
 });
 export default Einnahmen;
