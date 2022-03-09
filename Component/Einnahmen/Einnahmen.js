@@ -8,16 +8,15 @@ import {
 	Dimensions,
 	ScrollView,
 	Image,
+	ActivityIndicator,
+	TextInput,
 } from "react-native";
 import DatePicker from "react-native-datepicker";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { newToken, Amounts, Vermoegen } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
-import {
-	IMFellEnglishSC_400Regular,
-	useFonts,
-} from "@expo-google-fonts/im-fell-english-sc";
+
 let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
 let lebensMittel = 0;
@@ -41,11 +40,11 @@ const Einnahmen = () => {
 	const [wohnungToggle, setWohnungToggle] = useState(false);
 	const [deleteAmount, setDeleteAmount] = useState(false);
 	const [date, setDate] = useState(
-		`07.0${new Date().getMonth() + 1}.${new Date().getFullYear()}`,
+		`${new Date().getMonth() + 1}.${new Date().getFullYear()}`,
 	);
 
 	useEffect(() => {
-		console.log("r", date);
+		console.log(date);
 		setEinkommen(0);
 		setAusgaben(0);
 		setLebensMittelGesamt(0);
@@ -68,7 +67,7 @@ const Einnahmen = () => {
 			.then(response => setAllAmounts(response.data))
 			.then(
 				allAmounts.map(amount => {
-					if (amount.date == date) {
+					if (amount.date.includes(date)) {
 						if (amount.categorie == "Einkommen") {
 							setEinkommen((gesamtEinkommen += Number(amount.amount)));
 							setVermoegen((guthaben += Number(amount.amount)));
@@ -157,7 +156,7 @@ const Einnahmen = () => {
 			<LinearGradient
 				style={styles.container}
 				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
-				{loading && (
+				{loading ? (
 					<View style={styles.container}>
 						{/*##########DonutChart########## */}
 						<View style={styles.chart}>
@@ -221,9 +220,9 @@ const Einnahmen = () => {
 								date={date}
 								mode='date'
 								placeholder='Datum auswählen'
-								format='DD.MM.YYYY'
-								minDate='01-01-1900'
-								maxDate='01-01-2100'
+								format='MM.YYYY'
+								minDate='01-1900'
+								maxDate='01-2100'
 								confirmBtnText='Bestätigen'
 								cancelBtnText='Abbrechen'
 								customStyles={{
@@ -247,6 +246,13 @@ const Einnahmen = () => {
 									setDate(date);
 								}}
 							/>
+							{/* <TextInput
+								onChangeText={e => setDate(e)}
+								backgroundColor='white'
+								placeholderTextColor='black'
+								style={styles.textInput}
+								placeholder='Datum wählen'
+							/> */}
 							{/*##########Einkommen########## */}
 							<View style={styles.allInParrent}>
 								<LinearGradient
@@ -492,6 +498,10 @@ const Einnahmen = () => {
 						</View>
 						<HomeNav />
 					</View>
+				) : (
+					<View style={styles.horizontal}>
+						<ActivityIndicator size='large' color='#dc143c' />
+					</View>
 				)}
 			</LinearGradient>
 		</View>
@@ -612,6 +622,10 @@ const styles = StyleSheet.create({
 	date: {
 		flex: 1,
 		justifyContent: "flex-start",
+	},
+	horizontal: {
+		justifyContent: "center",
+		flex: 1,
 	},
 });
 export default Einnahmen;

@@ -1,25 +1,30 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Link } from "react-router-native";
+import { LinearGradient } from "expo-linear-gradient";
 const Home = () => {
 	return (
 		<View style={styles.Home}>
-			<Text style={styles.headLine}>Expensee</Text>
-			<View style={styles.linkContainer}>
-				<View style={styles.linkView}>
-					<Link underlayColor={"transparent"} to='/login'>
-						<Text style={styles.text}>Login</Text>
-					</Link>
+			<LinearGradient
+				style={styles.Home}
+				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+				<Text style={styles.headLine}>Expensee</Text>
+				<View style={styles.linkContainer}>
+					<View style={styles.linkView}>
+						<Link underlayColor={"transparent"} to='/login'>
+							<Text style={styles.text}>Login</Text>
+						</Link>
+					</View>
+					<View style={styles.linkView}>
+						<Link underlayColor={"transparent"} to='/register'>
+							<Text style={styles.text}>Register</Text>
+						</Link>
+					</View>
 				</View>
-				<View style={styles.linkView}>
-					<Link underlayColor={"transparent"} to='/register'>
-						<Text style={styles.text}>Register</Text>
-					</Link>
-				</View>
-			</View>
-			<Image
-				style={styles.image}
-				source={require("../../assets/logoExpensee.png")}
-			/>
+				<Image
+					style={styles.image}
+					source={require("../../assets/logoExpensee.png")}
+				/>
+			</LinearGradient>
 		</View>
 	);
 };

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-native";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
-
+import { LinearGradient } from "expo-linear-gradient";
 const RegisterUser = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState("ff");
@@ -59,50 +59,54 @@ const RegisterUser = () => {
 	return (
 		<>
 			<View style={styles.register}>
-				<Text style={styles.headLine}>Expensee</Text>
-				<View style={styles.imageContainer}>
-					<Button onPress={pickImage} title='Select Image' />
-					<Button onPress={pickCamera} title='Camera Image' />
-				</View>
-				<View style={styles.linkContainer}>
-					<Text>{warning}</Text>
-					<View style={styles.linkView}>
-						<Link underlayColor={"transparent"} to='/'>
-							<Text style={styles.backHome}>Back to Home</Text>
-						</Link>
+				<LinearGradient
+					style={styles.register}
+					colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+					<Text style={styles.headLine}>Expensee</Text>
+					<View style={styles.imageContainer}>
+						<Button onPress={pickImage} title='Select Image' />
+						<Button onPress={pickCamera} title='Camera Image' />
 					</View>
-					<View style={styles.linkView}>
-						<TextInput
-							onChangeText={e => setUsername(e)}
-							style={styles.textInput}
-							placeholder='Username'
-							placeholderTextColor='black'
-							className='inputUsername'
-							color='black'
-						/>
+					<View style={styles.linkContainer}>
+						<Text>{warning}</Text>
+						<View style={styles.linkView}>
+							<Link underlayColor={"transparent"} to='/'>
+								<Text style={styles.backHome}>Back to Home</Text>
+							</Link>
+						</View>
+						<View style={styles.linkView}>
+							<TextInput
+								onChangeText={e => setUsername(e)}
+								style={styles.textInput}
+								placeholder='Username'
+								placeholderTextColor='black'
+								className='inputUsername'
+								color='black'
+							/>
+						</View>
+						<View style={styles.linkView}>
+							<TextInput
+								onChangeText={e => setEmail(e)}
+								style={styles.textInput}
+								placeholder='Email'
+								placeholderTextColor='black'
+								color='black'
+								className='inputUsername'
+							/>
+						</View>
+						<View style={styles.linkView}>
+							<TextInput
+								onChangeText={e => setPassword(e)}
+								style={styles.textInput}
+								placeholder='Password'
+								placeholderTextColor='black'
+								color='black'
+								className='inputUsername'
+							/>
+						</View>
+						<Button onPress={send} title='Send'></Button>
 					</View>
-					<View style={styles.linkView}>
-						<TextInput
-							onChangeText={e => setEmail(e)}
-							style={styles.textInput}
-							placeholder='Email'
-							placeholderTextColor='black'
-							color='black'
-							className='inputUsername'
-						/>
-					</View>
-					<View style={styles.linkView}>
-						<TextInput
-							onChangeText={e => setPassword(e)}
-							style={styles.textInput}
-							placeholder='Password'
-							placeholderTextColor='black'
-							color='black'
-							className='inputUsername'
-						/>
-					</View>
-					<Button onPress={send} title='Send'></Button>
-				</View>
+				</LinearGradient>
 			</View>
 		</>
 	);
