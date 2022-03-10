@@ -65,7 +65,6 @@ const Login = () => {
 							placeholder='Email'
 							placeholderTextColor='black'
 							className='inputUsername'
-							color='black'
 						/>
 					</View>
 					<View style={styles.linkView}>
@@ -94,9 +93,8 @@ const styles = StyleSheet.create({
 	textInput: {
 		margin: 5,
 		textAlign: "center",
-
 		padding: 3,
-		color: "white",
+		color: "black",
 	},
 	register: {
 		display: "flex",
