@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
 		width: 200,
 		borderRadius: 10,
 		backgroundColor: "white",
-		borderWidth: 2,
+		borderWidth: 1,
 	},
 	btn: {
 		color: "black",

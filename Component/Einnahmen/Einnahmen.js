@@ -269,7 +269,7 @@ const Einnahmen = () => {
 									<View style={styles.allIn}>
 										<ScrollView style={styles.scroll}>
 											{allAmounts.map(amount => {
-												if (amount.date == date) {
+												if (amount.date.includes(date)) {
 													if (amount.categorie == "Einkommen") {
 														return (
 															<View style={styles.einkommenToggle}>
@@ -316,7 +316,7 @@ const Einnahmen = () => {
 									<View style={styles.allInausgaben}>
 										<ScrollView style={styles.scrollAusgaben}>
 											{allAmounts.map(amount => {
-												if (amount.date == date) {
+												if (amount.date.includes(date)) {
 													if (
 														amount.categorie == "Lebensmittel" ||
 														amount.categorie == "Wohnung" ||
@@ -368,7 +368,7 @@ const Einnahmen = () => {
 									<View style={styles.allInausgaben}>
 										<ScrollView style={styles.scrollLebensmittel}>
 											{allAmounts.map(amount => {
-												if (amount.date == date) {
+												if (amount.date.includes(date)) {
 													if (amount.categorie == "Lebensmittel") {
 														return (
 															<View style={styles.einkommenToggle}>
@@ -416,7 +416,7 @@ const Einnahmen = () => {
 									<View style={styles.allInausgaben}>
 										<ScrollView style={styles.scrollShopping}>
 											{allAmounts.map(amount => {
-												if (amount.date == date) {
+												if (amount.date.includes(date)) {
 													if (amount.categorie == "Shopping") {
 														return (
 															<View style={styles.einkommenToggle}>
@@ -464,7 +464,7 @@ const Einnahmen = () => {
 									<View style={styles.allInausgaben}>
 										<ScrollView style={styles.scrollWohnung}>
 											{allAmounts.map(amount => {
-												if (amount.date == date) {
+												if (amount.date.includes(date)) {
 													if (amount.categorie == "Wohnung") {
 														return (
 															<View style={styles.einkommenToggle}>

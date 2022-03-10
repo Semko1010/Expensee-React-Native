@@ -64,8 +64,16 @@ const RegisterUser = () => {
 					colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
 					<Text style={styles.headLine}>Expensee</Text>
 					<View style={styles.imageContainer}>
-						<Button onPress={pickImage} title='Select Image' />
-						<Button onPress={pickCamera} title='Camera Image' />
+						<View style={styles.pickImg}>
+							<Button onPress={pickImage} title='Bild auswählen' />
+						</View>
+						<View style={styles.pickImg}>
+							<Button
+								style={styles.pickImg}
+								onPress={pickCamera}
+								title='Bild aufnehmen'
+							/>
+						</View>
 					</View>
 					<View style={styles.linkContainer}>
 						<Text>{warning}</Text>
@@ -98,13 +106,15 @@ const RegisterUser = () => {
 							<TextInput
 								onChangeText={e => setPassword(e)}
 								style={styles.textInput}
-								placeholder='Password'
+								placeholder='Passwort'
 								placeholderTextColor='black'
 								color='black'
 								className='inputUsername'
 							/>
 						</View>
-						<Button onPress={send} title='Send'></Button>
+						<View style={styles.btnView}>
+							<Button color='gray' onPress={send} title='Send'></Button>
+						</View>
 					</View>
 				</LinearGradient>
 			</View>
@@ -120,7 +130,6 @@ const styles = StyleSheet.create({
 		color: "white",
 	},
 	register: {
-		display: "flex",
 		justifyContent: "space-around",
 		alignItems: "center",
 		flexDirection: "column",
@@ -129,27 +138,10 @@ const styles = StyleSheet.create({
 		backgroundColor: "#2B2D5B",
 	},
 	headLine: {
+		marginTop: 30,
 		fontSize: 50,
 		color: "white",
-	},
-	linkContainer: {
-		marginBottom: 100,
-	},
-	linkView: {
-		margin: 10,
-		textAlign: "center",
-		width: 300,
-		height: 40,
-		backgroundColor: "#fffaf0",
-	},
-	backHome: {
-		color: "#FFFFFF",
-		textAlign: "center",
-		fontSize: 20,
-		textAlign: "center",
-		width: 300,
-		height: 40,
-		backgroundColor: "#2B2D4B",
+		fontFamily: "IMFellEnglishSC_400Regular",
 		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
@@ -158,6 +150,38 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.57,
 		shadowRadius: 15.19,
 		elevation: 23,
+	},
+	linkContainer: {
+		marginBottom: 100,
+		alignItems: "center",
+	},
+	linkView: {
+		margin: 10,
+		textAlign: "center",
+		width: 300,
+		height: 40,
+		backgroundColor: "#fffaf0",
+	},
+	imageContainer: {},
+	pickImg: {
+		marginTop: 10,
+	},
+	backHome: {
+		fontFamily: "IMFellEnglishSC_400Regular",
+		color: "#FFFFFF",
+		textAlign: "center",
+		fontSize: 30,
+		textAlign: "center",
+		width: 300,
+		height: 40,
+		backgroundColor: "#2B2D4B",
+	},
+	btnView: {
+		marginTop: 20,
+		width: 200,
+		borderRadius: 10,
+		backgroundColor: "white",
+		borderWidth: 1,
 	},
 });
 export default RegisterUser;

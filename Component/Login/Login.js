@@ -78,8 +78,13 @@ const Login = () => {
 							color='black'
 						/>
 					</View>
-
-					<Button onPress={send} title='Einloggen'></Button>
+					<View style={styles.btnView}>
+						<Button
+							style={styles.btnView}
+							color='gray'
+							onPress={send}
+							title='Einloggen'></Button>
+					</View>
 				</View>
 			</LinearGradient>
 		</View>
@@ -105,9 +110,19 @@ const styles = StyleSheet.create({
 	headLine: {
 		fontSize: 50,
 		color: "white",
+		fontFamily: "IMFellEnglishSC_400Regular",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 11,
+		},
+		shadowOpacity: 0.57,
+		shadowRadius: 15.19,
+		elevation: 23,
 	},
 	linkContainer: {
 		marginBottom: 100,
+		alignItems: "center",
 	},
 	linkView: {
 		margin: 10,
@@ -123,9 +138,9 @@ const styles = StyleSheet.create({
 		marginBottom: 40,
 	},
 	backHome: {
+		fontFamily: "IMFellEnglishSC_400Regular",
 		color: "#FFFFFF",
-		textAlign: "center",
-		fontSize: 20,
+		fontSize: 30,
 		textAlign: "center",
 		width: 300,
 		height: 40,
@@ -142,6 +157,13 @@ const styles = StyleSheet.create({
 	horizontal: {
 		position: "absolute",
 		top: 200,
+	},
+	btnView: {
+		marginTop: 20,
+		width: 200,
+		borderRadius: 10,
+		backgroundColor: "white",
+		borderWidth: 1,
 	},
 });
 export default Login;

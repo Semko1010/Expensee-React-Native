@@ -32,6 +32,15 @@ const styles = StyleSheet.create({
 	headLine: {
 		fontSize: 50,
 		color: "white",
+		fontFamily: "IMFellEnglishSC_400Regular",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 11,
+		},
+		shadowOpacity: 0.57,
+		shadowRadius: 15.19,
+		elevation: 23,
 	},
 	Home: {
 		flex: 1,
@@ -65,6 +74,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		color: "white",
 		fontSize: 30,
+		fontFamily: "IMFellEnglishSC_400Regular",
 	},
 	image: {
 		position: "absolute",
