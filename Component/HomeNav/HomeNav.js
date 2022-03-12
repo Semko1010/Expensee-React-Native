@@ -32,30 +32,12 @@ const styles = StyleSheet.create({
 	},
 
 	homeImages: {
-		position: "absolute",
-		paddingTop: 10,
-		bottom: 5,
+		padding: 5,
 		borderTopWidth: 1,
 		borderColor: "gray",
 		flexDirection: "row",
 		width: "100%",
 		justifyContent: "space-around",
-	},
-
-	logOut: {
-		margin: 25,
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "flex-end",
-	},
-	logOutText: {
-		color: "white",
-	},
-	logOutImage: {
-		marginTop: 10,
-		height: 17,
-		width: 25,
-		transform: [{ rotate: "180deg" }],
 	},
 });
 export default HomeNav;

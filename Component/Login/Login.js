@@ -9,7 +9,7 @@ import {
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate, TouchableOpacity } from "react-router-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { newToken } from "../../App";
+import { newToken, Amounts } from "../../App";
 import axios from "axios";
 const Login = () => {
 	const navigate = useNavigate();
@@ -19,22 +19,20 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 	const user = { email, password };
+	const { allAmounts, setAllAmounts } = useContext(Amounts);
+
 	async function send() {
 		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/login";
 		try {
-			const loadingtrue = await setLoading(true);
 			const fetch = await axios.post(URL, user);
 
 			if (fetch.data.userExist) {
+				setLoading(true);
 				setToken(fetch.data.token);
-				navigate("/einNahmen");
-				console.log("token", token);
+				navigate("/startSite");
 			} else {
 				setUserNotFound("Email or passwort wrong");
-				console.log("please log in");
 			}
-
-			console.log(fetch);
 		} catch (err) {
 			console.log(err);
 		}
@@ -80,7 +78,6 @@ const Login = () => {
 					<View style={styles.btnView}>
 						<Button
 							style={styles.btnView}
-							color='gray'
 							onPress={send}
 							title='Einloggen'></Button>
 					</View>
@@ -106,6 +103,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#2B2D5B",
 	},
 	headLine: {
+		marginTop: 50,
 		fontSize: 50,
 		color: "white",
 		fontFamily: "IMFellEnglishSC_400Regular",
@@ -155,13 +153,6 @@ const styles = StyleSheet.create({
 	horizontal: {
 		position: "absolute",
 		top: 200,
-	},
-	btnView: {
-		marginTop: 20,
-		width: 200,
-		borderRadius: 10,
-		backgroundColor: "white",
-		borderWidth: 1,
 	},
 });
 export default Login;

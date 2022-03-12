@@ -44,7 +44,6 @@ const Einnahmen = () => {
 	);
 
 	useEffect(() => {
-		console.log(date);
 		setEinkommen(0);
 		setAusgaben(0);
 		setLebensMittelGesamt(0);
@@ -60,11 +59,11 @@ const Einnahmen = () => {
 		const URL =
 			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
 		axios
-
 			.get(URL, {
 				headers: token,
 			})
 			.then(response => setAllAmounts(response.data))
+			.then(console.log("test", allAmounts))
 			.then(
 				allAmounts.map(amount => {
 					if (amount.date.includes(date)) {
@@ -92,9 +91,8 @@ const Einnahmen = () => {
 					}
 				}),
 			)
-
 			.then(setLoading(true));
-	}, [deleteAmount, vermoegen, date]);
+	}, [vermoegen]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
@@ -166,31 +164,31 @@ const Einnahmen = () => {
 										name: "Einkommen",
 										population: einkommen,
 										color: "#F63535",
-										legendFontColor: "white",
+										legendFontColor: "#696969",
 									},
 									{
 										name: "Ausgaben",
 										population: ausgaben,
 										color: "#515FEB",
-										legendFontColor: "white",
+										legendFontColor: "#696969",
 									},
 									{
 										name: "Lebensmittel",
 										population: lebensMittelGesamt,
 										color: "#EFB722",
-										legendFontColor: "white",
+										legendFontColor: "#696969",
 									},
 									{
 										name: "Shopping",
 										population: shoppingGesamt,
 										color: "#00bfff",
-										legendFontColor: "white",
+										legendFontColor: "#696969",
 									},
 									{
 										name: "Wohnung",
 										population: wohnungGesamt,
 										color: "#ff8c00",
-										legendFontColor: "white",
+										legendFontColor: "#696969",
 									},
 								]}
 								width={Dimensions.get("window").width - 16}
@@ -228,7 +226,7 @@ const Einnahmen = () => {
 								customStyles={{
 									dateIcon: {},
 									dateInput: {
-										borderColor: "white",
+										borderColor: "gray",
 										alignItems: "center",
 										borderWidth: 0,
 										borderBottomWidth: 1,
@@ -239,20 +237,14 @@ const Einnahmen = () => {
 									},
 									dateText: {
 										fontSize: 17,
-										color: "white",
+										color: "gray",
 									},
 								}}
 								onDateChange={date => {
 									setDate(date);
 								}}
 							/>
-							{/* <TextInput
-								onChangeText={e => setDate(e)}
-								backgroundColor='white'
-								placeholderTextColor='black'
-								style={styles.textInput}
-								placeholder='Datum wählen'
-							/> */}
+
 							{/*##########Einkommen########## */}
 							<View style={styles.allInParrent}>
 								<LinearGradient
@@ -496,13 +488,13 @@ const Einnahmen = () => {
 								)}
 							</View>
 						</View>
-						<HomeNav />
 					</View>
 				) : (
 					<View style={styles.horizontal}>
 						<ActivityIndicator size='large' color='#dc143c' />
 					</View>
 				)}
+				<HomeNav />
 			</LinearGradient>
 		</View>
 	);
@@ -558,8 +550,7 @@ const styles = StyleSheet.create({
 		marginTop: 5,
 	},
 	VermoegenText: {
-		fontFamily: "IMFellEnglishSC_400Regular",
-		color: "gray",
+		color: "white",
 		fontSize: 30,
 		marginBottom: 20,
 		marginTop: 20,

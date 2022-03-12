@@ -122,18 +122,18 @@ const Sales = () => {
 						customStyles={{
 							dateIcon: {},
 							dateInput: {
-								borderColor: "white",
+								borderColor: "gray",
 								alignItems: "center",
 								borderWidth: 0,
 								borderBottomWidth: 1,
 							},
 							placeholderText: {
 								fontSize: 17,
-								color: "white",
+								color: "gray",
 							},
 							dateText: {
 								fontSize: 17,
-								color: "white",
+								color: "black",
 								textAlign: "center",
 							},
 						}}
@@ -143,15 +143,10 @@ const Sales = () => {
 					/>
 
 					<View style={styles.btnView}>
-						<Button
-							color='black'
-							style={styles.btn}
-							onPress={send}
-							title='Erstellen'
-						/>
+						<Button style={styles.btn} onPress={send} title='Erstellen' />
 					</View>
+					<HomeNav />
 				</View>
-				<HomeNav />
 			</LinearGradient>
 		</View>
 	);
@@ -171,14 +166,15 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	allMenu: {
+		flex: 1,
 		alignItems: "center",
+		justifyContent: "space-between",
 	},
 	dropDown: {
-		marginTop: 70,
+		marginTop: 20,
 		marginBottom: 10,
 	},
 	Home: {
-		flexDirection: "column",
 		height: "100%",
 		width: "100%",
 		backgroundColor: "#2B2D5B",
@@ -195,7 +191,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 	},
 	linkView: {
-		margin: 15,
 		textAlign: "center",
 		width: 300,
 		height: 40,
@@ -203,12 +198,11 @@ const styles = StyleSheet.create({
 	},
 	numeric: {
 		marginBottom: 20,
-		marginTop: 20,
 	},
 	btnView: {
 		marginTop: 20,
 		width: 200,
-		borderRadius: 10,
+		borderRadius: 2,
 		backgroundColor: "white",
 		borderWidth: 1,
 	},

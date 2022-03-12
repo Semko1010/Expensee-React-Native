@@ -33,7 +33,7 @@ const StartSite = () => {
 				headers: token,
 			})
 			.then(response => setAllAmounts(response.data))
-			.then(console.log("test", allAmounts));
+			.then(console.log("semko", allAmounts));
 	}, [vermoegen]);
 
 	return (

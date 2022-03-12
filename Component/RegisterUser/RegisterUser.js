@@ -113,7 +113,7 @@ const RegisterUser = () => {
 							/>
 						</View>
 						<View style={styles.btnView}>
-							<Button color='gray' onPress={send} title='Send'></Button>
+							<Button onPress={send} title='Registrieren'></Button>
 						</View>
 					</View>
 				</LinearGradient>
@@ -127,10 +127,10 @@ const styles = StyleSheet.create({
 		margin: 5,
 		textAlign: "center",
 		padding: 3,
-		color: "white",
+		color: "black",
 	},
 	register: {
-		justifyContent: "space-around",
+		justifyContent: "space-between",
 		alignItems: "center",
 		flexDirection: "column",
 		height: "100%",
@@ -175,13 +175,6 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 40,
 		backgroundColor: "#2B2D4B",
-	},
-	btnView: {
-		marginTop: 20,
-		width: 200,
-		borderRadius: 10,
-		backgroundColor: "white",
-		borderWidth: 1,
 	},
 });
 export default RegisterUser;
