@@ -62,18 +62,18 @@ const StartSite = () => {
 					{allAmounts.map((amount, index) => (
 						<View style={styles.AmountView}>
 							<View style={styles.AmountDateAndDs}>
-								<Image
-									style={styles.imageAmount}
-									// source={require(`../../assets/${
-									// 	amount.categorie == "Einkommen" ? "green.png" : "red"
-									// }`)}
+								{amount.categorie == "Einkommen" ? (
+									<Image
+										style={styles.imageAmount}
+										source={require(`../../assets/plus.png`)}
+									/>
+								) : (
+									<Image
+										style={styles.imageAmount}
+										source={require(`../../assets/minus.png`)}
+									/>
+								)}
 
-									source={{
-										uri: `/Users/admin/Desktop/PortfolioProjects/expensee/assets/${
-											amount.categorie == "Einkommen" ? "plus.png" : "minus.png"
-										}`,
-									}}
-								/>
 								<View style={styles.amountViewText}>
 									<Text style={styles.amountTextDS}>{amount.description}</Text>
 									<Text style={styles.amountTextData}> {amount.date}</Text>
