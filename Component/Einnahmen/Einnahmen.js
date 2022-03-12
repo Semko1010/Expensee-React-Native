@@ -92,7 +92,7 @@ const Einnahmen = () => {
 				}),
 			)
 			.then(setLoading(true));
-	}, [vermoegen]);
+	}, [vermoegen, deleteAmount, date]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
