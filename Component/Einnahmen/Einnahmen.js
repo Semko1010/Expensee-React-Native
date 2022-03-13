@@ -10,6 +10,7 @@ import {
 	Image,
 	ActivityIndicator,
 	TextInput,
+	Button,
 } from "react-native";
 import DatePicker from "react-native-datepicker";
 import { useState, useEffect, useContext } from "react";
@@ -92,7 +93,7 @@ const Einnahmen = () => {
 				}),
 			)
 			.then(setLoading(true));
-	}, [vermoegen, deleteAmount, date]);
+	}, [deleteAmount, vermoegen, date]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);
@@ -566,11 +567,7 @@ const styles = StyleSheet.create({
 		top: 45,
 		width: "80%",
 	},
-	allInausgaben: {
-		position: "absolute",
-		top: 45,
-		width: "80%",
-	},
+
 	allInausgaben: {
 		position: "absolute",
 		top: 45,
@@ -607,9 +604,7 @@ const styles = StyleSheet.create({
 		width: 25,
 		height: 25,
 	},
-	delBtn: {
-		marginRight: 10,
-	},
+	delBtn: {},
 	date: {
 		flex: 1,
 		justifyContent: "flex-start",
