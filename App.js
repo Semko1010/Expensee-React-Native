@@ -6,6 +6,8 @@ import Home from "./Component/Home/Home";
 import Einnahmen from "./Component/Einnahmen/Einnahmen";
 import StartSite from "./Component/StartSite/StartSite";
 import Sales from "./Component/Sales/Sales";
+import PasswordResett from "./Component/PasswordReset/PasswordReset";
+
 import {
 	IMFellEnglishSC_400Regular,
 	useFonts,
@@ -34,6 +36,7 @@ export default function App(navigation) {
 								<Route path='/startSite' element={<StartSite />} />
 								<Route path='/einNahmen' element={<Einnahmen />} />
 								<Route path='/sales' element={<Sales />} />
+								<Route path='/passwordReset' element={<PasswordResett />} />
 							</Routes>
 						</View>
 					</NativeRouter>

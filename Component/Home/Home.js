@@ -19,7 +19,11 @@ const Home = () => {
 							<Text style={styles.text}>Register</Text>
 						</Link>
 					</View>
+					<Link underlayColor={"transparent"} to='/passwordReset'>
+						<Text style={styles.passwort}>Passwort vergessen</Text>
+					</Link>
 				</View>
+
 				<Image
 					style={styles.image}
 					source={require("../../assets/logoExpensee.png")}
@@ -75,6 +79,10 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontSize: 30,
 		fontFamily: "IMFellEnglishSC_400Regular",
+	},
+	passwort: {
+		textAlign: "center",
+		color: "blue",
 	},
 	image: {
 		position: "absolute",
