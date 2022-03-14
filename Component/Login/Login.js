@@ -15,6 +15,7 @@ const Login = () => {
 	const navigate = useNavigate();
 	const { token, setToken } = useContext(newToken);
 	const [userNotFound, setUserNotFound] = useState("");
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -26,10 +27,15 @@ const Login = () => {
 		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/login";
 		try {
 			const fetch = await axios.post(URL, user);
-
+			console.log("Semko", fetch);
 			if (fetch.data.userExist) {
-				setToken(fetch.data.token);
-				navigate("/startSite");
+				if (fetch.data.token.verifyUser) {
+					setToken(fetch.data.token);
+					navigate("/startSite");
+				} else {
+					console.log("pls verify");
+					setUserNotFound("Bitte Email verifiztieren");
+				}
 			} else {
 				setUserNotFound("Email or passwort wrong");
 			}

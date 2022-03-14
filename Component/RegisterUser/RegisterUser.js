@@ -11,7 +11,9 @@ const RegisterUser = () => {
 	const [password, setPassword] = useState("");
 	const [userImg, setUserImg] = useState("");
 	const [warning, setWarning] = useState("");
-	const user = { username, email, password, userImg };
+	const [verify, setVerify] = useState(false);
+
+	const user = { username, email, password, userImg, verify };
 	async function send() {
 		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/register";
 		if (username.length >= 3 && email.includes("@") && password.length >= 6) {
