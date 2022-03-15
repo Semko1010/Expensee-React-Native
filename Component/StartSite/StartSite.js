@@ -161,10 +161,7 @@ const styles = StyleSheet.create({
 		width: 25,
 		height: 25,
 	},
-	scroll: {
-		marginTop: 20,
-		marginBottom: 90,
-	},
+	scroll: {},
 });
 
 export default StartSite;

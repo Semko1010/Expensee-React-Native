@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 	},
 	register: {
 		display: "flex",
-		justifyContent: "space-around",
+		justifyContent: "space-evenly",
 		alignItems: "center",
 		flexDirection: "column",
 		height: "100%",
@@ -157,8 +157,7 @@ const styles = StyleSheet.create({
 		elevation: 23,
 	},
 	horizontal: {
-		position: "absolute",
-		top: 200,
+		marginTop: 50,
 	},
 });
 export default Login;
