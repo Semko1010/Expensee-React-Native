@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/actor": "^0.2.2",
     "@expo-google-fonts/akronim": "^0.2.2",
     "@expo-google-fonts/im-fell-english-sc": "^0.2.2",
     "@react-native-community/art": "^1.2.0",

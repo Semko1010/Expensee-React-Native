@@ -1,12 +1,20 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Link } from "react-router-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Info from "../Info/Infos";
 const Home = () => {
 	return (
 		<View style={styles.Home}>
 			<LinearGradient
 				style={styles.Home}
 				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+				<Link style={styles.infoLink} underlayColor={"transparent"} to='/info'>
+					<Image
+						style={styles.info}
+						source={require("../../assets/info.png")}
+					/>
+				</Link>
+
 				<Text style={styles.headLine}>Expensee</Text>
 				<View style={styles.linkContainer}>
 					<View style={styles.linkView}>
@@ -33,6 +41,15 @@ const Home = () => {
 	);
 };
 const styles = StyleSheet.create({
+	info: {
+		width: 30,
+		height: 30,
+	},
+	infoLink: {
+		position: "absolute",
+		left: 5,
+		top: 45,
+	},
 	headLine: {
 		fontSize: 50,
 		color: "white",

@@ -7,11 +7,12 @@ import Einnahmen from "./Component/Einnahmen/Einnahmen";
 import StartSite from "./Component/StartSite/StartSite";
 import Sales from "./Component/Sales/Sales";
 import PasswordResett from "./Component/PasswordReset/PasswordReset";
-
+import Info from "./Component/Info/Infos";
 import {
 	IMFellEnglishSC_400Regular,
 	useFonts,
 } from "@expo-google-fonts/im-fell-english-sc";
+import { Actor_400Regular } from "@expo-google-fonts/actor";
 import { useState, createContext } from "react";
 
 const newToken = createContext({});
@@ -19,7 +20,10 @@ const Amounts = createContext({});
 const Vermoegen = createContext({});
 const fonts = createContext({});
 export default function App(navigation) {
-	const [fontsLoaded, error] = useFonts({ IMFellEnglishSC_400Regular });
+	const [fontsLoaded, error] = useFonts({
+		IMFellEnglishSC_400Regular,
+		Actor_400Regular,
+	});
 	const [token, setToken] = useState();
 	const [allAmounts, setAllAmounts] = useState([]);
 	const [vermoegen, setVermoegen] = useState(0);
@@ -31,6 +35,7 @@ export default function App(navigation) {
 						<View style={styles.container}>
 							<Routes>
 								<Route path='/' element={<Home />} />
+								<Route path='/info' element={<Info />} />
 								<Route path='/register' element={<RegisterUser />} />
 								<Route path='/login' element={<Login />} />
 								<Route path='/startSite' element={<StartSite />} />
