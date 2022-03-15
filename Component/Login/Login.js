@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#2B2D5B",
 	},
 	headLine: {
-		marginTop: 50,
+		marginTop: 70,
 		fontSize: 50,
 		color: "white",
 		fontFamily: "IMFellEnglishSC_400Regular",
