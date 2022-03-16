@@ -23,7 +23,7 @@ const RegisterUser = () => {
 					navigate("/login");
 					console.log("User created");
 				} else {
-					console.log("user exist");
+					setWarning("Email existiert bereits !");
 				}
 			} catch (err) {
 				console.log(err);
@@ -78,31 +78,33 @@ const RegisterUser = () => {
 						</View>
 					</View>
 					<View style={styles.linkContainer}>
-						<Text>{warning}</Text>
+						<Text style={styles.userExist}>{warning}</Text>
 						<View style={styles.linkView}>
 							<Link underlayColor={"transparent"} to='/'>
 								<Text style={styles.backHome}>Back to Home</Text>
 							</Link>
 						</View>
-						<View style={styles.linkView}>
-							<TextInput
-								onChangeText={e => setUsername(e)}
-								style={styles.textInput}
-								placeholder='Username'
-								placeholderTextColor='black'
-								className='inputUsername'
-								color='black'
-							/>
-						</View>
-						<View style={styles.linkView}>
-							<TextInput
-								onChangeText={e => setEmail(e)}
-								style={styles.textInput}
-								placeholder='Email'
-								placeholderTextColor='black'
-								color='black'
-								className='inputUsername'
-							/>
+						<View style={styles.emailUsernameContainer}>
+							<View style={styles.linkView}>
+								<TextInput
+									onChangeText={e => setUsername(e)}
+									style={styles.textInput}
+									placeholder='Username'
+									placeholderTextColor='black'
+									className='inputUsername'
+									color='black'
+								/>
+							</View>
+							<View style={styles.linkView}>
+								<TextInput
+									onChangeText={e => setEmail(e)}
+									style={styles.textInput}
+									placeholder='Email'
+									placeholderTextColor='black'
+									color='black'
+									className='inputUsername'
+								/>
+							</View>
 						</View>
 						<View style={styles.linkView}>
 							<TextInput
@@ -125,14 +127,22 @@ const RegisterUser = () => {
 };
 
 const styles = StyleSheet.create({
+	emailUsernameContainer: {
+		flexDirection: "row",
+	},
 	textInput: {
 		margin: 5,
 		textAlign: "center",
-		padding: 3,
 		color: "black",
 	},
+	userExist: {
+		color: "red",
+		textAlign: "center",
+		marginBottom: 30,
+		fontSize: 18,
+	},
 	register: {
-		justifyContent: "space-between",
+		justifyContent: "space-evenly",
 		alignItems: "center",
 		flexDirection: "column",
 		height: "100%",
@@ -140,7 +150,8 @@ const styles = StyleSheet.create({
 		backgroundColor: "#2B2D5B",
 	},
 	headLine: {
-		marginTop: 30,
+		position: "absolute",
+		top: 50,
 		fontSize: 50,
 		color: "white",
 		fontFamily: "IMFellEnglishSC_400Regular",
@@ -159,12 +170,16 @@ const styles = StyleSheet.create({
 	},
 	linkView: {
 		margin: 10,
+		alignItems: "center",
 		textAlign: "center",
-		width: 300,
-		height: 40,
+		width: 150,
+		height: 30,
 		backgroundColor: "#fffaf0",
 	},
-	imageContainer: {},
+	imageContainer: {
+		marginTop: 200,
+		marginBottom: 50,
+	},
 	pickImg: {
 		marginTop: 10,
 	},
@@ -173,7 +188,6 @@ const styles = StyleSheet.create({
 		color: "#FFFFFF",
 		textAlign: "center",
 		fontSize: 30,
-		textAlign: "center",
 		width: 300,
 		height: 40,
 		backgroundColor: "#2B2D4B",

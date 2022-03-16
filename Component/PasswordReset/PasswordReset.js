@@ -30,7 +30,7 @@ const PasswordResett = () => {
 			setChangeTrue("Passwörter stimmen nicht überein !");
 		}
 	}
-
+	http://localhost:3000/api/expensee/users/verifyPasswordChange/semir01020@gmail.com/bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a
 	return (
 		<View style={styles.container}>
 			<LinearGradient

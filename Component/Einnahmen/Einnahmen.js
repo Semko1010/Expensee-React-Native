@@ -64,7 +64,6 @@ const Einnahmen = () => {
 				headers: token,
 			})
 			.then(response => setAllAmounts(response.data))
-			.then(console.log("test", allAmounts))
 			.then(
 				allAmounts.map(amount => {
 					if (amount.date.includes(date)) {
@@ -504,6 +503,7 @@ const Einnahmen = () => {
 const styles = StyleSheet.create({
 	container: {
 		width: "100%",
+
 		flex: 1,
 		justifyContent: "space-between",
 	},
@@ -557,11 +557,11 @@ const styles = StyleSheet.create({
 		width: "80%",
 		textAlign: "center",
 	},
-	allInParrent: {
-		position: "relative",
-		zIndex: 20,
-	},
+	allInParrent: {},
 	allIn: {
+		// position: "absolute",
+		// width: "100%",
+		// zIndex: 20,
 		width: "80%",
 	},
 
