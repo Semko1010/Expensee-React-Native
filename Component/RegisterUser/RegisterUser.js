@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-native";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
+import { RegisterStatus } from "../../App";
 const RegisterUser = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState("ff");
@@ -12,7 +13,7 @@ const RegisterUser = () => {
 	const [userImg, setUserImg] = useState("");
 	const [warning, setWarning] = useState("");
 	const [verify, setVerify] = useState(false);
-
+	const { regStatus, setRegStatus } = useContext(RegisterStatus);
 	const user = { username, email, password, userImg, verify };
 	async function send() {
 		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/register";
@@ -22,6 +23,7 @@ const RegisterUser = () => {
 				if (!fetch.data.userExist) {
 					navigate("/login");
 					console.log("User created");
+					setRegStatus("Email wurde gesendet");
 				} else {
 					setWarning("Email existiert bereits !");
 				}

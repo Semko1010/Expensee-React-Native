@@ -19,6 +19,7 @@ const newToken = createContext({});
 const Amounts = createContext({});
 const Vermoegen = createContext({});
 const fonts = createContext({});
+const RegisterStatus = createContext({});
 export default function App(navigation) {
 	const [fontsLoaded, error] = useFonts({
 		IMFellEnglishSC_400Regular,
@@ -27,24 +28,27 @@ export default function App(navigation) {
 	const [token, setToken] = useState();
 	const [allAmounts, setAllAmounts] = useState([]);
 	const [vermoegen, setVermoegen] = useState(0);
+	const [regStatus, setRegStatus] = useState("");
 	return (
 		<Vermoegen.Provider value={{ vermoegen, setVermoegen }}>
 			<Amounts.Provider value={{ allAmounts, setAllAmounts }}>
 				<newToken.Provider value={{ token, setToken }}>
-					<NativeRouter>
-						<View style={styles.container}>
-							<Routes>
-								<Route path='/' element={<Home />} />
-								<Route path='/info' element={<Info />} />
-								<Route path='/register' element={<RegisterUser />} />
-								<Route path='/login' element={<Login />} />
-								<Route path='/startSite' element={<StartSite />} />
-								<Route path='/einNahmen' element={<Einnahmen />} />
-								<Route path='/sales' element={<Sales />} />
-								<Route path='/passwordReset' element={<PasswordResett />} />
-							</Routes>
-						</View>
-					</NativeRouter>
+					<RegisterStatus.Provider value={{ regStatus, setRegStatus }}>
+						<NativeRouter>
+							<View style={styles.container}>
+								<Routes>
+									<Route path='/' element={<Home />} />
+									<Route path='/info' element={<Info />} />
+									<Route path='/register' element={<RegisterUser />} />
+									<Route path='/login' element={<Login />} />
+									<Route path='/startSite' element={<StartSite />} />
+									<Route path='/einNahmen' element={<Einnahmen />} />
+									<Route path='/sales' element={<Sales />} />
+									<Route path='/passwordReset' element={<PasswordResett />} />
+								</Routes>
+							</View>
+						</NativeRouter>
+					</RegisterStatus.Provider>
 				</newToken.Provider>
 			</Amounts.Provider>
 		</Vermoegen.Provider>
@@ -60,4 +64,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export { newToken, Amounts, Vermoegen, fonts };
+export { newToken, Amounts, Vermoegen, fonts, RegisterStatus };

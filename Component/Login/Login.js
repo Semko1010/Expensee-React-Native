@@ -6,38 +6,36 @@ import {
 	TextInput,
 	ActivityIndicator,
 } from "react-native";
-import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate, TouchableOpacity } from "react-router-native";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { newToken, Amounts } from "../../App";
+import { newToken, RegisterStatus } from "../../App";
 import axios from "axios";
 const Login = () => {
 	const navigate = useNavigate();
 	const { token, setToken } = useContext(newToken);
-	const [userNotFound, setUserNotFound] = useState("");
-
+	const { regStatus, setRegStatus } = useContext(RegisterStatus);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 	const user = { email, password };
-	const { allAmounts, setAllAmounts } = useContext(Amounts);
 
 	async function send() {
 		setLoading(true);
 		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/login";
 		try {
 			const fetch = await axios.post(URL, user);
-
+			console.log(fetch);
 			if (fetch.data.userExist) {
 				if (fetch.data.token.verifyUser) {
 					setToken(fetch.data.token);
 					navigate("/startSite");
 				} else {
 					console.log("pls verify");
-					setUserNotFound("Bitte Email verifiztieren");
+					setRegStatus("Bitte Email verifiztieren");
 				}
 			} else {
-				setUserNotFound("Email or passwort wrong");
+				setRegStatus("Email or passwort wrong");
 			}
 		} catch (err) {
 			console.log(err);
@@ -56,7 +54,13 @@ const Login = () => {
 					</View>
 				)}
 				<View style={styles.linkContainer}>
-					<Text style={styles.userNotFound}>{userNotFound}</Text>
+					<Text
+						style={[
+							styles.userNotFound,
+							{ color: regStatus == "Email wurde gesendet" ? "green" : "red" },
+						]}>
+						{regStatus}
+					</Text>
 					<View style={styles.linkView}>
 						<Link underlayColor={"transparent"} to='/'>
 							<Text style={styles.backHome}>Back to Home</Text>
@@ -135,7 +139,6 @@ const styles = StyleSheet.create({
 		color: "black",
 	},
 	userNotFound: {
-		color: "red",
 		textAlign: "center",
 		marginBottom: 40,
 	},

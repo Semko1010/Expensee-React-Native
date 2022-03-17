@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "react-router-native";
-import { newToken, Amounts, Vermoegen } from "../../App";
+import { newToken, Amounts, Vermoegen, RegisterStatus } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
 
 let arr = [];
@@ -12,7 +12,7 @@ const StartSite = () => {
 	const { token, setToken } = useContext(newToken);
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
-
+	const { regStatus, setRegStatus } = useContext(RegisterStatus);
 	useEffect(() => {
 		const amountsURL =
 			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
@@ -34,6 +34,7 @@ const StartSite = () => {
 			})
 			.then(response => setAllAmounts(response.data))
 			.then(console.log("semko", allAmounts));
+		setRegStatus("");
 	}, [vermoegen]);
 
 	return (
