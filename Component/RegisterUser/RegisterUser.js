@@ -86,40 +86,34 @@ const RegisterUser = () => {
 			<View style={styles.linkContainer}>
 				<Text style={styles.userExist}>{warning}</Text>
 
-				<View style={styles.linkView}>
-					<TextInput
-						onChangeText={e => setUsername(e)}
-						style={styles.textInput}
-						placeholder='Username'
-						placeholderTextColor='black'
-						className='inputUsername'
-						color='black'
-					/>
-				</View>
-				<View style={styles.linkView}>
-					<TextInput
-						onChangeText={e => setEmail(e)}
-						style={styles.textInput}
-						placeholder='Email'
-						placeholderTextColor='black'
-						color='black'
-						className='inputUsername'
-					/>
-				</View>
+				<TextInput
+					style={styles.linkView}
+					onChangeText={e => setUsername(e)}
+					placeholder='Username'
+					placeholderTextColor='black'
+					className='inputUsername'
+					color='black'
+				/>
 
-				<View style={styles.linkView}>
-					<TextInput
-						onChangeText={e => setPassword(e)}
-						style={styles.textInput}
-						placeholder='Passwort'
-						placeholderTextColor='black'
-						color='black'
-						className='inputUsername'
-					/>
-				</View>
-				<View style={styles.btnView}>
-					<Button onPress={send} title='Registrieren'></Button>
-				</View>
+				<TextInput
+					onChangeText={e => setEmail(e)}
+					style={styles.linkView}
+					placeholder='Email'
+					placeholderTextColor='black'
+					color='black'
+					className='inputUsername'
+				/>
+
+				<TextInput
+					onChangeText={e => setPassword(e)}
+					style={styles.linkView}
+					placeholder='Passwort'
+					placeholderTextColor='black'
+					color='black'
+					className='inputUsername'
+				/>
+
+				<Button onPress={send} title='Registrieren'></Button>
 			</View>
 		</LinearGradient>
 	);
@@ -139,11 +133,7 @@ const styles = StyleSheet.create({
 		width: 35,
 		height: 35,
 	},
-	textInput: {
-		margin: 5,
-		textAlign: "center",
-		color: "black",
-	},
+
 	userExist: {
 		color: "red",
 		textAlign: "center",
