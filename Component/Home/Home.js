@@ -4,40 +4,35 @@ import { LinearGradient } from "expo-linear-gradient";
 import Info from "../Info/Infos";
 const Home = () => {
 	return (
-		<View style={styles.Home}>
-			<LinearGradient
-				style={styles.Home}
-				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
-				<Link style={styles.infoLink} underlayColor={"transparent"} to='/info'>
-					<Image
-						style={styles.info}
-						source={require("../../assets/info.png")}
-					/>
-				</Link>
+		<LinearGradient
+			style={styles.Home}
+			colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+			<Link style={styles.infoLink} underlayColor={"transparent"} to='/info'>
+				<Image style={styles.info} source={require("../../assets/info.png")} />
+			</Link>
 
-				<Text style={styles.headLine}>Expensee</Text>
-				<View style={styles.linkContainer}>
-					<View style={styles.linkView}>
-						<Link underlayColor={"transparent"} to='/login'>
-							<Text style={styles.text}>Login</Text>
-						</Link>
-					</View>
-					<View style={styles.linkView}>
-						<Link underlayColor={"transparent"} to='/register'>
-							<Text style={styles.text}>Register</Text>
-						</Link>
-					</View>
-					<Link underlayColor={"transparent"} to='/passwordReset'>
-						<Text style={styles.passwort}>Passwort vergessen</Text>
+			<Text style={styles.headLine}>Expensee</Text>
+			<View style={styles.linkContainer}>
+				<LinearGradient style={styles.linkView} colors={["#2c3e50", "#3498db"]}>
+					<Link underlayColor={"transparent"} to='/login'>
+						<Text style={styles.text}>Login</Text>
 					</Link>
-				</View>
+				</LinearGradient>
+				<LinearGradient style={styles.linkView} colors={["#2c3e50", "#3498db"]}>
+					<Link underlayColor={"transparent"} to='/register'>
+						<Text style={styles.text}>Register</Text>
+					</Link>
+				</LinearGradient>
+				<Link underlayColor={"transparent"} to='/passwordReset'>
+					<Text style={styles.passwort}>Passwort vergessen</Text>
+				</Link>
+			</View>
 
-				<Image
-					style={styles.image}
-					source={require("../../assets/logoExpensee.png")}
-				/>
-			</LinearGradient>
-		</View>
+			<Image
+				style={styles.image}
+				source={require("../../assets/logoExpensee.png")}
+			/>
+		</LinearGradient>
 	);
 };
 const styles = StyleSheet.create({
@@ -76,11 +71,12 @@ const styles = StyleSheet.create({
 		marginBottom: 100,
 	},
 	linkView: {
+		borderRadius: 5,
 		margin: 10,
 		textAlign: "center",
 		width: 300,
 		height: 40,
-		backgroundColor: "#2B2D4B",
+
 		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
@@ -99,7 +95,7 @@ const styles = StyleSheet.create({
 	},
 	passwort: {
 		textAlign: "center",
-		color: "blue",
+		color: "#0000cd",
 	},
 	image: {
 		position: "absolute",

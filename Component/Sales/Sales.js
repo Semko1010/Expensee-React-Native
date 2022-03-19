@@ -63,92 +63,92 @@ const Sales = () => {
 	}
 
 	return (
-		<View style={styles.Home}>
-			<LinearGradient
-				style={styles.Home}
-				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
-				<Text style={styles.headLine}>Umsätze</Text>
-				<View style={styles.allMenu}>
-					<View style={styles.dropDown}>
-						<Text style={styles.kategorie}>Kategorie</Text>
+		<LinearGradient
+			style={styles.sales}
+			colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+			<Text style={styles.headLine}>Umsätze</Text>
+			<View style={styles.allMenu}>
+				<View style={styles.dropDown}>
+					<Text style={styles.kategorie}>Kategorie</Text>
 
-						<SelectDropdown
-							style={{
-								backgroundColor: "crimson",
-								opacity: 0.9,
-							}}
-							data={stuff}
-							onSelect={(selectedItem, index) => {
-								setCategorie(selectedItem);
-							}}
-						/>
-					</View>
-					<View style={styles.linkView}>
-						<TextInput
-							onChangeText={e => setDescription(e)}
-							placeholderTextColor='black'
-							style={styles.textInput}
-							placeholder='Beschreibung'
-						/>
-					</View>
-					<Text style={styles.warning}>{warning}</Text>
-					<View style={styles.numeric}>
-						<NumericInput
-							value={amount}
-							onChange={value => setAmount(value)}
-							onLimitReached={(isMax, msg) => console.log(isMax, msg)}
-							totalWidth={300}
-							totalHeight={50}
-							iconSize={25}
-							step={1}
-							valueType='real'
-							rounded
-							textColor='white'
-							iconStyle={{ color: "white" }}
-							rightButtonBackgroundColor='#00bfff'
-							leftButtonBackgroundColor='#00bfff'
-						/>
-					</View>
-
-					<DatePicker
-						date={date}
-						mode='date'
-						placeholder='Datum'
-						format='DD.MM.YYYY'
-						minDate='01-01-1900'
-						maxDate='01-01-2100'
-						confirmBtnText='Bestätigen'
-						cancelBtnText='Abbrechen'
-						customStyles={{
-							dateIcon: {},
-							dateInput: {
-								borderColor: "gray",
-								alignItems: "center",
-								borderWidth: 0,
-								borderBottomWidth: 1,
-							},
-							placeholderText: {
-								fontSize: 17,
-								color: "gray",
-							},
-							dateText: {
-								fontSize: 17,
-								color: "black",
-								textAlign: "center",
-							},
+					<SelectDropdown
+						style={{
+							backgroundColor: "crimson",
+							opacity: 0.9,
 						}}
-						onDateChange={date => {
-							setDate(date);
+						data={stuff}
+						onSelect={(selectedItem, index) => {
+							setCategorie(selectedItem);
 						}}
 					/>
-
-					<View style={styles.btnView}>
-						<Button style={styles.btn} onPress={send} title='Erstellen' />
-					</View>
-					<HomeNav />
 				</View>
-			</LinearGradient>
-		</View>
+				<View style={styles.linkView}>
+					<TextInput
+						onChangeText={e => setDescription(e)}
+						placeholderTextColor='black'
+						style={styles.textInput}
+						placeholder='Beschreibung'
+					/>
+				</View>
+				<Text style={styles.warning}>{warning}</Text>
+				<View style={styles.numeric}>
+					<NumericInput
+						value={amount}
+						onChange={value => setAmount(value)}
+						onLimitReached={(isMax, msg) => console.log(isMax, msg)}
+						totalWidth={300}
+						totalHeight={50}
+						iconSize={25}
+						step={1}
+						valueType='real'
+						rounded
+						textColor='white'
+						iconStyle={{ color: "white" }}
+						rightButtonBackgroundColor='#00bfff'
+						leftButtonBackgroundColor='#00bfff'
+						borderColor='white'
+					/>
+				</View>
+
+				<DatePicker
+					date={date}
+					mode='date'
+					placeholder='Datum'
+					format='DD.MM.YYYY'
+					minDate='01-01-1900'
+					maxDate='01-01-2100'
+					confirmBtnText='Bestätigen'
+					cancelBtnText='Abbrechen'
+					customStyles={{
+						dateIcon: {},
+						dateInput: {
+							borderColor: "gray",
+							alignItems: "center",
+							borderWidth: 0,
+							borderBottomWidth: 1,
+						},
+						placeholderText: {
+							fontSize: 17,
+							color: "gray",
+						},
+						dateText: {
+							fontSize: 17,
+							color: "black",
+							textAlign: "center",
+						},
+					}}
+					onDateChange={date => {
+						setDate(date);
+					}}
+				/>
+
+				<LinearGradient style={styles.btnView} colors={["#2c3e50", "#3498db"]}>
+					<Button onPress={send} title='Erstellen' />
+				</LinearGradient>
+
+				<HomeNav />
+			</View>
+		</LinearGradient>
 	);
 };
 const styles = StyleSheet.create({
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 		marginBottom: 10,
 	},
-	Home: {
+	sales: {
 		height: "100%",
 		width: "100%",
 		backgroundColor: "#2B2D5B",
@@ -202,12 +202,9 @@ const styles = StyleSheet.create({
 	btnView: {
 		marginTop: 20,
 		width: 200,
-		borderRadius: 2,
+		borderRadius: 5,
 		backgroundColor: "white",
-		borderWidth: 1,
-	},
-	btn: {
-		color: "black",
+		borderColor: "black",
 	},
 });
 export default Sales;

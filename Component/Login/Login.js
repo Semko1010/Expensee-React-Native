@@ -43,57 +43,57 @@ const Login = () => {
 	}
 
 	return (
-		<View style={styles.register}>
-			<LinearGradient
-				style={styles.register}
-				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
-				<Text style={styles.headLine}>Expensee</Text>
-				{loading && (
-					<View style={styles.horizontal}>
-						<ActivityIndicator size='large' color='#dc143c' />
-					</View>
-				)}
-				<View style={styles.linkContainer}>
-					<Text
-						style={[
-							styles.userNotFound,
-							{ color: regStatus == "Email wurde gesendet" ? "green" : "red" },
-						]}>
-						{regStatus}
-					</Text>
-					<View style={styles.linkView}>
-						<Link underlayColor={"transparent"} to='/'>
-							<Text style={styles.backHome}>Back to Home</Text>
-						</Link>
-					</View>
-					<View style={styles.linkView}>
-						<TextInput
-							onChangeText={e => setEmail(e)}
-							style={styles.textInput}
-							placeholder='Email'
-							placeholderTextColor='black'
-							className='inputUsername'
-						/>
-					</View>
-					<View style={styles.linkView}>
-						<TextInput
-							onChangeText={e => setPassword(e)}
-							style={styles.textInput}
-							placeholder='Password'
-							placeholderTextColor='black'
-							className='inputUsername'
-							color='black'
-						/>
-					</View>
-					<View style={styles.btnView}>
-						<Button
-							style={styles.btnView}
-							onPress={send}
-							title='Einloggen'></Button>
-					</View>
+		<LinearGradient
+			style={styles.register}
+			colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+			<Text style={styles.headLine}>Expensee</Text>
+			{loading && (
+				<View style={styles.horizontal}>
+					<ActivityIndicator size='large' color='#dc143c' />
 				</View>
-			</LinearGradient>
-		</View>
+			)}
+			<View style={styles.linkContainer}>
+				<Text
+					style={[
+						styles.userNotFound,
+						{ color: regStatus == "Email wurde gesendet" ? "green" : "red" },
+					]}>
+					{regStatus}
+				</Text>
+
+				<LinearGradient colors={["#2c3e50", "#3498db"]}>
+					<Link underlayColor={"transparent"} to='/'>
+						<Text style={styles.backHome}>Back to Home</Text>
+					</Link>
+				</LinearGradient>
+
+				<View style={styles.linkView}>
+					<TextInput
+						onChangeText={e => setEmail(e)}
+						style={styles.textInput}
+						placeholder='Email'
+						placeholderTextColor='black'
+						className='inputUsername'
+					/>
+				</View>
+				<View style={styles.linkView}>
+					<TextInput
+						onChangeText={e => setPassword(e)}
+						style={styles.textInput}
+						placeholder='Password'
+						placeholderTextColor='black'
+						className='inputUsername'
+						color='black'
+					/>
+				</View>
+				<View style={styles.btnView}>
+					<Button
+						style={styles.btnView}
+						onPress={send}
+						title='Einloggen'></Button>
+				</View>
+			</View>
+		</LinearGradient>
 	);
 };
 const styles = StyleSheet.create({
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		width: 300,
 		height: 40,
-		backgroundColor: "#2B2D4B",
 		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,

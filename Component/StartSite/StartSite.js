@@ -1,6 +1,13 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	Image,
+	ScrollView,
+	SafeAreaView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "react-router-native";
 import { newToken, Amounts, Vermoegen, RegisterStatus } from "../../App";
@@ -38,58 +45,56 @@ const StartSite = () => {
 	}, [vermoegen]);
 
 	return (
-		<View style={styles.startSite}>
-			<LinearGradient
-				style={styles.startSite}
-				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
-				<View style={styles.logOut}>
-					<Image
-						style={styles.userImg}
-						source={{
-							uri: `data:image/jpeg;base64,${userImg}`,
-						}}
-					/>
+		<LinearGradient
+			style={styles.startSite}
+			colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+			<View style={styles.logOut}>
+				<Image
+					style={styles.userImg}
+					source={{
+						uri: `data:image/jpeg;base64,${userImg}`,
+					}}
+				/>
 
-					<View style={styles.logOutView}>
-						<Link underlayColor={"transparent"} to='/'>
-							<Image
-								style={styles.logOutImage}
-								source={require("../../assets/ausloggen.png")}
-							/>
-						</Link>
-					</View>
+				<View style={styles.logOutView}>
+					<Link underlayColor={"transparent"} to='/'>
+						<Image
+							style={styles.logOutImage}
+							source={require("../../assets/ausloggen.png")}
+						/>
+					</Link>
 				</View>
-				<ScrollView style={styles.scroll}>
-					{allAmounts.map((amount, index) => (
-						<View style={styles.AmountView}>
-							<View style={styles.AmountDateAndDs}>
-								{amount.categorie == "Einkommen" ? (
-									<Image
-										style={styles.imageAmount}
-										source={require(`../../assets/plus.png`)}
-									/>
-								) : (
-									<Image
-										style={styles.imageAmount}
-										source={require(`../../assets/minus.png`)}
-									/>
-								)}
+			</View>
+			<ScrollView style={styles.scroll}>
+				{allAmounts.map((amount, index) => (
+					<View style={styles.AmountView}>
+						<View style={styles.AmountDateAndDs}>
+							{amount.categorie == "Einkommen" ? (
+								<Image
+									style={styles.imageAmount}
+									source={require(`../../assets/plus.png`)}
+								/>
+							) : (
+								<Image
+									style={styles.imageAmount}
+									source={require(`../../assets/minus.png`)}
+								/>
+							)}
 
-								<View style={styles.amountViewText}>
-									<Text style={styles.amountTextDS}>{amount.description}</Text>
-									<Text style={styles.amountTextData}> {amount.date}</Text>
-								</View>
+							<View style={styles.amountViewText}>
+								<Text style={styles.amountTextDS}>{amount.description}</Text>
+								<Text style={styles.amountTextData}> {amount.date}</Text>
 							</View>
-							<Text style={styles.amountTextAmount}>{` ${
-								amount.categorie == "Einkommen" ? "+" : "-"
-							}   ${amount.amount} €`}</Text>
 						</View>
-					))}
-				</ScrollView>
+						<Text style={styles.amountTextAmount}>{` ${
+							amount.categorie == "Einkommen" ? "+" : "-"
+						}   ${amount.amount} €`}</Text>
+					</View>
+				))}
+			</ScrollView>
 
-				<HomeNav />
-			</LinearGradient>
-		</View>
+			<HomeNav />
+		</LinearGradient>
 	);
 };
 const styles = StyleSheet.create({

@@ -61,70 +61,66 @@ const RegisterUser = () => {
 	};
 
 	return (
-		<>
-			<View style={styles.register}>
-				<LinearGradient
-					style={styles.register}
-					colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
-					<Text style={styles.headLine}>Expensee</Text>
-					<View style={styles.imageContainer}>
-						<View style={styles.pickImg}>
-							<Button onPress={pickImage} title='Bild auswählen' />
-						</View>
-						<View style={styles.pickImg}>
-							<Button
-								style={styles.pickImg}
-								onPress={pickCamera}
-								title='Bild aufnehmen'
-							/>
-						</View>
-					</View>
-					<View style={styles.linkContainer}>
-						<Text style={styles.userExist}>{warning}</Text>
-						<View style={styles.linkView}>
-							<Link underlayColor={"transparent"} to='/'>
-								<Text style={styles.backHome}>Back to Home</Text>
-							</Link>
-						</View>
-						<View style={styles.emailUsernameContainer}>
-							<View style={styles.linkView}>
-								<TextInput
-									onChangeText={e => setUsername(e)}
-									style={styles.textInput}
-									placeholder='Username'
-									placeholderTextColor='black'
-									className='inputUsername'
-									color='black'
-								/>
-							</View>
-							<View style={styles.linkView}>
-								<TextInput
-									onChangeText={e => setEmail(e)}
-									style={styles.textInput}
-									placeholder='Email'
-									placeholderTextColor='black'
-									color='black'
-									className='inputUsername'
-								/>
-							</View>
-						</View>
-						<View style={styles.linkView}>
-							<TextInput
-								onChangeText={e => setPassword(e)}
-								style={styles.textInput}
-								placeholder='Passwort'
-								placeholderTextColor='black'
-								color='black'
-								className='inputUsername'
-							/>
-						</View>
-						<View style={styles.btnView}>
-							<Button onPress={send} title='Registrieren'></Button>
-						</View>
-					</View>
-				</LinearGradient>
+		<LinearGradient
+			style={styles.register}
+			colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+			<Text style={styles.headLine}>Expensee</Text>
+			<View style={styles.imageContainer}>
+				<View style={styles.pickImg}>
+					<Button onPress={pickImage} title='Bild auswählen' />
+				</View>
+				<View style={styles.pickImg}>
+					<Button
+						style={styles.pickImg}
+						onPress={pickCamera}
+						title='Bild aufnehmen'
+					/>
+				</View>
 			</View>
-		</>
+			<View style={styles.linkContainer}>
+				<Text style={styles.userExist}>{warning}</Text>
+				<LinearGradient colors={["#2c3e50", "#3498db"]}>
+					<Link underlayColor={"transparent"} to='/'>
+						<Text style={styles.backHome}>Back to Home</Text>
+					</Link>
+				</LinearGradient>
+				<View style={styles.emailUsernameContainer}>
+					<View style={styles.linkView}>
+						<TextInput
+							onChangeText={e => setUsername(e)}
+							style={styles.textInput}
+							placeholder='Username'
+							placeholderTextColor='black'
+							className='inputUsername'
+							color='black'
+						/>
+					</View>
+					<View style={styles.linkView}>
+						<TextInput
+							onChangeText={e => setEmail(e)}
+							style={styles.textInput}
+							placeholder='Email'
+							placeholderTextColor='black'
+							color='black'
+							className='inputUsername'
+						/>
+					</View>
+				</View>
+				<View style={styles.linkView}>
+					<TextInput
+						onChangeText={e => setPassword(e)}
+						style={styles.textInput}
+						placeholder='Passwort'
+						placeholderTextColor='black'
+						color='black'
+						className='inputUsername'
+					/>
+				</View>
+				<View style={styles.btnView}>
+					<Button onPress={send} title='Registrieren'></Button>
+				</View>
+			</View>
+		</LinearGradient>
 	);
 };
 
@@ -192,7 +188,6 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		width: 300,
 		height: 40,
-		backgroundColor: "#2B2D4B",
 	},
 });
 export default RegisterUser;

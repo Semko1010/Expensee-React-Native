@@ -30,16 +30,19 @@ const PasswordResett = () => {
 			setChangeTrue("Passwörter stimmen nicht überein !");
 		}
 	}
-	http://localhost:3000/api/expensee/users/verifyPasswordChange/semir01020@gmail.com/bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a
-	return (
+	//localhost:3000/api/expensee/users/verifyPasswordChange/semir01020@gmail.com/bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a
+	http: return (
 		<View style={styles.container}>
 			<LinearGradient
 				style={styles.container}
 				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
-				<Link underlayColor={"transparent"} to='/'>
-					<Text style={styles.backHome}>Back to Home</Text>
-				</Link>
-
+				<LinearGradient
+					style={styles.linearGradient}
+					colors={["#2c3e50", "#3498db"]}>
+					<Link underlayColor={"transparent"} to='/'>
+						<Text style={styles.backHome}>Back to Home</Text>
+					</Link>
+				</LinearGradient>
 				<View style={styles.subcontainer}>
 					<Text style={styles.passwordChangeTrue}>{changeTrue}</Text>
 					<TextInput
@@ -92,9 +95,11 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		fontSize: 30,
 		textAlign: "center",
+	},
+	linearGradient: {
 		width: 300,
 		height: 40,
-		backgroundColor: "#2B2D4B",
+		borderRadius: 5,
 	},
 });
 
