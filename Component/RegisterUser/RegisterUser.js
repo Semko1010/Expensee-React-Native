@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, Image } from "react-native";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-native";
 import * as ImagePicker from "expo-image-picker";
@@ -64,6 +64,12 @@ const RegisterUser = () => {
 		<LinearGradient
 			style={styles.register}
 			colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+			<Link style={styles.infoLink} underlayColor={"transparent"} to='/'>
+				<Image
+					style={styles.homeImage}
+					source={require("../../assets/right.png")}
+				/>
+			</Link>
 			<Text style={styles.headLine}>Expensee</Text>
 			<View style={styles.imageContainer}>
 				<View style={styles.pickImg}>
@@ -79,33 +85,28 @@ const RegisterUser = () => {
 			</View>
 			<View style={styles.linkContainer}>
 				<Text style={styles.userExist}>{warning}</Text>
-				<LinearGradient colors={["#2c3e50", "#3498db"]}>
-					<Link underlayColor={"transparent"} to='/'>
-						<Text style={styles.backHome}>Back to Home</Text>
-					</Link>
-				</LinearGradient>
-				<View style={styles.emailUsernameContainer}>
-					<View style={styles.linkView}>
-						<TextInput
-							onChangeText={e => setUsername(e)}
-							style={styles.textInput}
-							placeholder='Username'
-							placeholderTextColor='black'
-							className='inputUsername'
-							color='black'
-						/>
-					</View>
-					<View style={styles.linkView}>
-						<TextInput
-							onChangeText={e => setEmail(e)}
-							style={styles.textInput}
-							placeholder='Email'
-							placeholderTextColor='black'
-							color='black'
-							className='inputUsername'
-						/>
-					</View>
+
+				<View style={styles.linkView}>
+					<TextInput
+						onChangeText={e => setUsername(e)}
+						style={styles.textInput}
+						placeholder='Username'
+						placeholderTextColor='black'
+						className='inputUsername'
+						color='black'
+					/>
 				</View>
+				<View style={styles.linkView}>
+					<TextInput
+						onChangeText={e => setEmail(e)}
+						style={styles.textInput}
+						placeholder='Email'
+						placeholderTextColor='black'
+						color='black'
+						className='inputUsername'
+					/>
+				</View>
+
 				<View style={styles.linkView}>
 					<TextInput
 						onChangeText={e => setPassword(e)}
@@ -127,6 +128,16 @@ const RegisterUser = () => {
 const styles = StyleSheet.create({
 	emailUsernameContainer: {
 		flexDirection: "row",
+	},
+	infoLink: {
+		position: "absolute",
+		right: 10,
+		top: 40,
+	},
+	homeImage: {
+		transform: [{ rotate: "180deg" }],
+		width: 35,
+		height: 35,
 	},
 	textInput: {
 		margin: 5,
@@ -170,7 +181,7 @@ const styles = StyleSheet.create({
 		margin: 10,
 		alignItems: "center",
 		textAlign: "center",
-		width: 150,
+		width: 300,
 		height: 30,
 		backgroundColor: "#fffaf0",
 	},
