@@ -47,24 +47,11 @@ const StartSite = () => {
 					response.data.sort((a, b) => {
 						const firstDate = a.date.split(".").reverse().join();
 						const secondDate = b.date.split(".").reverse().join();
-
-						return (
-							new Date(firstDate).valueOf() - new Date(secondDate).valueOf()
-						);
+						return firstDate < secondDate ? -1 : firstDate > secondDate ? 1 : 0;
 					}),
 				);
 			})
 
-			// .then(
-			// 	allAmounts.sort((a, b) => {
-			// 		const firstDate = a.date.split(".").reverse().join();
-			// 		const secondDate = b.date.split(".").reverse().join();
-			// 		console.log(
-			// 			new Date(firstDate).valueOf() - new Date(secondDate).valueOf(),
-			// 		);
-			// 		return new Date(firstDate).valueOf() - new Date(secondDate).valueOf();
-			// 	}),
-			// )
 			.then(setLoading(true))
 			.then(console.log("seccond", allAmounts));
 		setRegStatus("");
@@ -91,35 +78,35 @@ const StartSite = () => {
 					</Link>
 				</View>
 			</View>
-			{/* {loading && ( */}
-			<ScrollView style={styles.scroll}>
-				{allAmounts.map((amount, index) => (
-					<View style={styles.AmountView}>
-						<View style={styles.AmountDateAndDs}>
-							{amount.categorie == "Einkommen" ? (
-								<Image
-									style={styles.imageAmount}
-									source={require(`../../assets/plus.png`)}
-								/>
-							) : (
-								<Image
-									style={styles.imageAmount}
-									source={require(`../../assets/minus.png`)}
-								/>
-							)}
+			{loading && (
+				<ScrollView style={styles.scroll}>
+					{allAmounts.map((amount, index) => (
+						<View style={styles.AmountView}>
+							<View style={styles.AmountDateAndDs}>
+								{amount.categorie == "Einkommen" ? (
+									<Image
+										style={styles.imageAmount}
+										source={require(`../../assets/plus.png`)}
+									/>
+								) : (
+									<Image
+										style={styles.imageAmount}
+										source={require(`../../assets/minus.png`)}
+									/>
+								)}
 
-							<View style={styles.amountViewText}>
-								<Text style={styles.amountTextDS}>{amount.description}</Text>
-								<Text style={styles.amountTextData}> {amount.date}</Text>
+								<View style={styles.amountViewText}>
+									<Text style={styles.amountTextDS}>{amount.description}</Text>
+									<Text style={styles.amountTextData}> {amount.date}</Text>
+								</View>
 							</View>
+							<Text style={styles.amountTextAmount}>{` ${
+								amount.categorie == "Einkommen" ? "+" : "-"
+							}   ${amount.amount} €`}</Text>
 						</View>
-						<Text style={styles.amountTextAmount}>{` ${
-							amount.categorie == "Einkommen" ? "+" : "-"
-						}   ${amount.amount} €`}</Text>
-					</View>
-				))}
-			</ScrollView>
-			{/* )} */}
+					))}
+				</ScrollView>
+			)}
 			<HomeNav />
 		</LinearGradient>
 	);

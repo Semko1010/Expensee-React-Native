@@ -1,5 +1,8 @@
 <h1>Expensee React Native</h1>
 
+Android App:
+https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40semko1010/expensee-cd470a5f0b76496b84c1323a236506bb-signed.apk
+
 
 
 
