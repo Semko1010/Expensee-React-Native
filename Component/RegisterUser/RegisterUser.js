@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, Button, TextInput, Image } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	Button,
+	TextInput,
+	Image,
+	ActivityIndicator,
+} from "react-native";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-native";
 import * as ImagePicker from "expo-image-picker";
@@ -13,9 +21,11 @@ const RegisterUser = () => {
 	const [userImg, setUserImg] = useState("");
 	const [warning, setWarning] = useState("");
 	const [verify, setVerify] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const { regStatus, setRegStatus } = useContext(RegisterStatus);
 	const user = { username, email, password, userImg, verify };
 	async function send() {
+		setLoading(true);
 		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/register";
 		if (username.length >= 3 && email.includes("@") && password.length >= 6) {
 			try {
@@ -71,49 +81,57 @@ const RegisterUser = () => {
 				/>
 			</Link>
 			<Text style={styles.headLine}>Expensee</Text>
-			<View style={styles.imageContainer}>
-				<View style={styles.pickImg}>
-					<Button onPress={pickImage} title='Bild auswählen' />
+			{loading && (
+				<View style={styles.horizontal}>
+					<ActivityIndicator size='small' color='#dc143c' />
 				</View>
-				<View style={styles.pickImg}>
-					<Button
-						style={styles.pickImg}
-						onPress={pickCamera}
-						title='Bild aufnehmen'
+			)}
+			<Text style={styles.userExist}>{warning}</Text>
+			<View style={styles.imgAndtextInputs}>
+				<View style={styles.imageContainer}>
+					<View style={styles.pickImg}>
+						<Button onPress={pickImage} title='Bild auswählen' />
+					</View>
+					<View style={styles.pickImg}>
+						<Button
+							style={styles.pickImg}
+							onPress={pickCamera}
+							title='Bild aufnehmen'
+						/>
+					</View>
+				</View>
+
+				<View style={styles.linkContainer}>
+					<TextInput
+						style={styles.linkView}
+						onChangeText={e => setUsername(e)}
+						placeholder='Username'
+						placeholderTextColor='black'
+						className='inputUsername'
+						color='black'
+					/>
+
+					<TextInput
+						onChangeText={e => setEmail(e)}
+						style={styles.linkView}
+						placeholder='Email'
+						placeholderTextColor='black'
+						color='black'
+						className='inputUsername'
+					/>
+
+					<TextInput
+						onChangeText={e => setPassword(e)}
+						style={styles.linkView}
+						placeholder='Passwort'
+						placeholderTextColor='black'
+						color='black'
+						className='inputUsername'
 					/>
 				</View>
 			</View>
-			<View style={styles.linkContainer}>
-				<Text style={styles.userExist}>{warning}</Text>
-
-				<TextInput
-					style={styles.linkView}
-					onChangeText={e => setUsername(e)}
-					placeholder='Username'
-					placeholderTextColor='black'
-					className='inputUsername'
-					color='black'
-				/>
-
-				<TextInput
-					onChangeText={e => setEmail(e)}
-					style={styles.linkView}
-					placeholder='Email'
-					placeholderTextColor='black'
-					color='black'
-					className='inputUsername'
-				/>
-
-				<TextInput
-					onChangeText={e => setPassword(e)}
-					style={styles.linkView}
-					placeholder='Passwort'
-					placeholderTextColor='black'
-					color='black'
-					className='inputUsername'
-				/>
-
-				<Button onPress={send} title='Registrieren'></Button>
+			<View style={styles.regBtn}>
+				<Button onPress={send} title='Registrieren' />
 			</View>
 		</LinearGradient>
 	);
@@ -140,6 +158,10 @@ const styles = StyleSheet.create({
 		marginBottom: 30,
 		fontSize: 18,
 	},
+	imgAndtextInputs: {
+		alignItems: "center",
+		flexDirection: "row",
+	},
 	register: {
 		justifyContent: "space-evenly",
 		alignItems: "center",
@@ -164,21 +186,17 @@ const styles = StyleSheet.create({
 		elevation: 23,
 	},
 	linkContainer: {
-		marginBottom: 100,
 		alignItems: "center",
 	},
 	linkView: {
 		margin: 10,
 		alignItems: "center",
 		textAlign: "center",
-		width: 300,
+		width: 180,
 		height: 30,
 		backgroundColor: "#fffaf0",
 	},
-	imageContainer: {
-		marginTop: 200,
-		marginBottom: 50,
-	},
+	imageContainer: {},
 	pickImg: {
 		marginTop: 10,
 	},
@@ -189,6 +207,12 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		width: 300,
 		height: 40,
+	},
+	regBtn: {
+		width: 300,
+	},
+	horizontal: {
+		marginTop: 100,
 	},
 });
 export default RegisterUser;
