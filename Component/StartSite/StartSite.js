@@ -16,10 +16,12 @@ import HomeNav from "../HomeNav/HomeNav";
 let arr = [];
 const StartSite = () => {
 	const [userImg, setUserImg] = useState("");
+	const [loading, setLoading] = useState(false);
 	const { token, setToken } = useContext(newToken);
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
 	const { regStatus, setRegStatus } = useContext(RegisterStatus);
+
 	useEffect(() => {
 		const amountsURL =
 			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
@@ -39,8 +41,32 @@ const StartSite = () => {
 			.get(amountsURL, {
 				headers: token,
 			})
-			.then(response => setAllAmounts(response.data))
-			.then(console.log("semko", allAmounts));
+
+			.then(response => {
+				setAllAmounts(
+					response.data.sort((a, b) => {
+						const firstDate = a.date.split(".").reverse().join();
+						const secondDate = b.date.split(".").reverse().join();
+
+						return (
+							new Date(firstDate).valueOf() - new Date(secondDate).valueOf()
+						);
+					}),
+				);
+			})
+
+			// .then(
+			// 	allAmounts.sort((a, b) => {
+			// 		const firstDate = a.date.split(".").reverse().join();
+			// 		const secondDate = b.date.split(".").reverse().join();
+			// 		console.log(
+			// 			new Date(firstDate).valueOf() - new Date(secondDate).valueOf(),
+			// 		);
+			// 		return new Date(firstDate).valueOf() - new Date(secondDate).valueOf();
+			// 	}),
+			// )
+			.then(setLoading(true))
+			.then(console.log("seccond", allAmounts));
 		setRegStatus("");
 	}, [vermoegen]);
 
@@ -60,11 +86,12 @@ const StartSite = () => {
 					<Link underlayColor={"transparent"} to='/'>
 						<Image
 							style={styles.logOutImage}
-							source={require("../../assets/ausloggen.png")}
+							source={require("../../assets/right.png")}
 						/>
 					</Link>
 				</View>
 			</View>
+			{/* {loading && ( */}
 			<ScrollView style={styles.scroll}>
 				{allAmounts.map((amount, index) => (
 					<View style={styles.AmountView}>
@@ -92,7 +119,7 @@ const StartSite = () => {
 					</View>
 				))}
 			</ScrollView>
-
+			{/* )} */}
 			<HomeNav />
 		</LinearGradient>
 	);
@@ -100,7 +127,7 @@ const StartSite = () => {
 const styles = StyleSheet.create({
 	startSite: {
 		height: "100%",
-		justifyContent: "space-around",
+		justifyContent: "space-between",
 		width: "100%",
 	},
 
@@ -139,8 +166,8 @@ const styles = StyleSheet.create({
 	logOutImage: {
 		marginRight: 30,
 		marginTop: 10,
-		height: 45,
-		width: 50,
+		height: 40,
+		width: 40,
 		transform: [{ rotate: "180deg" }],
 	},
 	userImg: {
