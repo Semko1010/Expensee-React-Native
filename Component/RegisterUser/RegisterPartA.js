@@ -81,7 +81,14 @@ const RegisterPartA = () => {
 					source={require("../../assets/right.png")}
 				/>
 			</Link>
+
 			<Text style={styles.headLine}>Registrieren</Text>
+			<Image
+				style={styles.userImg}
+				source={{
+					uri: `data:image/jpeg;base64,${userImg}`,
+				}}
+			/>
 			<View style={styles.imageContainer}>
 				<View style={styles.pickImg}>
 					<Button onPress={pickImage} title='Bild auswählen' />
@@ -183,6 +190,11 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontSize: 30,
 		fontFamily: "IMFellEnglishSC_400Regular",
+	},
+	userImg: {
+		height: 130,
+		width: 130,
+		borderRadius: 130,
 	},
 });
 export default RegisterPartA;
