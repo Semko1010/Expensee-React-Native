@@ -6,7 +6,6 @@ import {
 	TextInput,
 	Image,
 	ActivityIndicator,
-	TouchableOpacity,
 } from "react-native";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-native";
@@ -14,7 +13,7 @@ import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import { RegisterStatus, Imageuser } from "../../App";
-const RegisterUser = () => {
+const RegisterPartA = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState("ff");
 	const [email, setEmail] = useState("");
@@ -47,6 +46,31 @@ const RegisterUser = () => {
 		}
 	}
 
+	const pickImage = async () => {
+		// No permissions request is necessary for launching the image library
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [4, 3],
+			quality: 1,
+			base64: true,
+		});
+
+		setUserImg(result.base64);
+	};
+	const pickCamera = async () => {
+		// No permissions request is necessary for launching the image library
+		let result = await ImagePicker.launchCameraAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [4, 3],
+			quality: 1,
+			base64: true,
+		});
+
+		setUserImg(result.base64);
+	};
+
 	return (
 		<LinearGradient
 			style={styles.register}
@@ -57,51 +81,24 @@ const RegisterUser = () => {
 					source={require("../../assets/right.png")}
 				/>
 			</Link>
-
 			<Text style={styles.headLine}>Registrieren</Text>
-
-			{loading && (
-				<View style={styles.horizontal}>
-					<ActivityIndicator size='large' color='#dc143c' />
-					<Text style={styles.userExist}>{warning}</Text>
+			<View style={styles.imageContainer}>
+				<View style={styles.pickImg}>
+					<Button onPress={pickImage} title='Bild auswählen' />
 				</View>
-			)}
-
-			<View style={styles.linkContainer}>
-				<TextInput
-					style={styles.linkView}
-					onChangeText={e => setUsername(e)}
-					placeholder='Username'
-					placeholderTextColor='black'
-					className='inputUsername'
-					color='black'
-				/>
-
-				<TextInput
-					onChangeText={e => setEmail(e)}
-					style={styles.linkView}
-					placeholder='Email'
-					placeholderTextColor='black'
-					color='black'
-					className='inputUsername'
-				/>
-
-				<TextInput
-					onChangeText={e => setPassword(e)}
-					style={styles.linkView}
-					placeholder='Passwort'
-					placeholderTextColor='black'
-					color='black'
-					className='inputUsername'
-				/>
+				<View style={styles.pickImg}>
+					<Button
+						style={styles.pickImg}
+						onPress={pickCamera}
+						title='Bild aufnehmen'
+					/>
+				</View>
 			</View>
 
-			<LinearGradient
-				style={styles.linkViewReg}
-				colors={["#2c3e50", "#3498db"]}>
-				<TouchableOpacity style={styles.delBtn} onPress={send}>
-					<Text style={styles.text}>Registrieren</Text>
-				</TouchableOpacity>
+			<LinearGradient style={styles.linkView} colors={["#2c3e50", "#3498db"]}>
+				<Link underlayColor={"transparent"} to='/register'>
+					<Text style={styles.text}>Weiter</Text>
+				</Link>
 			</LinearGradient>
 		</LinearGradient>
 	);
@@ -140,7 +137,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "#2B2D5B",
 	},
 	headLine: {
-		marginTop: 50,
 		fontSize: 55,
 		color: "white",
 		fontFamily: "IMFellEnglishSC_400Regular",
@@ -158,14 +154,6 @@ const styles = StyleSheet.create({
 		marginBottom: 50,
 	},
 	linkView: {
-		margin: 10,
-		alignItems: "center",
-		textAlign: "center",
-		width: 300,
-		height: 40,
-		backgroundColor: "#fffaf0",
-	},
-	linkViewReg: {
 		borderRadius: 5,
 	},
 	imageContainer: {
@@ -185,6 +173,9 @@ const styles = StyleSheet.create({
 	regBtn: {
 		width: 300,
 	},
+	horizontal: {
+		marginTop: 100,
+	},
 	text: {
 		height: 40,
 		width: 300,
@@ -193,8 +184,5 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		fontFamily: "IMFellEnglishSC_400Regular",
 	},
-	horizontal: {
-		marginTop: 100,
-	},
 });
-export default RegisterUser;
+export default RegisterPartA;

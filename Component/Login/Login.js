@@ -5,6 +5,8 @@ import {
 	Button,
 	TextInput,
 	ActivityIndicator,
+	TouchableOpacity,
+	Image,
 } from "react-native";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-native";
@@ -46,6 +48,12 @@ const Login = () => {
 		<LinearGradient
 			style={styles.register}
 			colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
+			<Link style={styles.infoLink} underlayColor={"transparent"} to='/'>
+				<Image
+					style={styles.homeImage}
+					source={require("../../assets/right.png")}
+				/>
+			</Link>
 			<Text style={styles.headLine}>Expensee</Text>
 			{loading && (
 				<View style={styles.horizontal}>
@@ -60,12 +68,6 @@ const Login = () => {
 					]}>
 					{regStatus}
 				</Text>
-
-				<LinearGradient colors={["#2c3e50", "#3498db"]}>
-					<Link underlayColor={"transparent"} to='/'>
-						<Text style={styles.backHome}>Back to Home</Text>
-					</Link>
-				</LinearGradient>
 
 				<View style={styles.linkView}>
 					<TextInput
@@ -86,17 +88,28 @@ const Login = () => {
 						color='black'
 					/>
 				</View>
-				<View style={styles.btnView}>
-					<Button
-						style={styles.btnView}
-						onPress={send}
-						title='Einloggen'></Button>
-				</View>
+				<LinearGradient
+					style={styles.linkViewReg}
+					colors={["#2c3e50", "#3498db"]}>
+					<TouchableOpacity style={styles.delBtn} onPress={send}>
+						<Text style={styles.text}>Login</Text>
+					</TouchableOpacity>
+				</LinearGradient>
 			</View>
 		</LinearGradient>
 	);
 };
 const styles = StyleSheet.create({
+	infoLink: {
+		position: "absolute",
+		right: 10,
+		top: 40,
+	},
+	homeImage: {
+		transform: [{ rotate: "180deg" }],
+		width: 35,
+		height: 35,
+	},
 	textInput: {
 		margin: 5,
 		textAlign: "center",
@@ -160,6 +173,18 @@ const styles = StyleSheet.create({
 	},
 	horizontal: {
 		marginTop: 50,
+	},
+	text: {
+		height: 40,
+		width: 300,
+		textAlign: "center",
+		color: "white",
+		fontSize: 30,
+		fontFamily: "IMFellEnglishSC_400Regular",
+	},
+	linkViewReg: {
+		marginTop: 10,
+		borderRadius: 5,
 	},
 });
 export default Login;
