@@ -10,6 +10,9 @@ const Home = () => {
 			<Link style={styles.infoLink} underlayColor={"transparent"} to='/info'>
 				<Image style={styles.info} source={require("../../assets/info.png")} />
 			</Link>
+			<Link style={styles.contact} underlayColor={"transparent"} to='/contact'>
+				<Image style={styles.info} source={require("../../assets/email.png")} />
+			</Link>
 
 			<Text style={styles.headLine}>Expensee</Text>
 			<View style={styles.linkContainer}>
@@ -37,12 +40,17 @@ const Home = () => {
 };
 const styles = StyleSheet.create({
 	info: {
-		width: 30,
-		height: 30,
+		width: 40,
+		height: 40,
 	},
 	infoLink: {
 		position: "absolute",
-		left: 5,
+		left: 10,
+		top: 45,
+	},
+	contact: {
+		position: "absolute",
+		right: 10,
 		top: 45,
 	},
 	headLine: {

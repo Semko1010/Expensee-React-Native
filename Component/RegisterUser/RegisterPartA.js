@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	register: {
-		justifyContent: "space-around",
+		justifyContent: "space-evenly",
 		alignItems: "center",
 		flexDirection: "column",
 		height: "100%",

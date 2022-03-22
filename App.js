@@ -10,6 +10,7 @@ import StartSite from "./Component/StartSite/StartSite";
 import Sales from "./Component/Sales/Sales";
 import PasswordResett from "./Component/PasswordReset/PasswordReset";
 import Info from "./Component/Info/Infos";
+import Contact from "./Component/Contact/Contact";
 import {
 	IMFellEnglishSC_400Regular,
 	useFonts,
@@ -44,6 +45,7 @@ export default function App(navigation) {
 									<Routes>
 										<Route path='/' element={<Home />} />
 										<Route path='/info' element={<Info />} />
+										<Route path='/contact' element={<Contact />} />
 										<Route path='/register' element={<RegisterUser />} />
 										<Route path='/registerPartB' element={<RegisterUserB />} />
 										<Route path='/login' element={<Login />} />

@@ -18,9 +18,9 @@ const Login = () => {
 	const { token, setToken } = useContext(newToken);
 	const { regStatus, setRegStatus } = useContext(RegisterStatus);
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [message, setMessage] = useState("");
 	const [loading, setLoading] = useState(false);
-	const user = { email, password };
+	const user = { email, message };
 
 	async function send() {
 		setLoading(true);
@@ -31,13 +31,12 @@ const Login = () => {
 			if (fetch.data.userExist) {
 				if (fetch.data.token.verifyUser) {
 					setToken(fetch.data.token);
-					navigate("/startSite");
 				} else {
 					console.log("pls verify");
 					setRegStatus("Bitte Email verifiztieren");
 				}
 			} else {
-				setRegStatus("Email oder Passwort falsch");
+				setRegStatus("Email or passwort wrong");
 			}
 		} catch (err) {
 			console.log(err);
@@ -54,7 +53,9 @@ const Login = () => {
 					source={require("../../assets/right.png")}
 				/>
 			</Link>
-			<Text style={styles.headLine}>Login</Text>
+			<Text style={styles.headLine}>Kontakt</Text>
+
+			<Text style={styles.textinfo}>Hier kannst du Fehler melden</Text>
 			{loading && (
 				<View style={styles.horizontal}>
 					<ActivityIndicator size='large' color='#dc143c' />
@@ -78,11 +79,11 @@ const Login = () => {
 						className='inputUsername'
 					/>
 				</View>
-				<View style={styles.linkView}>
+				<View style={styles.linkViewNachricht}>
 					<TextInput
-						onChangeText={e => setPassword(e)}
+						onChangeText={e => setMessage(e)}
 						style={styles.textInput}
-						placeholder='Password'
+						placeholder='Nachricht'
 						placeholderTextColor='black'
 						className='inputUsername'
 						color='black'
@@ -92,7 +93,7 @@ const Login = () => {
 					style={styles.linkViewReg}
 					colors={["#2c3e50", "#3498db"]}>
 					<TouchableOpacity style={styles.delBtn} onPress={send}>
-						<Text style={styles.text}>Login</Text>
+						<Text style={styles.text}>Senden</Text>
 					</TouchableOpacity>
 				</LinearGradient>
 			</View>
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
 	},
 	register: {
 		display: "flex",
-
+		justifyContent: "space-evenly",
 		alignItems: "center",
 		flexDirection: "column",
 		height: "100%",
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#2B2D5B",
 	},
 	headLine: {
-		marginTop: 50,
+		marginTop: 30,
 		fontSize: 50,
 		color: "white",
 		fontFamily: "IMFellEnglishSC_400Regular",
@@ -140,7 +141,6 @@ const styles = StyleSheet.create({
 		elevation: 23,
 	},
 	linkContainer: {
-		marginBottom: 100,
 		alignItems: "center",
 	},
 	linkView: {
@@ -151,8 +151,18 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fffaf0",
 		color: "black",
 	},
+	linkViewNachricht: {
+		margin: 10,
+		textAlign: "center",
+		width: 300,
+		height: 100,
+		backgroundColor: "#fffaf0",
+		color: "black",
+	},
+
 	userNotFound: {
 		textAlign: "center",
+		marginBottom: 40,
 	},
 	backHome: {
 		fontFamily: "IMFellEnglishSC_400Regular",
@@ -170,18 +180,27 @@ const styles = StyleSheet.create({
 		shadowRadius: 15.19,
 		elevation: 23,
 	},
-	horizontal: {},
+
 	text: {
-		height: 40,
 		width: 300,
 		textAlign: "center",
 		color: "white",
-		fontSize: 30,
+		fontSize: 24,
+		fontFamily: "IMFellEnglishSC_400Regular",
+	},
+	textinfo: {
+		textAlign: "center",
+		color: "gray",
+		fontSize: 24,
 		fontFamily: "IMFellEnglishSC_400Regular",
 	},
 	linkViewReg: {
 		marginTop: 10,
 		borderRadius: 5,
+	},
+	horizontal: {
+		marginTop: 30,
+		height: 10,
 	},
 });
 export default Login;

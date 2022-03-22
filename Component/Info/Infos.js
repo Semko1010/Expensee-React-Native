@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
 		height: 30,
 	},
 	imgView: {
-		width: "80%",
 		alignItems: "center",
 	},
 	backHome: {

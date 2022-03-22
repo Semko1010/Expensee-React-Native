@@ -145,7 +145,6 @@ const Sales = () => {
 				<LinearGradient style={styles.btnView} colors={["#2c3e50", "#3498db"]}>
 					<Button onPress={send} title='Erstellen' />
 				</LinearGradient>
-
 				<HomeNav />
 			</View>
 		</LinearGradient>
@@ -177,7 +176,6 @@ const styles = StyleSheet.create({
 	sales: {
 		height: "100%",
 		width: "100%",
-		backgroundColor: "#2B2D5B",
 	},
 	warning: {
 		color: "red",
@@ -192,7 +190,7 @@ const styles = StyleSheet.create({
 	},
 	linkView: {
 		textAlign: "center",
-		width: 300,
+		width: "50%",
 		height: 40,
 		backgroundColor: "#fffaf0",
 	},
@@ -201,7 +199,7 @@ const styles = StyleSheet.create({
 	},
 	btnView: {
 		marginTop: 20,
-		width: 200,
+		width: "50%",
 		borderRadius: 5,
 		backgroundColor: "white",
 		borderColor: "black",
