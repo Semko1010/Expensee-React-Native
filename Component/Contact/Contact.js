@@ -16,7 +16,7 @@ import axios from "axios";
 const Login = () => {
 	const navigate = useNavigate();
 	const { token, setToken } = useContext(newToken);
-	const { regStatus, setRegStatus } = useContext(RegisterStatus);
+	const [regStatus, setRegStatus] = useState("");
 	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -24,22 +24,22 @@ const Login = () => {
 
 	async function send() {
 		setLoading(true);
-		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/login";
-		try {
-			const fetch = await axios.post(URL, user);
-			console.log(fetch);
-			if (fetch.data.userExist) {
-				if (fetch.data.token.verifyUser) {
-					setToken(fetch.data.token);
+		URL = "https://expenseeserver.herokuapp.com/api/expensee/users/contact";
+		if (email.includes("@") && message.length > 5) {
+			try {
+				const fetch = await axios.post(URL, user);
+				console.log(fetch);
+				if (fetch.data.emailSend) {
+					setRegStatus("Email wurde gesendet");
+					setLoading(false);
 				} else {
-					console.log("pls verify");
-					setRegStatus("Bitte Email verifiztieren");
+					setRegStatus("Versuchen sie es später noch einmal");
 				}
-			} else {
-				setRegStatus("Email or passwort wrong");
+			} catch (err) {
+				console.log(err);
 			}
-		} catch (err) {
-			console.log(err);
+		} else {
+			setRegStatus("Bitte alle Felder ausfüllen");
 		}
 	}
 
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
 
 	userNotFound: {
 		textAlign: "center",
-		marginBottom: 40,
+		marginBottom: 10,
 	},
 	backHome: {
 		fontFamily: "IMFellEnglishSC_400Regular",
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 	},
 	horizontal: {
-		marginTop: 30,
+		marginBottom: 20,
 		height: 10,
 	},
 });

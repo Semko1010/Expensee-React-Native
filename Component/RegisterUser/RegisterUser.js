@@ -31,7 +31,7 @@ const RegisterUser = () => {
 		if (username.length >= 3 && email.includes("@") && password.length >= 6) {
 			try {
 				const fetch = await axios.post(URL, user);
-
+				console.log(fetch);
 				if (!fetch.data.userExist) {
 					navigate("/login");
 					console.log("User created");

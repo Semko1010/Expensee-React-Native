@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	TextInput,
+	TouchableOpacity,
+	Image,
+} from "react-native";
 import { useState } from "react";
 import { Link } from "react-router-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -36,13 +43,12 @@ const PasswordResett = () => {
 			<LinearGradient
 				style={styles.container}
 				colors={["#ADA996", "#F2F2F2", "#DBDBDB", "#EAEAEA"]}>
-				<LinearGradient
-					style={styles.linearGradient}
-					colors={["#2c3e50", "#3498db"]}>
-					<Link underlayColor={"transparent"} to='/'>
-						<Text style={styles.backHome}>Back to Home</Text>
-					</Link>
-				</LinearGradient>
+				<Link style={styles.infoLink} underlayColor={"transparent"} to='/'>
+					<Image
+						style={styles.homeImage}
+						source={require("../../assets/right.png")}
+					/>
+				</Link>
 				<View style={styles.subcontainer}>
 					<Text style={styles.passwordChangeTrue}>{changeTrue}</Text>
 					<TextInput
@@ -61,7 +67,13 @@ const PasswordResett = () => {
 						style={styles.textinput}
 					/>
 				</View>
-				<Button title='senden' onPress={reset} />
+				<LinearGradient
+					style={styles.linkViewReg}
+					colors={["#2c3e50", "#3498db"]}>
+					<TouchableOpacity style={styles.delBtn} onPress={reset}>
+						<Text style={styles.text}>Login</Text>
+					</TouchableOpacity>
+				</LinearGradient>
 			</LinearGradient>
 		</View>
 	);
@@ -100,6 +112,28 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 40,
 		borderRadius: 5,
+	},
+	text: {
+		height: 40,
+		width: 300,
+		textAlign: "center",
+		color: "white",
+		fontSize: 30,
+		fontFamily: "IMFellEnglishSC_400Regular",
+	},
+	linkViewReg: {
+		marginTop: 10,
+		borderRadius: 5,
+	},
+	infoLink: {
+		position: "absolute",
+		right: 10,
+		top: 40,
+	},
+	homeImage: {
+		transform: [{ rotate: "180deg" }],
+		width: 35,
+		height: 35,
 	},
 });
 
