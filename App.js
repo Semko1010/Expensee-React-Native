@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, PermissionsAndroid } from "react-native";
 import { NativeRouter, Routes, Route, Link } from "react-router-native";
 import RegisterUser from "./Component/RegisterUser/RegisterUser";
 import RegisterUserB from "./Component/RegisterUser/RegisterPartA";
@@ -16,7 +16,7 @@ import {
 	useFonts,
 } from "@expo-google-fonts/im-fell-english-sc";
 import { Actor_400Regular } from "@expo-google-fonts/actor";
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 
 const newToken = createContext({});
 const Amounts = createContext({});
@@ -24,6 +24,7 @@ const Vermoegen = createContext({});
 const fonts = createContext({});
 const RegisterStatus = createContext({});
 const Imageuser = createContext({});
+
 export default function App(navigation) {
 	const [fontsLoaded, error] = useFonts({
 		IMFellEnglishSC_400Regular,
@@ -34,6 +35,81 @@ export default function App(navigation) {
 	const [allAmounts, setAllAmounts] = useState([]);
 	const [vermoegen, setVermoegen] = useState(0);
 	const [regStatus, setRegStatus] = useState("");
+
+	useEffect(() => {
+		const requestBackgroundPermission = async () => {
+			try {
+				const granted = await PermissionsAndroid.request(
+					PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+					{
+						title: "Standort erlauben",
+						message:
+							"Cool Photo App needs access to your camera " +
+							"so you can take awesome pictures.",
+						buttonNeutral: "Ask Me Later",
+						buttonNegative: "Cancel",
+						buttonPositive: "OK",
+					},
+				);
+				if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+					console.log("You can use the camera");
+				} else {
+					console.log("Camera permission denied");
+				}
+			} catch (err) {
+				console.warn(err);
+			}
+		};
+
+		const requestCoarsePermission = async () => {
+			try {
+				const granted = await PermissionsAndroid.request(
+					PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+					{
+						title: "Standort erlauben",
+						message:
+							"Cool Photo App needs access to your camera " +
+							"so you can take awesome pictures.",
+						buttonNeutral: "Ask Me Later",
+						buttonNegative: "Cancel",
+						buttonPositive: "OK",
+					},
+				);
+				if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+					console.log("You can use the camera");
+				} else {
+					console.log("Camera permission denied");
+				}
+			} catch (err) {
+				console.warn(err);
+			}
+		};
+
+		const requestFinePermission = async () => {
+			try {
+				const granted = await PermissionsAndroid.request(
+					PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION,
+					{
+						title: "Standort erlauben",
+						message:
+							"Cool Photo App needs access to your camera " +
+							"so you can take awesome pictures.",
+						buttonNeutral: "Ask Me Later",
+						buttonNegative: "Cancel",
+						buttonPositive: "OK",
+					},
+				);
+				if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+					console.log("You can use the camera");
+				} else {
+					console.log("Camera permission denied");
+				}
+			} catch (err) {
+				console.warn(err);
+			}
+		};
+	}, []);
+
 	return (
 		<Imageuser.Provider value={{ userImg, setUserImg }}>
 			<Vermoegen.Provider value={{ vermoegen, setVermoegen }}>
