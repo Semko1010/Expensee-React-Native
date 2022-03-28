@@ -35,6 +35,16 @@
     "react-native-select-dropdown": "^1.8.0",
     "react-router-native": "^6.2.1"
   },
+  "android":{
+    "package":"com.Expensee.application",
+    "versioncode":1,
+    "permissions": [
+      "CAMERA",
+      "ACCESS_FINE_LOCATION",
+      "ACCESS_COARSE_LOCATION",
+      "ACCESS_BACKGROUND_LOCATION"
+  ] 
+  },
   "devDependencies": {
     "@babel/core": "^7.12.9"
   },
