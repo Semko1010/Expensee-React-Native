@@ -39,10 +39,7 @@
     "package":"com.Expensee.application",
     "versioncode":1,
     "permissions": [
-      "CAMERA",
-      "ACCESS_FINE_LOCATION",
-      "ACCESS_COARSE_LOCATION",
-      "ACCESS_BACKGROUND_LOCATION"
+      "CAMERA"
   ] 
   },
   "devDependencies": {
