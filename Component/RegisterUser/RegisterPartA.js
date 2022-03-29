@@ -59,35 +59,7 @@ const RegisterPartA = () => {
 
 		setUserImg(result.base64);
 	};
-	// const requestFinePermission = async () => {
-	// 	try {
-	// 		const granted = await PermissionsAndroid.request(
-	// 			PermissionsAndroid.PERMISSIONS.ACCESS_MEDIA_LOCATION,
-	// 			{
-	// 				title: "Auf Medien zugreifen ?",
-	// 				message:
-	// 					"Cool Photo App needs access to your camera " +
-	// 					"so you can take awesome pictures.",
-	// 				buttonNeutral: "Ask Me Later",
-	// 				buttonNegative: "Cancel",
-	// 				buttonPositive: "OK",
-	// 			},
-	// 		);
-	// 		if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-	// 			let result = await ImagePicker.launchImageLibraryAsync({
-	// 				mediaTypes: ImagePicker.MediaTypeOptions.All,
-	// 				allowsEditing: true,
-	// 				aspect: [4, 3],
-	// 				quality: 1,
-	// 				base64: true,
-	// 			});
-	// 		} else {
-	// 			console.log("Camera permission denied");
-	// 		}
-	// 	} catch (err) {
-	// 		console.warn(err);
-	// 	}
-	// };
+
 	const pickCamera = async () => {
 		// No permissions request is necessary for launching the image library
 		let result = await ImagePicker.launchCameraAsync({

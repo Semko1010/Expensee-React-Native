@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { Link, useNavigate } from "react-router-native";
 import HomeNav from "../HomeNav/HomeNav";
-import DatePicker from "react-native-datepicker";
+// import DatePicker from "react-native-datepicker";
 import { newToken, Vermoegen, Amounts, fonts } from "../../App";
 import axios from "axios";
 import NumericInput from "react-native-numeric-input";

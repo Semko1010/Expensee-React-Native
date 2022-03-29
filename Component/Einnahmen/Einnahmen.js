@@ -12,7 +12,7 @@ import {
 	TextInput,
 	Button,
 } from "react-native";
-import DatePicker from "react-native-datepicker";
+// import DatePicker from "react-native-datepicker";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { newToken, Amounts, Vermoegen } from "../../App";
