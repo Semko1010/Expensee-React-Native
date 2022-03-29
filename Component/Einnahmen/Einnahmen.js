@@ -25,7 +25,7 @@ let shopping = 0;
 let wohnung = 0;
 let guthaben = 0;
 const Einnahmen = () => {
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const { token, setToken } = useContext(newToken);
 	const { allAmounts, setAllAmounts } = useContext(Amounts);
 	const { vermoegen, setVermoegen } = useContext(Vermoegen);
@@ -216,7 +216,7 @@ const Einnahmen = () => {
 								styles.VermoegenText,
 								{ color: vermoegen <= 0 ? "red" : "green" },
 							]}>{`Guthaben ${vermoegen}€`}</Text>
-						<DatePicker
+						{/* <DatePicker
 							date={date}
 							mode='date'
 							placeholder='Datum auswählen'
@@ -245,7 +245,7 @@ const Einnahmen = () => {
 							onDateChange={date => {
 								setDate(date);
 							}}
-						/>
+						/> */}
 
 						{/*##########Einkommen########## */}
 

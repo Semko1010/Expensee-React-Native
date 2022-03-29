@@ -110,7 +110,7 @@ const Sales = () => {
 					/>
 				</View>
 
-				<DatePicker
+				{/* <DatePicker
 					date={date}
 					mode='date'
 					placeholder='Datum'
@@ -140,7 +140,7 @@ const Sales = () => {
 					onDateChange={date => {
 						setDate(date);
 					}}
-				/>
+				/> */}
 
 				<LinearGradient style={styles.btnView} colors={["#2c3e50", "#3498db"]}>
 					<Button onPress={send} title='Erstellen' />
