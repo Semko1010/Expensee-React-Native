@@ -1,6 +1,6 @@
 {
   "name": "expensee",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -11,26 +11,17 @@
   },
   "dependencies": {
     "@expo-google-fonts/actor": "^0.2.2",
-    "@expo-google-fonts/akronim": "^0.2.2",
     "@expo-google-fonts/im-fell-english-sc": "^0.2.2",
-    "@react-native-community/art": "^1.2.0",
-    "@react-navigation/drawer": "^6.3.1",
-    "@react-navigation/native": "^6.0.8",
     "axios": "^0.26.0",
     "eas-cli": "^0.48.1",
     "expo": "~44.0.0",
     "expo-cli": "^5.2.0",
-    "expo-crypto": "~10.1.1",
     "expo-image-picker": "~12.0.1",
     "expo-linear-gradient": "~11.0.3",
     "react": "17.0.1",
-    "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-chart-kit": "^6.12.0",
     "react-native-datepicker": "^1.7.2",
-    "react-native-dropdown-picker": "^5.3.0",
-    "react-native-month-selector": "^1.4.0",
-    "react-native-month-year-picker": "^1.8.1",
     "react-native-numeric-input": "^1.9.1",
     "react-native-select-dropdown": "^1.8.0",
     "react-router-native": "^6.2.1",
@@ -38,10 +29,7 @@
   },
   "android": {
     "package": "com.Expensee.application",
-    "versioncode": 1
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "versioncode": 2
   },
   "private": true
 }
