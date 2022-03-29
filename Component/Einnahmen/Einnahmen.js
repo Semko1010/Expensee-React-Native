@@ -17,7 +17,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { newToken, Amounts, Vermoegen } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
-
+import uuid from "react-native-uuid";
 let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
 let lebensMittel = 0;
@@ -266,7 +266,7 @@ const Einnahmen = () => {
 										if (amount.date.includes(date)) {
 											if (amount.categorie == "Einkommen") {
 												return (
-													<View style={styles.einkommenToggle}>
+													<View style={styles.einkommenToggle} key={uuid.v4()}>
 														<Text style={styles.einkommenText}>
 															{amount.description}
 														</Text>
@@ -294,18 +294,18 @@ const Einnahmen = () => {
 						)}
 
 						{/*##########Ausgaben########## */}
-						<View style={styles.test}>
-							<LinearGradient
-								colors={["#515FEB", "#514FEB"]}
-								style={styles.button}>
-								<TouchableOpacity
-									onPress={toggleAusgaben}
-									style={styles.ausgaben}>
-									<Text style={styles.headText}>Ausgaben</Text>
-									<Text style={styles.headText}>{`${ausgaben}€`}</Text>
-								</TouchableOpacity>
-							</LinearGradient>
-						</View>
+
+						<LinearGradient
+							colors={["#515FEB", "#514FEB"]}
+							style={styles.button}>
+							<TouchableOpacity
+								onPress={toggleAusgaben}
+								style={styles.ausgaben}>
+								<Text style={styles.headText}>Ausgaben</Text>
+								<Text style={styles.headText}>{`${ausgaben}€`}</Text>
+							</TouchableOpacity>
+						</LinearGradient>
+
 						{ausgabenToggle && (
 							<View style={styles.allIn}>
 								<ScrollView style={styles.scrollAusgaben}>
@@ -317,7 +317,7 @@ const Einnahmen = () => {
 												amount.categorie == "Shopping"
 											) {
 												return (
-													<View style={styles.einkommenToggle}>
+													<View style={styles.einkommenToggle} key={uuid.v4()}>
 														<Text style={styles.einkommenText}>
 															{amount.description}
 														</Text>
@@ -363,7 +363,7 @@ const Einnahmen = () => {
 										if (amount.date.includes(date)) {
 											if (amount.categorie == "Lebensmittel") {
 												return (
-													<View style={styles.einkommenToggle}>
+													<View style={styles.einkommenToggle} key={uuid.v4()}>
 														<Text style={styles.einkommenText}>
 															{amount.description}
 														</Text>
@@ -411,7 +411,7 @@ const Einnahmen = () => {
 										if (amount.date.includes(date)) {
 											if (amount.categorie == "Shopping") {
 												return (
-													<View style={styles.einkommenToggle}>
+													<View style={styles.einkommenToggle} key={uuid.v4()}>
 														<Text style={styles.einkommenText}>
 															{amount.description}
 														</Text>
@@ -456,7 +456,7 @@ const Einnahmen = () => {
 										if (amount.date.includes(date)) {
 											if (amount.categorie == "Wohnung") {
 												return (
-													<View style={styles.einkommenToggle}>
+													<View style={styles.einkommenToggle} key={uuid.v4()}>
 														<Text style={styles.einkommenText}>
 															{amount.description}
 														</Text>

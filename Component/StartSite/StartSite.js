@@ -12,8 +12,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "react-router-native";
 import { newToken, Amounts, Vermoegen, RegisterStatus } from "../../App";
 import HomeNav from "../HomeNav/HomeNav";
+import uuid from "react-native-uuid";
 
-let arr = [];
 const StartSite = () => {
 	const [userImg, setUserImg] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -81,7 +81,7 @@ const StartSite = () => {
 			{loading && (
 				<ScrollView style={styles.scroll}>
 					{allAmounts.map((amount, index) => (
-						<View style={styles.AmountView}>
+						<View style={styles.AmountView} key={uuid.v4()}>
 							<View style={styles.AmountDateAndDs}>
 								{amount.categorie == "Einkommen" ? (
 									<Image
