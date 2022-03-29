@@ -33,14 +33,12 @@
     "react-native-month-year-picker": "^1.8.1",
     "react-native-numeric-input": "^1.9.1",
     "react-native-select-dropdown": "^1.8.0",
-    "react-router-native": "^6.2.1"
+    "react-router-native": "^6.2.1",
+    "expo-updates": "~0.11.6"
   },
-  "android":{
-    "package":"com.Expensee.application",
-    "versioncode":1,
-    "permissions": [
-      "CAMERA"
-  ] 
+  "android": {
+    "package": "com.Expensee.application",
+    "versioncode": 1
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
