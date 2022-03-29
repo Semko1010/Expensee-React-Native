@@ -29,7 +29,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "permissions":[
-        "CAMERA"
+        "CAMERA", "WRITE_EXTERNAL_STORAGE", "CAMERA_ROLL"
       ]
     },
     "web": {

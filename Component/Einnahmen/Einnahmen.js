@@ -12,7 +12,7 @@ import {
 	TextInput,
 	Button,
 } from "react-native";
-// import DatePicker from "react-native-datepicker";
+import DatePicker from "react-native-datepicker";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { newToken, Amounts, Vermoegen } from "../../App";
@@ -216,7 +216,7 @@ const Einnahmen = () => {
 								styles.VermoegenText,
 								{ color: vermoegen <= 0 ? "red" : "green" },
 							]}>{`Guthaben ${vermoegen}€`}</Text>
-						{/* <DatePicker
+						<DatePicker
 							date={date}
 							mode='date'
 							placeholder='Datum auswählen'
@@ -245,7 +245,7 @@ const Einnahmen = () => {
 							onDateChange={date => {
 								setDate(date);
 							}}
-						/> */}
+						/>
 
 						{/*##########Einkommen########## */}
 
