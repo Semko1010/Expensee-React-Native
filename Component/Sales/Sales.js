@@ -19,7 +19,7 @@ const Sales = () => {
 	const [categorie, setCategorie] = useState("");
 	const [description, setDescription] = useState("");
 	const [amount, setAmount] = useState(0);
-	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Wohnung"];
+	const stuff = ["Einkommen", "Lebensmittel", "Shopping", "Fixkosten"];
 
 	async function send() {
 		const stateamount = {

@@ -22,7 +22,7 @@ let gesamtEinkommen = 0;
 let gesamtAusgaben = 0;
 let lebensMittel = 0;
 let shopping = 0;
-let wohnung = 0;
+let fixkosten = 0;
 let guthaben = 0;
 const Einnahmen = () => {
 	const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ const Einnahmen = () => {
 	const [ausgaben, setAusgaben] = useState(0);
 	const [lebensMittelGesamt, setLebensMittelGesamt] = useState(0);
 	const [shoppingGesamt, setShoppingGesamt] = useState(0);
-	const [wohnungGesamt, setWohnungGesamt] = useState(0);
+	const [fixkostenGesamt, setFixkostenGesamt] = useState(0);
 	const [einkommenToggle, setEinkommenToggle] = useState(false);
 	const [ausgabenToggle, setAusgabenToggle] = useState(false);
 	const [lebensmittelToggle, setLebensmittel] = useState(false);
@@ -49,13 +49,13 @@ const Einnahmen = () => {
 		setAusgaben(0);
 		setLebensMittelGesamt(0);
 		setShoppingGesamt(0);
-		setWohnungGesamt(0);
+		setFixkostenGesamt(0);
 		setVermoegen(0);
 		gesamtEinkommen = 0;
 		gesamtAusgaben = 0;
 		lebensMittel = 0;
 		shopping = 0;
-		wohnung = 0;
+		fixkosten = 0;
 		guthaben = 0;
 		const URL =
 			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
@@ -73,7 +73,7 @@ const Einnahmen = () => {
 						}
 						if (
 							amount.categorie == "Lebensmittel" ||
-							amount.categorie == "Wohnung" ||
+							amount.categorie == "Fixkosten" ||
 							amount.categorie == "Shopping"
 						) {
 							setAusgaben((gesamtAusgaben += Number(amount.amount)));
@@ -85,8 +85,8 @@ const Einnahmen = () => {
 						if (amount.categorie == "Shopping") {
 							setShoppingGesamt((shopping += Number(amount.amount)));
 						}
-						if (amount.categorie == "Wohnung") {
-							setWohnungGesamt((wohnung += Number(amount.amount)));
+						if (amount.categorie == "Fixkosten") {
+							setFixkostenGesamt((fixkosten += Number(amount.amount)));
 						}
 					}
 				}),
@@ -185,7 +185,7 @@ const Einnahmen = () => {
 								},
 								{
 									name: "Wohnung",
-									population: wohnungGesamt,
+									population: fixkostenGesamt,
 									color: "#ff8c00",
 									legendFontColor: "#696969",
 								},
@@ -445,8 +445,8 @@ const Einnahmen = () => {
 							colors={["#ff8c00", "#ff8c30"]}
 							style={styles.button}>
 							<TouchableOpacity onPress={toggleWohnung} style={styles.ausgaben}>
-								<Text style={styles.headText}>Wohnung</Text>
-								<Text style={styles.headText}>{`${wohnungGesamt}€`}</Text>
+								<Text style={styles.headText}>Fixkosten</Text>
+								<Text style={styles.headText}>{`${fixkostenGesamt}€`}</Text>
 							</TouchableOpacity>
 						</LinearGradient>
 						{wohnungToggle && (
@@ -454,7 +454,7 @@ const Einnahmen = () => {
 								<ScrollView style={styles.scrollWohnung}>
 									{allAmounts.map(amount => {
 										if (amount.date.includes(date)) {
-											if (amount.categorie == "Wohnung") {
+											if (amount.categorie == "Fixkosten") {
 												return (
 													<View style={styles.einkommenToggle} key={uuid.v4()}>
 														<Text style={styles.einkommenText}>

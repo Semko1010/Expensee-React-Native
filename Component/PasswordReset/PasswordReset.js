@@ -71,7 +71,7 @@ const PasswordResett = () => {
 					style={styles.linkViewReg}
 					colors={["#2c3e50", "#3498db"]}>
 					<TouchableOpacity style={styles.delBtn} onPress={reset}>
-						<Text style={styles.text}>Login</Text>
+						<Text style={styles.text}>Senden</Text>
 					</TouchableOpacity>
 				</LinearGradient>
 			</LinearGradient>
