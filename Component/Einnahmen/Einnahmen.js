@@ -68,25 +68,39 @@ const Einnahmen = () => {
 				allAmounts.map(amount => {
 					if (amount.date.includes(date)) {
 						if (amount.categorie == "Einkommen") {
-							setEinkommen((gesamtEinkommen += Number(amount.amount)));
-							setVermoegen((guthaben += Number(amount.amount)));
+							setEinkommen(
+								Number((gesamtEinkommen += Number(amount.amount)).toFixed(2)),
+							);
+							setVermoegen(
+								Number((guthaben += Number(amount.amount)).toFixed(2)),
+							);
 						}
 						if (
 							amount.categorie == "Lebensmittel" ||
 							amount.categorie == "Fixkosten" ||
 							amount.categorie == "Shopping"
 						) {
-							setAusgaben((gesamtAusgaben += Number(amount.amount)));
-							setVermoegen((guthaben -= Number(amount.amount)));
+							setAusgaben(
+								Number((gesamtAusgaben += Number(amount.amount)).toFixed(2)),
+							);
+							setVermoegen(
+								Number((guthaben -= Number(amount.amount)).toFixed(2)),
+							);
 						}
 						if (amount.categorie == "Lebensmittel") {
-							setLebensMittelGesamt((lebensMittel += Number(amount.amount)));
+							setLebensMittelGesamt(
+								Number((lebensMittel += Number(amount.amount)).toFixed(2)),
+							);
 						}
 						if (amount.categorie == "Shopping") {
-							setShoppingGesamt((shopping += Number(amount.amount)));
+							setShoppingGesamt(
+								Number((shopping += Number(amount.amount)).toFixed(2)),
+							);
 						}
 						if (amount.categorie == "Fixkosten") {
-							setFixkostenGesamt((fixkosten += Number(amount.amount)));
+							setFixkostenGesamt(
+								Number((fixkosten += Number(amount.amount)).toFixed(2)),
+							);
 						}
 					}
 				}),
