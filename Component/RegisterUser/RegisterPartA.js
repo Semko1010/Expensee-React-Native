@@ -96,11 +96,7 @@ const RegisterPartA = () => {
 					<Button onPress={pickImage} title='Bild auswählen' />
 				</View>
 				<View style={styles.pickImg}>
-					<Button
-						style={styles.pickImg}
-						onPress={pickCamera}
-						title='Bild aufnehmen'
-					/>
+					<Button onPress={pickCamera} title='Bild aufnehmen' />
 				</View>
 			</View>
 
@@ -163,13 +159,33 @@ const styles = StyleSheet.create({
 		marginBottom: 50,
 	},
 	linkView: {
+		justifyContent: "center",
 		borderRadius: 5,
+		margin: 10,
+		textAlign: "center",
+		width: "75%",
+		height: 45,
+
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 11,
+		},
+		shadowOpacity: 0.57,
+		shadowRadius: 15.19,
+
+		elevation: 23,
 	},
 	imageContainer: {
 		marginBottom: 30,
+		width: "100%",
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	pickImg: {
 		marginTop: 10,
+		height: 45,
+		width: "55%",
 	},
 	backHome: {
 		fontFamily: "IMFellEnglishSC_400Regular",
@@ -186,8 +202,6 @@ const styles = StyleSheet.create({
 		marginTop: 100,
 	},
 	text: {
-		height: 40,
-		width: 300,
 		textAlign: "center",
 		color: "white",
 		fontSize: 30,

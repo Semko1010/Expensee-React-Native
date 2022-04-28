@@ -45,6 +45,15 @@ const Einnahmen = () => {
 	);
 
 	useEffect(() => {
+		(async () => {
+			const URL =
+				"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
+			const fetchAmount = await axios.get(URL, { headers: token });
+			const setAmount = await setAllAmounts(fetchAmount.data);
+		})();
+	}, []);
+
+	useEffect(() => {
 		setEinkommen(0);
 		setAusgaben(0);
 		setLebensMittelGesamt(0);
@@ -57,56 +66,44 @@ const Einnahmen = () => {
 		shopping = 0;
 		fixkosten = 0;
 		guthaben = 0;
-		const URL =
-			"https://expenseeserver.herokuapp.com/api/expensee/users/allAmounts";
-		axios
-			.get(URL, {
-				headers: token,
-			})
-			.then(response => setAllAmounts(response.data))
-			.then(
-				allAmounts.map(amount => {
-					if (amount.date.includes(date)) {
-						if (amount.categorie == "Einkommen") {
-							setEinkommen(
-								Number((gesamtEinkommen += Number(amount.amount)).toFixed(2)),
-							);
-							setVermoegen(
-								Number((guthaben += Number(amount.amount)).toFixed(2)),
-							);
-						}
-						if (
-							amount.categorie == "Lebensmittel" ||
-							amount.categorie == "Fixkosten" ||
-							amount.categorie == "Shopping"
-						) {
-							setAusgaben(
-								Number((gesamtAusgaben += Number(amount.amount)).toFixed(2)),
-							);
-							setVermoegen(
-								Number((guthaben -= Number(amount.amount)).toFixed(2)),
-							);
-						}
-						if (amount.categorie == "Lebensmittel") {
-							setLebensMittelGesamt(
-								Number((lebensMittel += Number(amount.amount)).toFixed(2)),
-							);
-						}
-						if (amount.categorie == "Shopping") {
-							setShoppingGesamt(
-								Number((shopping += Number(amount.amount)).toFixed(2)),
-							);
-						}
-						if (amount.categorie == "Fixkosten") {
-							setFixkostenGesamt(
-								Number((fixkosten += Number(amount.amount)).toFixed(2)),
-							);
-						}
-					}
-				}),
-			)
-			.then(setLoading(true));
-	}, [deleteAmount, vermoegen, date]);
+
+		allAmounts.map(amount => {
+			if (amount.date.includes(date)) {
+				if (amount.categorie == "Einkommen") {
+					setEinkommen(
+						Number((gesamtEinkommen += Number(amount.amount)).toFixed(2)),
+					);
+					setVermoegen(Number((guthaben += Number(amount.amount)).toFixed(2)));
+				}
+				if (
+					amount.categorie == "Lebensmittel" ||
+					amount.categorie == "Fixkosten" ||
+					amount.categorie == "Shopping"
+				) {
+					setAusgaben(
+						Number((gesamtAusgaben += Number(amount.amount)).toFixed(2)),
+					);
+					setVermoegen(Number((guthaben -= Number(amount.amount)).toFixed(2)));
+				}
+				if (amount.categorie == "Lebensmittel") {
+					setLebensMittelGesamt(
+						Number((lebensMittel += Number(amount.amount)).toFixed(2)),
+					);
+				}
+				if (amount.categorie == "Shopping") {
+					setShoppingGesamt(
+						Number((shopping += Number(amount.amount)).toFixed(2)),
+					);
+				}
+				if (amount.categorie == "Fixkosten") {
+					setFixkostenGesamt(
+						Number((fixkosten += Number(amount.amount)).toFixed(2)),
+					);
+				}
+			}
+		});
+		setLoading(true);
+	}, [allAmounts, deleteAmount, vermoegen, date]);
 
 	const toggleEinkommen = () => {
 		setShoppingToggle(false);

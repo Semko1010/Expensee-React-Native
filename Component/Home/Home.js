@@ -77,13 +77,16 @@ const styles = StyleSheet.create({
 	},
 	linkContainer: {
 		marginBottom: 100,
+		width: "100%",
+		alignItems: "center",
 	},
 	linkView: {
+		justifyContent: "center",
 		borderRadius: 5,
 		margin: 10,
 		textAlign: "center",
-		width: 300,
-		height: 40,
+		width: "75%",
+		height: 45,
 
 		shadowColor: "#000",
 		shadowOffset: {

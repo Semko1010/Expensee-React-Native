@@ -141,12 +141,13 @@ const styles = StyleSheet.create({
 		elevation: 23,
 	},
 	linkContainer: {
+		width: "100%",
 		alignItems: "center",
 	},
 	linkView: {
 		margin: 10,
 		textAlign: "center",
-		width: 300,
+		width: "75%",
 		height: 40,
 		backgroundColor: "#fffaf0",
 		color: "black",
@@ -154,8 +155,8 @@ const styles = StyleSheet.create({
 	linkViewNachricht: {
 		margin: 10,
 		textAlign: "center",
-		width: 300,
-		height: 100,
+		width: "75%",
+		height: "30%",
 		backgroundColor: "#fffaf0",
 		color: "black",
 	},
@@ -182,10 +183,9 @@ const styles = StyleSheet.create({
 	},
 
 	text: {
-		width: 300,
 		textAlign: "center",
 		color: "white",
-		fontSize: 24,
+		fontSize: 30,
 		fontFamily: "IMFellEnglishSC_400Regular",
 	},
 	textinfo: {
@@ -195,8 +195,22 @@ const styles = StyleSheet.create({
 		fontFamily: "IMFellEnglishSC_400Regular",
 	},
 	linkViewReg: {
-		marginTop: 10,
+		justifyContent: "center",
 		borderRadius: 5,
+		margin: 10,
+		textAlign: "center",
+		width: "75%",
+		height: 45,
+
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 11,
+		},
+		shadowOpacity: 0.57,
+		shadowRadius: 15.19,
+
+		elevation: 23,
 	},
 	horizontal: {
 		marginBottom: 20,

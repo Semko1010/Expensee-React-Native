@@ -47,7 +47,7 @@ const StartSite = () => {
 					response.data.sort((a, b) => {
 						const firstDate = a.date.split(".").reverse().join();
 						const secondDate = b.date.split(".").reverse().join();
-						return firstDate < secondDate ? -1 : firstDate > secondDate ? 1 : 0;
+						return firstDate < secondDate ? 1 : firstDate > secondDate ? -1 : 0;
 					}),
 				);
 			})

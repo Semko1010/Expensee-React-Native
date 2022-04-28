@@ -12,6 +12,7 @@
   "dependencies": {
     "@expo-google-fonts/actor": "^0.2.2",
     "@expo-google-fonts/im-fell-english-sc": "^0.2.2",
+    "@react-navigation/drawer": "^6.4.1",
     "axios": "^0.26.0",
     "eas-cli": "^0.48.1",
     "expo": "~44.0.0",

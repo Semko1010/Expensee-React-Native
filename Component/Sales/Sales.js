@@ -74,7 +74,7 @@ const Sales = () => {
 					<SelectDropdown
 						style={{
 							backgroundColor: "crimson",
-							opacity: 0.9,
+							opacity: 1,
 						}}
 						data={stuff}
 						onSelect={(selectedItem, index) => {
@@ -199,10 +199,9 @@ const styles = StyleSheet.create({
 	},
 	btnView: {
 		marginTop: 20,
-		width: "50%",
+		width: "75%",
 		borderRadius: 5,
 		backgroundColor: "white",
-		borderColor: "black",
 	},
 });
 export default Sales;

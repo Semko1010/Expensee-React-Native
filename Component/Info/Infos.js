@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
 	},
 	imgView: {
 		alignItems: "center",
+		width: "85%",
 	},
 	backHome: {
 		fontFamily: "IMFellEnglishSC_400Regular",
@@ -95,9 +96,22 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 	},
 	linkView: {
-		width: 300,
-		height: 40,
+		justifyContent: "center",
 		borderRadius: 5,
+		margin: 10,
+		textAlign: "center",
+		width: "75%",
+		height: 45,
+
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 11,
+		},
+		shadowOpacity: 0.57,
+		shadowRadius: 15.19,
+
+		elevation: 23,
 	},
 });
 export default Info;
